@@ -1,0 +1,166 @@
+---
+title: "Crecimiento y Desarrollo Económico"
+subtitle: "**Temas Administrativos**"
+author: "Mauricio M. Tejada"
+institute: "*Departamento de Economía, Universidad Diego Portales*"
+format:
+  revealjs:
+    theme: serif_mod.scss
+    logo: "figs/logo_econ.png"
+    footer: "Ingeniería Comercial -- Crecimiento y Desarrollo Económico"
+    slide-number: c/t
+    show-slide-number: all
+    #embed-resources: true
+---
+
+## Temas Administrativos
+
+1. *Quien es quien:*
+
+    - Profesor: Mauricio Tejada (email: [mauricio.tejada@mail.udp.cl](mailto:mauricio.tejada@mail.udp.cl])).
+
+    - Ayudante: A ser anunciado.
+
+. . .
+
+2. *Horarios:*
+
+    - Clases: Lunes y Miércoles 11:30 a 12:40. Sala XX.
+
+    - Horas de Oficina: Lunes 14:30 a 16:00. Oficia 510 Edificio Cubo.
+
+    - Ayudantía: A ser anunciada.
+
+. . .
+
+3. *Comunicación:*
+
+    - Email y Canvas.
+
+
+## Objetivos del Curso
+
+Al finalizar el curso, el estudiante debiera ser capaz de:
+
+::: {.incremental}
+
+- Analizar de qué manera las economías generan riqueza en diferentes etapas de sus ciclos de desarrollo.
+
+- Construir y relacionar indicadores de bienestar económico para poder comparar estados de desarrollo en diferentes economías.
+
+- Comparar y contrastar los principales paradigmas de crecimiento económico, vinculando la evolución de estos con la evolución de las economías y del pensamiento económico.
+
+- Interpretar y explicar la información econométrica y estadística asociada a modelos de desarrollo y crecimiento económico en la literatura científica.
+
+- Aplicar modelos de diagnóstico para sugerir políticas públicas que permita mejorar el bienestar de las personas.
+
+:::
+
+## Contenidos
+
+**Unidad 1**: Introducción
+
+- Hechos estilizados sobre el crecimiento y el desarrollo.
+  
+\ 
+
+**Unidad 2**: Crecimiento Económico
+
+- Concepto básicos.
+- El modelo de Solow.
+- Progreso tecnológico.
+- Capital humano.
+- Convergencia (no condicional y condicional).
+- Contabilidad del crecimiento.
+
+## Contenidos
+
+**Unidad 3**: Desarrollo Económico
+
+- Trampas para el desarrollo.
+- Desigualdad.
+- Pobreza.
+- Población.
+- Medio ambiente (si el tiempo lo permite).
+
+## Bibliografía
+
+- *Bibliografía básica:*
+
+  - Jones C. and D. Vollrath (2013). Introduction to Economic Growth. Third Edition. Norton \& Company. **[JV]**
+  - Ray, D. (2002). Economía del Desarrollo. Antoni Bosch. **[R]**
+
+\ 
+
+- *Bibliografía complementaria:*
+
+  - de Janvry A. and E. Sadoulet (2021). Development Economics: Theory and Practice. Second Edition. Routledge. **[JS]** 
+  - Aghion, P. and P. Howitt (1997). Endogenous Growth Theory. MIT Press. **[AH]**
+
+## Fuente de datos:
+
+- Penn World Table:  
+
+  [https://www.rug.nl/ggdc/productivity/pwt/](https://www.rug.nl/ggdc/productivity/pwt/)
+
+- Barro Lee Educational Attainment:
+
+  [https://barrolee.github.io/BarroLeeDataSet/BLv3.html](https://barrolee.github.io/BarroLeeDataSet/BLv3.html)
+
+- World Development Indicators: 
+
+  [https://datatopics.worldbank.org/world-development-indicators/](https://datatopics.worldbank.org/world-development-indicators/)
+  
+- World Economic Outlook:
+
+  [https://www.imf.org/en/publications/weo](https://www.imf.org/en/publications/weo)
+
+
+## Evaluación 
+
+La evaluación final para el curso será determinada de acuerdo al siguiente esquema:
+
+- **Evaluación Parcial 1 (20 \%)**: semana de exámenes fijada por la escuela. 
+- **Evaluación Parcial 2 (20 \%)**: semana de exámenes fijada por la escuela. 
+- **Tareas (15 \%)**: se desarrollarán dos durante el semestre.
+- **Presentación artículo de la literatura (15 \%)**: se desarrollará durante el semestre.
+- **Examen Final (30 \%)**: semana de exámenes finales fijada por la escuela.
+
+## Evaluación 
+
+Para la evaluación del curso tome en cuenta lo siguiente:
+
+::: {.incremental}
+
+- Las evaluaciones parciales y el examen final se tomarán en semana de pruebas y los horarios serán asignados por la escuela. La semana de pruebas no habrán clases ni ayudantía.
+
+- Justificativos sobre inasistencia a evaluaciones parciales o al examen final deben ser remitidos a *Secretaria de Estudios*. Son ellos los que evaluaran la admisibilidad de los mismos.
+
+- Si el o la estudiante falta a una evaluación parcial, se reponderará la misma en el examen final. Como la evaluación final no puede superar el 55%, faltar a más de una evaluación parcial requiera de tomar evaluaciones recuperatorias.
+
+- Conductas deshonestas, plagio y cualquier acción que vicie el proceso de aprendizaje será llevada al *Comité de Ética*.
+
+:::
+
+## Sobre el uso de herramientas de inteligencia artificial
+
+- Para garantizar un aprendizaje óptimo y ético usen de forma responsable las herramientas de inteligencia artificial. 
+
+- Usen la herramienta solo si no afecta su rendimiento académico o el de sus compañeros. 
+
+- Usen la herramienta cuando logren internalizar y entender los argumentos, puedan citar fuentes, y puedan verificar que los datos sean verídicos. 
+
+- Tomen en cuenta cuenta que esta herramientas están en constante evolución y tiene capacidades y limitaciones. 
+
+- Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones.
+
+## Programación
+
+
+
+|Agosto|Septiembre|Octubre|Noviembre|Diciembre|
+|:---:|:---:|:---:|:---:|:---:|
+|8 Clases|5 Clases|7 Clases|6 Clases|2 Clases|
+|Unidad 1 (4) | Unidad 2 (5) | Unidad 2 (4) | Unidad 3 (6) | Unidad 3 (2)  |
+|Unidad 2 (4) |              | Unidad 3 (3) |              |               |
+|             |*Evaluación 1* |              | *Evaluación 2* |               | 

@@ -97,7 +97,7 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
   - de Janvry A. and E. Sadoulet (2021). Development Economics: Theory and Practice. Second Edition. Routledge. **[JS]** 
   - Aghion, P. and P. Howitt (1997). Endogenous Growth Theory. MIT Press. **[AH]**
 
-## Fuente de datos:
+## Fuente de datos
 
 - Penn World Table:  
 
@@ -155,8 +155,6 @@ Para la evaluación del curso tome en cuenta lo siguiente:
 - Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones.
 
 ## Programación
-
-
 
 |Agosto|Septiembre|Octubre|Noviembre|Diciembre|
 |:---:|:---:|:---:|:---:|:---:|

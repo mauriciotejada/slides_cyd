@@ -1,0 +1,16 @@
+---
+title: "Crecimiento y Desarrollo Económico"
+subtitle: "**Desarrollo Económico**"
+author: "Mauricio M. Tejada"
+institute: "*Departamento de Economía, Universidad Diego Portales*"
+format:
+  revealjs:
+    theme: serif_mod.scss
+    logo: "figs/logo_econ.png"
+    footer: "Ingeniería Comercial -- Crecimiento y Desarrollo Económico"
+    slide-number: c/t
+    show-slide-number: all
+    #embed-resources: true
+---
+
+# Introducción

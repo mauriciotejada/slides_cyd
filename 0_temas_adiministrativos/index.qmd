@@ -25,7 +25,7 @@ format:
 
 2. *Horarios:*
 
-    - Clases: Lunes y Miércoles 11:30 a 12:40. Sala XX.
+    - Clases: Lunes y Miércoles 11:30 a 12:40. Sala B-405.
 
     - Horas de Oficina: Lunes 14:30 a 16:00. Oficia 510 Edificio Cubo.
 
@@ -120,11 +120,11 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 
 La evaluación final para el curso será determinada de acuerdo al siguiente esquema:
 
-- **Evaluación Parcial 1 (20 \%)**: semana de exámenes fijada por la escuela. 
-- **Evaluación Parcial 2 (20 \%)**: semana de exámenes fijada por la escuela. 
+- **Evaluación Parcial 1 (20 \%)**: hasta el 15 de septiembre. 
+- **Evaluación Parcial 2 (20 \%)**: semana del 6 al 10 de noviembre.
 - **Tareas (15 \%)**: se desarrollarán dos durante el semestre.
 - **Presentación artículo de la literatura (15 \%)**: se desarrollará durante el semestre.
-- **Examen Final (30 \%)**: semana de exámenes finales fijada por la escuela.
+- **Examen Final (30 \%)**: semana del 11 al 19 de diciembre.
 
 ## Evaluación 
 
@@ -132,11 +132,13 @@ Para la evaluación del curso tome en cuenta lo siguiente:
 
 ::: {.incremental}
 
-- Las evaluaciones parciales y el examen final se tomarán en semana de pruebas y los horarios serán asignados por la escuela. La semana de pruebas no habrán clases ni ayudantía.
+- No hay eximición de la evaluación final o examen. La nota mínima de presentación al examen es 3,5. 
 
-- Justificativos sobre inasistencia a evaluaciones parciales o al examen final deben ser remitidos a *Secretaria de Estudios*. Son ellos los que evaluaran la admisibilidad de los mismos.
+- Si un/a estudiante falta a una evaluación, deberá rendir de forma obligatoria el examen para reemplazar la nota pendiente (ya no deberá presentar justificación en secretaría de estudios). Quienes estén en esta condición, deben cumplir la misma exigencia de nota mínima de presentación (nota 3.5).
 
-- Si el o la estudiante falta a una evaluación parcial, se reponderará la misma en el examen final. Como la evaluación final no puede superar el 55%, faltar a más de una evaluación parcial requiera de tomar evaluaciones recuperatorias.
+- Solo una evaluación (evaluación 1 o 2) puede ser reemplazada con el examen o evaluación final.
+
+- Solo los/as estudiantes que rindieron ambas evaluaciones podrán justificar su inasistencia a su examen. 
 
 - Conductas deshonestas, plagio y cualquier acción que vicie el proceso de aprendizaje será llevada al *Comité de Ética*.
 

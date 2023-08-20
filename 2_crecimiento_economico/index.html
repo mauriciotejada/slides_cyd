@@ -8,7 +8,7 @@
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.433">
+  <meta name="generator" content="quarto-1.3.450">
 
   <meta name="author" content="Mauricio M. Tejada">
   <title>Crecimiento y Desarrollo Económico</title>
@@ -873,6 +873,543 @@ Mauricio M. Tejada
 <li><p>Alternativamente: <span class="math display">\[Y=A K^{\alpha} U^{\beta} H^{\gamma}\]</span> donde <span class="math inline">\(U\)</span> es mano de obra no calificada y <span class="math inline">\(H\)</span> es capital humano. Suponemos sustitución imperfecta entre tipos de trabajo.</p></li>
 </ul></li>
 </ul>
+</section>
+<section id="la-ecuación-fundamental-del-modelo-de-solow" class="slide level2">
+<h2>La ecuación fundamental del modelo de Solow</h2>
+<p><strong>Recodemos …</strong></p>
+<ul>
+<li><p>Los agentes ahorran una fracción constante de su ingreso: <span class="math display">\[S(t)=s Y(t)\]</span></p></li>
+<li><p>El ahorro es igual a la inversión: <span class="math display">\[S(t)=I(t)\]</span></p></li>
+<li><p>La inversión incrementa el stock de capital: <span class="math display">\[K(t+1)=(1-\delta) K(t)+I(t)=(1-\delta) K(t)+s Y(t)\]</span> con <span class="math inline">\(\delta\)</span> la tasa de depreciación.</p></li>
+<li><p>Esta es la ecuación de acumulación del stock de capital.</p></li>
+</ul>
+</section>
+<section id="la-ecuación-fundamental-del-modelo-de-solow-1" class="slide level2">
+<h2>La ecuación fundamental del modelo de Solow</h2>
+<ul>
+<li><p>Ecuación de acumulación: <span class="math display">\[K(t+1)=(1-\delta) K(t)+s Y(t)\]</span></p></li>
+<li><p>Para convertir a magnitudes per cápita dividimos entre el trabajo: <span class="math inline">\(k=K / L, y=Y / L\)</span> : <span class="math display">\[(1+n) k(t+1)=(1-\delta) k(t)+s y(t)\]</span> (usamos <span class="math inline">\(n\)</span> para indicar la tasa de crecimiento de la población).</p></li>
+<li><p>Combinamos con la función de producción per cápita <span class="math inline">\(y=f(k)\)</span> : <strong><span class="math display">\[(1+n) k(t+1)=(1-\delta) k(t)+s f(k(t))\]</span></strong></p></li>
+<li><p>Esta es la <strong>ecuación fundamental</strong> para el modelo de crecimiento. Con ella podemos estudiar la dinámica del stock de capital</p></li>
+</ul>
+</section>
+<section id="la-dinámica-del-stock-de-capital" class="slide level2">
+<h2>La dinámica del stock de capital</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Solución de Solow</strong>:</p>
+<ul>
+<li><p>Ecuación fundamental: <span class="math display">\[(1+n) k(t+1)=(1-\delta) k(t)+s f(k(t))\]</span></p></li>
+<li><p>En términos de variaciones <span class="math display">\[\Delta k=\frac{(1-\delta) k(t)+s f(k(t)) - (1+n)k(t)}{1+n}\]</span></p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/fig1_solow_plot.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-dinámica-del-stock-de-capital-1" class="slide level2">
+<h2>La dinámica del stock de capital</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Convergencia desde un capital bajo:</strong></p>
+<ul>
+<li><p>Si <span class="math inline">\(k(0) &lt; k^{*}\)</span>, entonces:</p>
+<ul>
+<li><p><span class="math inline">\(\Delta k&gt;0\)</span>.</p></li>
+<li><p><span class="math inline">\(k(t) \rightarrow^{+} k^{*}\)</span> para cualquier <span class="math inline">\(k(0)\)</span></p></li>
+<li><p>Donde: <span class="math display">\[\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}\]</span></p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/fig2_solow_plot_convergence.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-dinámica-del-stock-de-capital-2" class="slide level2">
+<h2>La dinámica del stock de capital</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Convergencia desde un capital alto:</strong></p>
+<ul>
+<li><p>Si <span class="math inline">\(k(0) &gt; k^{*}\)</span>, entonces:</p>
+<ul>
+<li><p><span class="math inline">\(\Delta k&lt;0\)</span>.</p></li>
+<li><p><span class="math inline">\(k(t) \rightarrow^{-} k^{*}\)</span> para cualquier <span class="math inline">\(k(0)\)</span></p></li>
+<li><p>Donde: <span class="math display">\[\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}\]</span></p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/fig3_solow_plot_convergence2.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="el-estado-estacionario" class="slide level2">
+<h2>El estado estacionario</h2>
+<ul>
+<li><p>La <strong>relación capital-trabajo</strong> en estado estacionario es constante: <span class="math display">\[\frac{y^{*}}{k^{*}}=\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}\]</span></p></li>
+<li><p><span class="math inline">\(k^{*}=K(t) / L(t)\)</span> es constante <span class="math inline">\((\Delta k = 0)\)</span>, pero <span class="math inline">\(K(t)\)</span> y <span class="math inline">\(L(t)\)</span> siguen creciendo a una tasa de <span class="math inline">\(n\)</span>.</p></li>
+<li><p>Lo mismo ocurre con el producto, <span class="math inline">\(y^{*}=f(k^{*})\)</span> es constante, por lo que <span class="math inline">\(Y(t)\)</span> crece también a tasa <span class="math inline">\(n\)</span>.</p>
+<ul>
+<li>El argumento depende fundamentalmente de los <strong>rendimientos decrecientes de los insumos</strong>.</li>
+</ul></li>
+</ul>
+<p>&nbsp;</p>
+<div class="emph">
+<p><strong>Predicción del modelo de Solow 1:</strong></p>
+<p>No hay crecimiento a largo plazo por encima del crecimiento de la población. Cualquier crecimiento extra sólo viene del progreso técnico, como veremos más adelante.</p>
+</div>
+</section>
+<section id="el-estado-estacionario-estática-comparativa" class="slide level2">
+<h2>El estado estacionario: estática comparativa</h2>
+<ul>
+<li>¿Cómo <span class="math inline">\(s, n\)</span> y <span class="math inline">\(\delta\)</span> afectan a <span class="math inline">\(k^{*}\)</span>:</li>
+</ul>
+
+<img data-src="figs/fig4_comparative_statics.png" style="width:90.0%" class="r-stretch quarto-figure-center"></section>
+<section id="el-estado-estacionario-para-el-caso-cobb-douglas" class="slide level2">
+<h2>El estado estacionario para el caso Cobb-Douglas</h2>
+<ul>
+<li><p>Estado estacionario <span class="math inline">\(k^{*}\)</span> resuelve: <span class="math display">\[\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}\]</span></p></li>
+<li><p>En el caso de la función Cobb-Douglas, <span class="math inline">\(f(k)=A k^{\alpha}\)</span>, tenemos: <span class="math display">\[\frac{f\left(k^{*}\right)}{k^{*}}=A k^{* \alpha-1}=\frac{n+\delta}{s}\]</span> y por tanto: <span class="math display">\[k^{*}=\left(\frac{s A}{n+\delta}\right)^{1 /(1-\alpha)}\]</span></p></li>
+<li><p>Se puede verificar directamente las propiedades que antes establecimos geométricamente</p>
+<ul>
+<li>Esto es, encuentre el signo de las derivadas parciales de <span class="math inline">\(k^{*}\)</span> con respecto a <span class="math inline">\(s\)</span>, <span class="math inline">\(n\)</span> y <span class="math inline">\(\delta\)</span>.</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="fuentes-de-crecimiento-exógeno-vs.-endógeno" class="title-slide slide level1 center">
+<h1>Fuentes de crecimiento: exógeno vs.&nbsp;endógeno</h1>
+
+</section>
+<section id="fuentes-de-crecimiento" class="slide level2">
+<h2>Fuentes de crecimiento</h2>
+<p><strong>Crecimiento exógeno versus crecimiento endógeno</strong></p>
+<ul>
+<li><p>Crecimiento exógeno: proviene de “fuera” del modelo.</p>
+<ul>
+<li>Progreso tecnológico continuo.</li>
+</ul></li>
+<li><p>Crecimiento endógeno: proviene del “adentro” del modelo.</p>
+<ul>
+<li><p>Progreso tecnológico inducido</p></li>
+<li><p>Ausencia de rendimientos decrecientes</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="crecimiento-exógeno-en-el-modelo-de-solow-progreso-tecnológico" class="slide level2">
+<h2>Crecimiento exógeno en el modelo de Solow: progreso tecnológico</h2>
+<ul>
+<li><p><strong>Supuesto X</strong>: Función de producción es ahora: <span class="math display">\[Y(t)=F(K(t), e(t) L(t))\]</span> donde <span class="math inline">\(e(t)\)</span> es la eficiencia del trabajo, entonces <span class="math inline">\(e(t) L(t)\)</span> es el trabajo efectivo.</p></li>
+<li><p>Progreso tecnológico exógeno: <span class="math display">\[e(t+1)=e(t)(1+\pi), \pi&gt;0\]</span></p></li>
+<li><p>Dividamos la ecuación de acumulación por <span class="math inline">\(e(t) L(t)\)</span> en lugar de <span class="math inline">\(L(t)\)</span> : <span class="math display">\[(1+\pi)(1+n) \hat{k}(t+1)=(1-\delta) \hat{k}(t)+s f(\hat{k}(t))\]</span> donde <span class="math inline">\(\hat{k}=K / e L\)</span> está medido en <strong>unidades efectivas per cápita</strong>.</p></li>
+<li><p>Todo lo demás es idéntico a los visto antes.</p></li>
+</ul>
+</section>
+<section id="el-estado-estacionario-en-unidades-efectivas-de-de-trabajo" class="slide level2">
+<h2>El estado estacionario (en unidades efectivas de de trabajo)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>En estado estacionario: <span class="math display">\[\begin{aligned}
+\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}&amp;=\frac{(1+n)(1+\pi)-(1- \delta)}{s} \\
+&amp;\simeq \frac{n+\delta+\pi}{s}
+\end{aligned}\]</span></p></li>
+<li><p>Note que: <span class="math display">\[y^{*}(t)=\hat{y}^{*}e(t)\]</span> entonces, el la tasa de crecimiento per cápita a largo plazo es <span class="math inline">\(\pi\)</span>.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/fig5_solow_plot_convergence_with_agrowth.png" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="el-estado-estacionario-en-unidades-efectivas-de-de-trabajo-1" class="slide level2">
+<h2>El estado estacionario (en unidades efectivas de de trabajo)</h2>
+<ul>
+<li><p>En el caso de la función Cobb-Douglas, <span class="math inline">\(\hat{y}=f\left(k^{*}\right)=A \hat{k}^{\alpha}\)</span>, tenemos: <span class="math display">\[\hat{k}^{*}=\left(\frac{s A}{n+\delta+\pi}\right)^{1 /(1-\alpha)}\]</span></p></li>
+<li><p>La producción de estado estacionario en unidades efectivas de trabajo es: <span class="math display">\[\hat{y}^{*}=A^{1 /(1-\alpha)}\left(\frac{s}{n+\delta+\pi}\right)^{\alpha /(1-\alpha )}\]</span></p></li>
+<li><p>Como antes, la producción real per cápita y el capital crecen a una tasa de <span class="math inline">\(\pi\)</span>.</p></li>
+</ul>
+</section>
+<section id="el-estado-estacionario-en-unidades-efectivas-de-de-trabajo-2" class="slide level2">
+<h2>El estado estacionario (en unidades efectivas de de trabajo)</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p>Trayectoria de la producción per cápita en estado estacionario: <span class="math display">\[\begin{aligned}
+y^{*}(t)&amp;=\hat{y}^{*}(1+\pi)^{t} \\
+&amp;=A^{1 /(1-\alpha)}\left(\frac{s}{ n+\delta+\pi}\right)^{\alpha /(1-\alpha)}(1+\pi)^{t}
+\end{aligned}\]</span></p></li>
+<li><p>Note que fuera de la trayectoria de estados estacionario, el producto per cápita puede crecer más (o menos) que <span class="math inline">\(\pi\)</span>.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/fig6_path_y.png" style="width:95.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="el-estado-estacionario-estática-comparativa-1" class="slide level2">
+<h2>El estado estacionario: estática comparativa</h2>
+<ul>
+<li>Trayectoria de la producción per cápita en estado estacionario: <span class="math display">\[y^{*}(t)=\hat{y}^{*}(1+\pi)^{t}=A^{1 /(1-\alpha)}\left(\frac{s}{n+\delta+\pi}\right)^{\alpha /(1-\alpha)}(1+\pi)^{t}\]</span></li>
+</ul>
+
+<img data-src="figs/fig7_comparative_statics_path_y.png" style="width:75.0%" class="r-stretch quarto-figure-center"></section>
+<section id="el-modelo-ak-un-primer-paso-a-los-modelo-de-crecimiento-endógeno" class="slide level2">
+<h2>El modelo AK, un primer paso a los modelo de crecimiento endógeno</h2>
+<ul>
+<li><p>Observemos cómo se mueve el estado estacionario con <span class="math inline">\(\alpha\)</span>.</p>
+<ul>
+<li><p>Cuando <span class="math inline">\(\alpha \rightarrow 1\)</span>, de forma que <span class="math inline">\(y(t)=A k(t)\)</span>, el modelo se comporta de manera muy diferente: <span class="math display">\[(1+n) k(t+1)=(1-\delta) k(t)+s A k(t)\]</span></p></li>
+<li><p>Realizando manipulaciones algebraicas: <span class="math display">\[\text { Tasa de crecimiento }= g = \frac{k(t+1)-k(t)}{k(t)}=\frac{s A-(n+\delta)}{1+n}\]</span></p></li>
+</ul></li>
+<li><p>En su versión aproximada tenemos: <span class="math display">\[s A \simeq g+n+\delta\]</span></p>
+<ul>
+<li>Ahora los <strong>parámetros</strong> tienen <strong>efectos permanentes</strong> sobre la tasa de crecimiento, a diferencia del modelo de Solow.</li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="convergencia" class="title-slide slide level1 center">
+<h1>Convergencia</h1>
+
+</section>
+<section id="convergencia-no-condicinal" class="slide level2">
+<h2>Convergencia no condicinal</h2>
+<ul>
+<li><p>El modelo de crecimiento de Solow predice <strong>convergencia no condicional</strong>:</p>
+<ul>
+<li><p>Los ingresos de los países tienden a acercarse cada vez más unos a otros.</p></li>
+<li><p>Este resultado está basado fuertemente en el supuesto de rendimientos decrecientes…</p></li>
+<li><p>…así como en la igualdad de los parámetros <span class="math inline">\(s, n, \pi\)</span> entre países.</p></li>
+</ul></li>
+<li><p>Pareciera que la idea de convergencia no condicional es demasiado pedir:</p>
+<ul>
+<li>No obstante, curiosamente la literatura se ha hecho la pregunta y ha tratado de responderla.</li>
+</ul></li>
+</ul>
+</section>
+<section id="probando-empíricamente-convergencia-no-condicinal" class="slide level2">
+<h2>Probando empíricamente convergencia no condicinal</h2>
+<ul>
+<li><p><strong>Baumol (AER 1986)</strong> estudió 16 países:</p>
+<ul>
+<li><p>Los más ricos del mundo hoy en día.</p></li>
+<li><p>En orden de más pobre a más rico en 1870:</p></li>
+</ul></li>
+</ul>
+<p>.center[{Japón, Finlandia, Suecia, Noruega, Alemania, Italia, Austria, Francia, Canadá,</p>
+<p>Dinamarca, EE. UU., Países Bajos, Suiza, Bélgica, Reino Unido y Australia}]</p>
+<ul>
+<li>¿Por qué solo 16? Angus Maddison y el <strong>proyecto Maddison</strong>.</li>
+</ul>
+<p>&nbsp;</p>
+<div class="emph">
+<p>La base de datos del proyecto Maddison proporciona información sobre el crecimiento económico comparativo y los niveles de ingresos a muy largo plazo. La versión 2020 de esta base de datos cubre 169 países y el período hasta 2018.</p>
+<p>https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2020?lang=en</p>
+</div>
+</section>
+<section id="probando-empíricamente-convergencia-no-condicinal-1" class="slide level2">
+<h2>Probando empíricamente convergencia no condicinal</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><p><strong>Idea</strong>: realizar una regresión de la tasa de crecimiento de 1870-1979 sobre los ingresos de 1870 (periodo base). <span class="math display">\[\ln y_{i}^{1979}-\ln y_{i}^{1870}=A+b \ln y_{i}^{1870}+\epsilon_{i}\]</span></p></li>
+<li><p>La hipótesis de convergencia no condicional se cumpliría si: <span class="math display">\[b \simeq-1\]</span></p></li>
+<li><p>Baumol obtiene <span class="math inline">\(\hat{b}=-0.995, R^{2}=0.88\)</span>.</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Gráficamente</strong>:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/fig1_conv1.png" style="width:110.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="probando-empíricamente-convergencia-no-condicinal-2" class="slide level2">
+<h2>Probando empíricamente convergencia no condicinal</h2>
+<ul>
+<li><p>Crítica de <strong>De Long (AER 1988)</strong>:</p>
+<ul>
+<li><p>Agrega siete países más a los 16 de Maddison.</p></li>
+<li><p>En 1870, estos países tenían tanto derecho a ser miembros del <strong>club de la convergencia</strong> como cualquiera de los 16 incluidos por Baumol:</p></li>
+</ul>
+<p>.center[{Argentina, Chile, Alemania Oriental, Irlanda, Nueva Zelanda, Portugal y España}]</p>
+<ul>
+<li><p>Hasta 1913, Nueva Zelanda, Argentina y Chile figuraban en la lista de los diez principales receptores de inversiones extranjeras británicas y francesas (en términos per cápita).</p></li>
+<li><p>Todos tenían un PIB per cápita superior al de Finlandia en 1870.</p></li>
+<li><p><strong>Estrategia</strong>: dejar Japón (¿por qué?) y agregar los 7.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="probando-empíricamente-convergencia-no-condicinal-3" class="slide level2">
+<h2>Probando empíricamente convergencia no condicinal</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/fig2_conv1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><p>Pendiente sigue siendo negativa, aunque pierde significancia estadística.</p></li>
+<li><p>Controlando por error de medida: <strong>desaparece toda relación</strong>. Suponga que el verdadero valor <span class="math inline">\(\ln y_{i}^{*1870}\)</span> no es observado: <span class="math display">\[e_i = \ln y_{i}^{*1870} - \ln y_{i}^{1870}, \ \ \ Cov(\ln y_{i}^{1870},e_i)=0\]</span> Verdadera relación: <span class="math display">\[\ln y_{i}^{1979}-\ln y_{i}^{*1870}=A+b \ln y_{i}^{*1870}+\epsilon_{i}\]</span> Pero estimamos: <span class="math display">\[\ln y_{i}^{1979}-\ln y_{i}^{1870}=A+b \ln y_{i}^{1870} + (1+b) e_i+\epsilon_{i}\]</span> MCO de <span class="math inline">\(b\)</span> no cambia, pero <span class="math inline">\(V((1+b) e_i+\epsilon_{i}) &gt; V(\epsilon_{i})\)</span></p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="probando-empíricamente-convergencia-no-condicinal-4" class="slide level2">
+<h2>Probando empíricamente convergencia no condicinal</h2>
+<p><strong>Más países</strong>: Conjunto de datos de Maddison actualizado 2013, 60 países.</p>
+
+<img data-src="figs/fig3_conv1.png" style="width:60.0%" class="r-stretch quarto-figure-center"></section>
+<section id="probando-empíricamente-convergencia-no-condicinal-5" class="slide level2">
+<h2>Probando empíricamente convergencia no condicinal</h2>
+<p><strong>Aún más países</strong>: Barro (QJE 1991), más de 100 países durante 1960-1985.</p>
+
+<img data-src="figs/fig4_conv1.png" style="width:65.0%" class="r-stretch quarto-figure-center"></section>
+<section id="convergencia-condicional" class="slide level2">
+<h2>Convergencia condicional</h2>
+<ul>
+<li>El concepto de convergencia no condicional supone que todos los parámetros que determinan el nivel de ingreso de largo plazo son iguales.</li>
+</ul>
+<div class="emph">
+<p><strong>Convergencia condicional:</strong></p>
+<p>El concepto de convergencia tiene sentido solo después de “controlar por” <span class="math inline">\(s\)</span> y <span class="math inline">\(n\)</span> o cualquier parámetro que varíe sistemáticamente entre países</p>
+</div>
+<ul>
+<li><p>Dos enfoques para analizar empíricamente el concepto de convergencia condicional.</p>
+<ul>
+<li><p><strong>Calibración</strong>: Vamos a ver si el modelo de Solow es “suficiente” para explicar cuantitativamente las diferencias de ingreso (metodología propuesta por Kydland y Prescott, 1982).</p></li>
+<li><p><strong>Regresión</strong>: Vamos a ver si los datos soportan las predicciones del modelo de Solow respecto de los determinantes del estándar de vida de los países (Mankiew, Romer y Weil, 1992).</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="convergencia-condicional-1" class="slide level2">
+<h2>Convergencia condicional</h2>
+<p>Los países se diferencian en uno o más de los siguientes: nivel de conocimientos técnicos (y su evolución), la tasa de ahorro, la tasa de crecimiento demográfico y la tasa de depreciación. Distingamos:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Convergencia en tasas de crecimiento:</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/fig6_conv1.png" style="width:85.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Divergencia:</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/fig7_conv1.png" style="width:85.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="enfoque-de-calibración" class="slide level2">
+<h2>Enfoque de calibración</h2>
+<ul>
+<li><p>Recuerde la ecuación que determinaba el stock de capital en unidades efectiva de trabajo en estado estacionario era: <span class="math display">\[\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}} \simeq \frac{n+\delta+\pi}{s}\]</span></p></li>
+<li><p>Usando la función de producción Cobb-Douglas: <span class="math display">\[Y=A K^{\alpha}(e L)^{1-\alpha}\]</span> con <span class="math inline">\(e(t)=(1+\pi)^{t}.\)</span></p></li>
+<li><p>En unidades laborales efectivas:</p></li>
+</ul>
+<p><span class="math display">\[\hat{y}=\frac{Y}{e L}=\frac{A K^{\alpha}(eL)^{1-\alpha}}{eL}=A \left( \frac{K} {eL}\right)^{\alpha}=A \hat{k}^{\alpha}(=f(\hat{k}))\]</span></p>
+</section>
+<section id="enfoque-de-calibración-1" class="slide level2">
+<h2>Enfoque de calibración</h2>
+<ul>
+<li><p>Combinando ambas ecuaciones tenemos: <span class="math display">\[\frac{n+\delta+\pi}{s} \simeq \frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}=A \hat{ k}^{* \alpha-1}\]</span></p></li>
+<li><p>Finalmente, resolvemos para <span class="math inline">\(\hat{ k}^{*}\)</span>: <span class="math display">\[\hat{k}^{*}=\left(\frac{s A}{n+\delta+\pi}\right)^{1 /(1-\alpha)}\]</span> y para <span class="math inline">\(\hat{y}^{*}\)</span> usando la función de producción: <span class="math display">\[\hat{y}^{*}=A\left(\frac{s A}{n+\delta+\pi}\right)^{\alpha /(1-\alpha)}=A^{1 /(1 -\alpha)}\left(\frac{s}{n+\delta+\pi}\right)^{\alpha /(1-\alpha)}\]</span></p></li>
+</ul>
+</section>
+<section id="enfoque-de-calibración-2" class="slide level2">
+<h2>Enfoque de calibración</h2>
+<ul>
+<li><p>Ahora suponga que dos países tienen <span class="math inline">\(\pi\)</span>, <span class="math inline">\(n\)</span> y <span class="math inline">\(\delta\)</span> similares. El ratio de productos per cápita sería: <span class="math display">\[\frac{y_{1}}{y_{2}}=\left(\frac{A_{1}}{A_{2}}\right)^{1 / 1-\alpha}\left(\frac{ s_{1}}{s_{2}}\right)^{\alpha / 1-\alpha}\]</span></p></li>
+<li><p><span class="math inline">\(\alpha\)</span> es la participación del ingreso del capital (¿recuerdan?).</p>
+<ul>
+<li>Posibles valores: <span class="math inline">\(0.25\)</span> (Parente-Prescott) <span class="math inline">\(-0.40\)</span> (Lucas), entonces <span class="math inline">\(\alpha /(1-\alpha) \leq 2 / 3\)</span></li>
+</ul></li>
+<li><p>Suponga que el <strong>país uno tiene el doble de tasa de ahorro <span class="math inline">\(s\)</span></strong>.</p>
+<ul>
+<li><p>Entonces el ratio de ingresos es aprox. <span class="math inline">\(2^{2/3}=1.587\)</span>, alrededor de <span class="math inline">\(60\%\)</span>.</p></li>
+<li><p><strong>¿Es suficiente?, la respuesta el no</strong>. Entre 1990-2020, el ingreso per cápita promedio (PPA) del <span class="math inline">\(10\%\)</span> más rico fue alrededor de <span class="math inline">\(30+\)</span> veces el del <span class="math inline">\(10\%\)</span> más pobre.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="enfoque-de-calibración-3" class="slide level2">
+<h2>Enfoque de calibración</h2>
+<ul>
+<li><p>Los diferenciales tecnológicos pueden darnos una mejor resultado en explicar diferencia en ingreso. Recuerde que: <span class="math display">\[\frac{y_{1}}{y_{2}}=\left(\frac{A_{1}}{A_{2}}\right)^{1 / 1-\alpha}\left(\frac{ s_{1}}{s_{2}}\right)^{\alpha / 1-\alpha}\]</span></p></li>
+<li><p>Es decir, las diferencias <span class="math inline">\(A\)</span> están más amplificadas que las diferencias <span class="math inline">\(s\)</span>: <span class="math display">\[\frac{y_{1}}{y_{2}}=\left(\frac{A_{1}}{A_{2}}\right)^{1 /(1-\alpha)}\]</span></p></li>
+<li><p>Mismo ejercicio, suponga que el <strong>país uno tiene el doble de nivel tecnológico</strong>.</p>
+<ul>
+<li><p>Entonces el ratio de ingresos es aprox. <span class="math inline">\(2^{5/3}=3.174\)</span>, alrededor de <span class="math inline">\(3+\)</span> veces.</p></li>
+<li><p>Mejor, pero aún lejos. Se requerirían diferencias enormes en <span class="math inline">\(A\)</span> para capturar diferencias observadas en <span class="math inline">\(y\)</span>.</p></li>
+<li><p><strong>Variación en los ingresos demasiado alta en relación con la teoría básica</strong>.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="qué-significa-alpha" class="slide level2">
+<h2>¿Qué significa <span class="math inline">\(\alpha\)</span>?</h2>
+<ul>
+<li><p>Recordemos que <span class="math inline">\(\alpha\)</span> representa la participación del ingreso del capital en el ingreso total. <span class="math display">\[\alpha = \frac{PMK \times k}{y}=\frac{q \times k}{y} \in (0,1)\]</span></p>
+<ul>
+<li><p>Cuanto más grande es, mayor es la propagación que podemos calibrar o predecir.</p></li>
+<li><p>Pero <span class="math inline">\(\alpha\)</span> mide la participación del capital físico, que no se acerca a 1.</p></li>
+<li><p>Es el corazón de la dificultad con el modelo de Solow.</p></li>
+</ul></li>
+<li><p>También se pueden acumular otros insumos, como el capital humano.</p>
+<ul>
+<li>Se debe considerar la participación de estos otros insumos en los ingresos totales.</li>
+</ul></li>
+</ul>
+</section>
+<section id="el-modelo-de-solow-con-tres-insumos" class="slide level2">
+<h2>El modelo de Solow con tres insumos</h2>
+<ul>
+<li><p>Suponga ahora que la función de producción es (usemos una Cobb-Douglas): <span class="math display">\[Y=A K^{\alpha} U^{\beta} H^{\gamma}\]</span> donde <span class="math inline">\(U\)</span> es mano de obra no calificada y <span class="math inline">\(H\)</span> es mano de obra educada.</p></li>
+<li><p>Mantenemos los supuestos de RCE en los 3 insumos y rendimientos marginales decrecientes en cada insumo.</p></li>
+<li><p>Note que existe sustitución imperfecta entre <span class="math inline">\(U\)</span>, <span class="math inline">\(H\)</span> y <span class="math inline">\(K\)</span>. Para producir se requieren los tres tres tipos de insumos.</p></li>
+<li><p>Ahora dividamos entre <span class="math inline">\(U\)</span> para expresar la producción por trabajador no calificado: <span class="math display">\[y=A k^{\alpha} h^{\gamma}\]</span> con <span class="math inline">\(h=H/U\)</span> y <span class="math inline">\(k=K/U\)</span>.</p></li>
+</ul>
+</section>
+<section id="el-modelo-de-solow-con-tres-insumos-1" class="slide level2">
+<h2>El modelo de Solow con tres insumos</h2>
+<ul>
+<li><p>Ahora tenemos dos ecuaciones de acumulación:</p>
+<p><span class="math display">\[Ahorros: \ \ \ K(t+1)=\left(1-\delta_{k}\right) K(t)+s_{k} Y(t)\]</span></p>
+<p><span class="math display">\[Educación: \ \ \ H(t+1)=\left(1-\delta_{h}\right) H(t)+s_{h} Y(t)\]</span></p></li>
+<li><p>Supongamos por simplicidad que no existe progreso tecnológico. De nuevo, dividiendo por <span class="math inline">\(U\)</span> tenemos: <span class="math display">\[\qquad(1+n) k(t+1)=\left(1-\delta_{k}\right) k(t)+s_{k} y(t)\]</span> <span class="math display">\[(1+n) h(t+1)=\left(1-\delta_{h}\right) h(t)+s_{h} y(t)\]</span></p></li>
+<li><p>En estado estacionario se cumple <span class="math inline">\(k(t)=k(t+1)=k^{*}\)</span>, <span class="math inline">\(h(t)=h(t+1)=h^{*}\)</span>, <span class="math inline">\(y(t)=y^{*}\)</span>, luego: <span class="math display">\[k^{*}=\frac{s_{k} y^{*}}{n+\delta_{k}}\]</span> <span class="math display">\[h^{*}=\frac{s_{h} y^{*}}{n+\delta_{h}}\]</span></p></li>
+</ul>
+</section>
+<section id="el-modelo-de-solow-con-tres-insumos-2" class="slide level2">
+<h2>El modelo de Solow con tres insumos</h2>
+<ul>
+<li>Recuerda <span class="math inline">\(y=A k^{\alpha} h^{\gamma}\)</span>. Combinando: <span class="math display">\[y^{*}=A k^{* \alpha} h^{* \gamma}=A\left(\frac{s_{k} y^{*}}{n+\delta_{k}}\right) ^{\alpha}\left(\frac{s_{h} y^{*}}{n+\delta_{h}}\right)^{\gamma},\]</span> <span class="math display">\[y^{*}=A^{1 /(1-\alpha-\gamma)}\left(\frac{s_{k}}{n+\delta_{k}}\right)^{\alpha /(1 -\alpha-\gamma)}\left(\frac{s_{h}}{n+\delta_{h}}\right)^{\gamma /(1-\alpha-\gamma)}\]</span></li>
+</ul>
+</section>
+<section id="enfoque-de-calibración-nuevamente" class="slide level2">
+<h2>Enfoque de calibración (nuevamente)</h2>
+<ul>
+<li>Ahora suponga que dos países tienen <span class="math inline">\(n\)</span>, <span class="math inline">\(\delta_k\)</span> y <span class="math inline">\(\delta_h\)</span> similares. El ratio de productos per cápita sería:</li>
+</ul>
+<p><span class="math display">\[\frac{y_1}{y_2}=\left(\frac{A_1}{A_2}\right)^{1 /(1-\alpha-\gamma)}\left(\frac{s_{1,k}}{s_{2,k}}\right)^{\alpha /(1 -\alpha-\gamma)}\left(\frac{s_{1,h}}{s_{1,h}}\right)^{\gamma /(1-\alpha-\gamma)}\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\alpha\)</span> y <span class="math inline">\(\gamma\)</span> son la participación del ingreso del capital y del capital humano (trabajo calificado) sobre el ingreso total, respectivamente.</p>
+<ul>
+<li>Posibles valores: <span class="math inline">\(\alpha = [0.25, 0.40]\)</span> y <span class="math inline">\(\gamma = [0.10, 0.20]\)</span>, entonces <span class="math inline">\((\alpha+\gamma) /(1-\alpha-\gamma) \leq 3 / 2\)</span></li>
+</ul></li>
+<li><p>Suponga que el <strong>país uno tiene el doble de tasa de ahorro <span class="math inline">\(s\)</span> en ambos capitales</strong>.</p>
+<ul>
+<li>Entonces el ratio de ingresos es aprox. <span class="math inline">\(2^{3/2}=2.828\)</span>, aproximadamente <span class="math inline">\(\times 3\)</span>.</li>
+</ul></li>
+<li><p>Mismo ejercicio, suponga que el <strong>país uno tiene el doble de nivel tecnológico</strong>.</p>
+<ul>
+<li>Entonces el ratio de ingresos es aprox. <span class="math inline">\(2^{5/2}=5.656\)</span>, alrededor de <span class="math inline">\(\times 5\)</span>.</li>
+</ul></li>
+<li><p>Mucho mejor!! <strong>Se requieren más componente para que la teoría logre capturar diferencias en ingreso</strong>.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="crecimiento-endógeno" class="title-slide slide level1 center">
+<h1>Crecimiento endógeno</h1>
+
+</section>
+<section id="capital-físico-y-capital-humano-nuevamente" class="slide level2">
+<h2>Capital físico y capital humano (nuevamente)</h2>
+<ul>
+<li><p>¿Qué sucede si <span class="math inline">\(\alpha+\gamma=1\)</span> en el modelo visto antes? En este caso: <span class="math display">\[y=A k^{\alpha} h^{1-\alpha}\]</span></p></li>
+<li><p>Implicancias (por simplicidad ignoremos el crecimiento de la población y la depreciación, la escencia no cambia):</p>
+<ul>
+<li><p>Definimos <span class="math inline">\(r=h/k\)</span>, entonces: <span class="math display">\[y/k=Ar^{1-\alpha} \ \ \ \ \ \ \ \ y/h=Ar^{-\alpha}\]</span></p></li>
+<li><p>Usando las ecuaciones de acumulación tenemos: <span class="math display">\[g_k(t)=\frac{k(t+1)-k(t)}{k(t)}=s_{k}Ar(t)^{1-\alpha}\]</span> <span class="math display">\[g_h(t)=\frac{h(t+1)-h(t)}{h(t)}=s_{h}Ar(t)^{-\alpha}\]</span></p></li>
+</ul></li>
+</ul>
+</section>
+<section id="capital-físico-y-capital-humano-nuevamente-1" class="slide level2">
+<h2>Capital físico y capital humano (nuevamente)</h2>
+<ul>
+<li><p>Implicancias (continuación):</p>
+<ul>
+<li><p>Si <span class="math inline">\(g_k(t) \geq g_h(t)\)</span>, entonces <span class="math inline">\(r=h/k \geq s_h/s_k\)</span>, pero como <span class="math inline">\(r=h/k\downarrow\)</span>, tenemos que <span class="math inline">\(r\rightarrow s_h/s_k\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(g_k(t) \leq g_h(t)\)</span>, entonces <span class="math inline">\(r=h/k \leq s_h/s_k\)</span>, pero como <span class="math inline">\(r=h/k\uparrow\)</span>, tenemos que <span class="math inline">\(r\rightarrow s_h/s_k\)</span>.</p></li>
+<li><p>Usando lo anterior: <span class="math display">\[r=\frac{s_h}{s_k} \Rightarrow g_k(t)=g_h(t)\]</span></p></li>
+<li><p>Usando la función de producción: <span class="math display">\[y=A k^{\alpha} h^{1-\alpha}=y=\frac{A}{r^{\alpha}} h \frac{h+k}{h+k} = A\frac{r^{1-\alpha}}{1+r}\kappa = \tilde{A}\kappa\]</span> con <span class="math inline">\(\kappa=h+k\)</span>.</p></li>
+<li><p>Si bien, la función de producción tiene retornos marginales decrecientes para <span class="math inline">\(k\)</span> y <span class="math inline">\(y\)</span>, presenta retornos marginales constantes para una definición amplia de capital <span class="math inline">\(\kappa\)</span>. <strong>Este modelo presenta crecimiento sostenido como el AK</strong>.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="qué-logramos-con-este-ejercicio" class="slide level2">
+<h2>¿Qué logramos con este ejercicio?</h2>
+<p><strong>La convergencia contradice los hechos. Pero …</strong></p>
+<ul>
+<li><p>La variación observada en el ingreso per cápita se ajusta a las variaciones en el ahorro.</p></li>
+<li><p>Usando un modelo que tiene tanto capital físico como humano tenemos las siguientes predicciones</p>
+<ul>
+<li><p><strong>La convergencia condicional (una vez se controla por el capital humano)</strong>: Condicionando por el nivel de capital humano, los países pobres tienden a crecer más deprisa.</p></li>
+<li><p><strong>La divergencia condicional (una vez controlado por el nivel inicial de ingreso per cápita)</strong>: Condicionando por el nivel de renta per cápita, los países que tienen más capital humano crecen más deprisa.</p></li>
+</ul></li>
+</ul>
+<p><strong>A seguir</strong>: teorías de la divergencia.</p>
 
 <img src="figs/logo_econ.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p>Ingeniería Comercial – Crecimiento y Desarrollo Económico</p>

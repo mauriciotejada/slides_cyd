@@ -162,7 +162,7 @@ knitr::include_graphics("figs/fig0_saving_investment.png")
 - Capital: $K(t+\Delta t)-K(t)= ( I(t) -\delta K(t) ) \Delta t$
 
 - Ecuación de [Harrod-Domar]{.emph}:
-**$$s / \theta=(1+g)(1+n)- (1-\delta) \approx g + n + \delta $$**
+**$$s / \theta== g + n + \delta $$**
 
 - Definiciones:
 

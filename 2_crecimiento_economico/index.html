@@ -698,13 +698,13 @@ Mauricio M. Tejada
 <p><strong>Identidad contable</strong></p>
 <ul>
 <li><p>Producción: <span class="math inline">\(Y(t)=C(t)+S(t)=C(t)+I(t)\)</span></p></li>
-<li><p>Capital: <span class="math inline">\(K(t+1)=(1-\delta) K(t)+I(t)\)</span></p></li>
+<li><p>Capital: <span class="math inline">\(K(t+\Delta t)-K(t)= ( I(t) -\delta K(t) ) \Delta t\)</span></p></li>
 <li><p>Ecuación de <span class="emph">Harrod-Domar</span>: <strong><span class="math display">\[s / \theta=(1+g)(1+n)- (1-\delta) \approx g + n + \delta \]</span></strong></p></li>
 <li><p>Definiciones:</p>
 <ul>
 <li><p><span class="math inline">\(y(t) = Y(t) / P(t)\)</span>,</p></li>
-<li><p><span class="math inline">\(g = [y(t+1) - y(t)] / y(t)\)</span>,</p></li>
-<li><p><span class="math inline">\(n = [P(t+1) - P(t)] / P(t)\)</span>,</p></li>
+<li><p><span class="math inline">\(g = \dot{y}(t)/y(t)\)</span>,</p></li>
+<li><p><span class="math inline">\(n = \dot{P}(t) / P(t)\)</span>,</p></li>
 <li><p><span class="math inline">\(s=S(t)/Y(t)\)</span>,</p></li>
 <li><p><span class="math inline">\(\theta = K(t) / Y(t)\)</span></p></li>
 </ul></li>
@@ -745,8 +745,8 @@ Mauricio M. Tejada
 <li><p>Abundancia de trabajo (e.r.c. el capital): un poco más de capital cundirá mucho <span class="math inline">\(K/Y\downarrow\)</span>.</p></li>
 <li><p>Escasez de trabajo (e.r.c. el capital): se utilizará intensivamente el capital <span class="math inline">\(K/Y\uparrow\)</span>.</p></li>
 <li><p><strong>Supuesto 1</strong>: Los agentes ahorran una fracción constante <span class="math inline">\(s\)</span> de su ingreso: <span class="math display">\[S(t) = I(t) = sY(t)\]</span></p></li>
-<li><p><strong>Supuesto 2:</strong>: La población crece a tasa <span class="math inline">\(n\)</span>: <span class="math display">\[n = [P(t+1) - P(t)] / P(t)\]</span></p></li>
-<li><p>Stock de capital per cápita: <span class="math display">\[K(t+1)=(1-\delta) K(t)+sY(t) \rightarrow (1+n)k(t+1)=(1-\delta) k(t)+sy(t)\]</span> con <span class="math inline">\(k=K/P\)</span> y <span class="math inline">\(y=Y/P\)</span>.</p></li>
+<li><p><strong>Supuesto 2:</strong>: La población crece a tasa <span class="math inline">\(n\)</span>: <span class="math display">\[n = \dot{P}(t) / P(t)\]</span></p></li>
+<li><p>Stock de capital per cápita: <span class="math display">\[\dot{K}(t)= sY(t) - \delta K(t) \rightarrow \dot{k}(t)=sy(t)-(n+\delta) k(t)\]</span> con <span class="math inline">\(k=K/P\)</span> y <span class="math inline">\(y=Y/P\)</span>.</p></li>
 </ul>
 </section>
 <section id="la-función-de-producción" class="slide level2">
@@ -880,16 +880,16 @@ Mauricio M. Tejada
 <ul>
 <li><p>Los agentes ahorran una fracción constante de su ingreso: <span class="math display">\[S(t)=s Y(t)\]</span></p></li>
 <li><p>El ahorro es igual a la inversión: <span class="math display">\[S(t)=I(t)\]</span></p></li>
-<li><p>La inversión incrementa el stock de capital: <span class="math display">\[K(t+1)=(1-\delta) K(t)+I(t)=(1-\delta) K(t)+s Y(t)\]</span> con <span class="math inline">\(\delta\)</span> la tasa de depreciación.</p></li>
+<li><p>La inversión incrementa el stock de capital: <span class="math display">\[\dot{K}(t)=I(t)-\delta K(t)=s Y(t)- \delta K(t)\]</span> con <span class="math inline">\(\delta\)</span> la tasa de depreciación.</p></li>
 <li><p>Esta es la ecuación de acumulación del stock de capital.</p></li>
 </ul>
 </section>
 <section id="la-ecuación-fundamental-del-modelo-de-solow-1" class="slide level2">
 <h2>La ecuación fundamental del modelo de Solow</h2>
 <ul>
-<li><p>Ecuación de acumulación: <span class="math display">\[K(t+1)=(1-\delta) K(t)+s Y(t)\]</span></p></li>
-<li><p>Para convertir a magnitudes per cápita dividimos entre el trabajo: <span class="math inline">\(k=K / L, y=Y / L\)</span> : <span class="math display">\[(1+n) k(t+1)=(1-\delta) k(t)+s y(t)\]</span> (usamos <span class="math inline">\(n\)</span> para indicar la tasa de crecimiento de la población).</p></li>
-<li><p>Combinamos con la función de producción per cápita <span class="math inline">\(y=f(k)\)</span> : <strong><span class="math display">\[(1+n) k(t+1)=(1-\delta) k(t)+s f(k(t))\]</span></strong></p></li>
+<li><p>Ecuación de acumulación: <span class="math display">\[\dot{K}(t)=s Y(t)- \delta K(t)\]</span></p></li>
+<li><p>Para convertir a magnitudes per cápita dividimos entre el trabajo: <span class="math inline">\(k=K / L, y=Y / L\)</span> : <span class="math display">\[\dot{k}(t)= \frac{\dot{K(t)}}{L(t)} - n k(t) = s y(t) - (n+\delta) k(t)\]</span> (usamos <span class="math inline">\(n\)</span> para indicar la tasa de crecimiento de la población).</p></li>
+<li><p>Combinamos con la función de producción per cápita <span class="math inline">\(y=f(k)\)</span> : <strong><span class="math display">\[\dot{k}(t)=s f(k(t))- (n+\delta) k(t)\]</span></strong></p></li>
 <li><p>Esta es la <strong>ecuación fundamental</strong> para el modelo de crecimiento. Con ella podemos estudiar la dinámica del stock de capital</p></li>
 </ul>
 </section>
@@ -899,8 +899,8 @@ Mauricio M. Tejada
 <div class="column" style="width:50%;">
 <p><strong>Solución de Solow</strong>:</p>
 <ul>
-<li><p>Ecuación fundamental: <span class="math display">\[(1+n) k(t+1)=(1-\delta) k(t)+s f(k(t))\]</span></p></li>
-<li><p>En términos de variaciones <span class="math display">\[\Delta k=\frac{(1-\delta) k(t)+s f(k(t)) - (1+n)k(t)}{1+n}\]</span></p></li>
+<li><p>Ecuación fundamental: <span class="math display">\[\dot{k}(t)=s f(k(t))- (n+\delta) k(t)\]</span></p></li>
+<li><p>En términos de variaciones porcentuales (tasa de crecimiento) <span class="math display">\[\frac{\dot{k}(t)}{k(t)}=s \frac{f(k(t))}{k(t)}- (n+\delta)\]</span></p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
@@ -923,8 +923,13 @@ Mauricio M. Tejada
 <ul>
 <li><p>Si <span class="math inline">\(k(0) &lt; k^{*}\)</span>, entonces:</p>
 <ul>
-<li><p><span class="math inline">\(\Delta k&gt;0\)</span>.</p></li>
-<li><p><span class="math inline">\(k(t) \rightarrow^{+} k^{*}\)</span> para cualquier <span class="math inline">\(k(0)\)</span></p></li>
+<li><p><span class="math inline">\(\dot{k}&gt;0\)</span>. <span class="math inline">\(k(t) \rightarrow^{+} k^{*}\)</span> para cualquier <span class="math inline">\(k(0)\)</span></p></li>
+<li><p>Donde: <span class="math display">\[\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}\]</span></p></li>
+</ul>
+<p><strong>Convergencia desde un capital alto:</strong></p></li>
+<li><p>Si <span class="math inline">\(k(0) &gt; k^{*}\)</span>, entonces:</p>
+<ul>
+<li><p><span class="math inline">\(\dot{k}&lt;0\)</span>. <span class="math inline">\(k(t) \rightarrow^{-} k^{*}\)</span> para cualquier <span class="math inline">\(k(0)\)</span></p></li>
 <li><p>Donde: <span class="math display">\[\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}\]</span></p></li>
 </ul></li>
 </ul>
@@ -941,37 +946,11 @@ Mauricio M. Tejada
 </div>
 </div>
 </section>
-<section id="la-dinámica-del-stock-de-capital-2" class="slide level2">
-<h2>La dinámica del stock de capital</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Convergencia desde un capital alto:</strong></p>
-<ul>
-<li><p>Si <span class="math inline">\(k(0) &gt; k^{*}\)</span>, entonces:</p>
-<ul>
-<li><p><span class="math inline">\(\Delta k&lt;0\)</span>.</p></li>
-<li><p><span class="math inline">\(k(t) \rightarrow^{-} k^{*}\)</span> para cualquier <span class="math inline">\(k(0)\)</span></p></li>
-<li><p>Donde: <span class="math display">\[\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}\]</span></p></li>
-</ul></li>
-</ul>
-</div><div class="column" style="width:50%;">
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="figs/fig3_solow_plot_convergence2.png" style="width:80.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
 <section id="el-estado-estacionario" class="slide level2">
 <h2>El estado estacionario</h2>
 <ul>
 <li><p>La <strong>relación capital-trabajo</strong> en estado estacionario es constante: <span class="math display">\[\frac{y^{*}}{k^{*}}=\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}\]</span></p></li>
-<li><p><span class="math inline">\(k^{*}=K(t) / L(t)\)</span> es constante <span class="math inline">\((\Delta k = 0)\)</span>, pero <span class="math inline">\(K(t)\)</span> y <span class="math inline">\(L(t)\)</span> siguen creciendo a una tasa de <span class="math inline">\(n\)</span>.</p></li>
+<li><p><span class="math inline">\(k^{*}=K(t) / L(t)\)</span> es constante <span class="math inline">\((\dot{k} = 0)\)</span>, pero <span class="math inline">\(K(t)\)</span> y <span class="math inline">\(L(t)\)</span> siguen creciendo a una tasa de <span class="math inline">\(n\)</span>.</p></li>
 <li><p>Lo mismo ocurre con el producto, <span class="math inline">\(y^{*}=f(k^{*})\)</span> es constante, por lo que <span class="math inline">\(Y(t)\)</span> crece también a tasa <span class="math inline">\(n\)</span>.</p>
 <ul>
 <li>El argumento depende fundamentalmente de los <strong>rendimientos decrecientes de los insumos</strong>.</li>
@@ -1001,6 +980,11 @@ Mauricio M. Tejada
 </ul></li>
 </ul>
 </section></section>
+<section id="dinámica-de-transición" class="title-slide slide level1 center">
+<h1>Dinámica de transición</h1>
+
+<img data-src="figs/dinamica_transicion.png" style="width:100.0%" class="r-stretch quarto-figure-center"></section>
+
 <section>
 <section id="fuentes-de-crecimiento-exógeno-vs.-endógeno" class="title-slide slide level1 center">
 <h1>Fuentes de crecimiento: exógeno vs.&nbsp;endógeno</h1>
@@ -1025,8 +1009,8 @@ Mauricio M. Tejada
 <h2>Crecimiento exógeno en el modelo de Solow: progreso tecnológico</h2>
 <ul>
 <li><p><strong>Supuesto X</strong>: Función de producción es ahora: <span class="math display">\[Y(t)=F(K(t), e(t) L(t))\]</span> donde <span class="math inline">\(e(t)\)</span> es la eficiencia del trabajo, entonces <span class="math inline">\(e(t) L(t)\)</span> es el trabajo efectivo.</p></li>
-<li><p>Progreso tecnológico exógeno: <span class="math display">\[e(t+1)=e(t)(1+\pi), \pi&gt;0\]</span></p></li>
-<li><p>Dividamos la ecuación de acumulación por <span class="math inline">\(e(t) L(t)\)</span> en lugar de <span class="math inline">\(L(t)\)</span> : <span class="math display">\[(1+\pi)(1+n) \hat{k}(t+1)=(1-\delta) \hat{k}(t)+s f(\hat{k}(t))\]</span> donde <span class="math inline">\(\hat{k}=K / e L\)</span> está medido en <strong>unidades efectivas per cápita</strong>.</p></li>
+<li><p>Progreso tecnológico exógeno: <span class="math display">\[\dot{e}(t)/e(t)=\pi, \pi&gt;0\]</span></p></li>
+<li><p>Dividamos la ecuación de acumulación por <span class="math inline">\(e(t) L(t)\)</span> en lugar de <span class="math inline">\(L(t)\)</span> : <span class="math display">\[\dot{\hat{k}}(t)=s f(\hat{k}(t))-(n+\delta+\pi) \hat{k}(t)\]</span> donde <span class="math inline">\(\hat{k}=K / e L\)</span> está medido en <strong>unidades efectivas per cápita</strong>.</p></li>
 <li><p>Todo lo demás es idéntico a los visto antes.</p></li>
 </ul>
 </section>
@@ -1035,10 +1019,7 @@ Mauricio M. Tejada
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li><p>En estado estacionario: <span class="math display">\[\begin{aligned}
-\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}&amp;=\frac{(1+n)(1+\pi)-(1- \delta)}{s} \\
-&amp;\simeq \frac{n+\delta+\pi}{s}
-\end{aligned}\]</span></p></li>
+<li><p>En estado estacionario: <span class="math display">\[\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}= \frac{n+\delta+\pi}{s}\]</span></p></li>
 <li><p>Note que: <span class="math display">\[y^{*}(t)=\hat{y}^{*}e(t)\]</span> entonces, el la tasa de crecimiento per cápita a largo plazo es <span class="math inline">\(\pi\)</span>.</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -1069,7 +1050,7 @@ Mauricio M. Tejada
 <ul>
 <li><p>Trayectoria de la producción per cápita en estado estacionario: <span class="math display">\[\begin{aligned}
 y^{*}(t)&amp;=\hat{y}^{*}(1+\pi)^{t} \\
-&amp;=A^{1 /(1-\alpha)}\left(\frac{s}{ n+\delta+\pi}\right)^{\alpha /(1-\alpha)}(1+\pi)^{t}
+&amp;=A^{1 /(1-\alpha)}\left(\frac{s}{ n+\delta+\pi}\right)^{\alpha /(1-\alpha)}e(t)
 \end{aligned}\]</span></p></li>
 <li><p>Note que fuera de la trayectoria de estados estacionario, el producto per cápita puede crecer más (o menos) que <span class="math inline">\(\pi\)</span>.</p></li>
 </ul>
@@ -1089,7 +1070,7 @@ y^{*}(t)&amp;=\hat{y}^{*}(1+\pi)^{t} \\
 <section id="el-estado-estacionario-estática-comparativa-1" class="slide level2">
 <h2>El estado estacionario: estática comparativa</h2>
 <ul>
-<li>Trayectoria de la producción per cápita en estado estacionario: <span class="math display">\[y^{*}(t)=\hat{y}^{*}(1+\pi)^{t}=A^{1 /(1-\alpha)}\left(\frac{s}{n+\delta+\pi}\right)^{\alpha /(1-\alpha)}(1+\pi)^{t}\]</span></li>
+<li>Trayectoria de la producción per cápita en estado estacionario: <span class="math display">\[y^{*}(t)=\hat{y}^{*}e(t)=A^{1 /(1-\alpha)}\left(\frac{s}{n+\delta+\pi}\right)^{\alpha /(1-\alpha)}e(t)\]</span></li>
 </ul>
 
 <img data-src="figs/fig7_comparative_statics_path_y.png" style="width:75.0%" class="r-stretch quarto-figure-center"></section>
@@ -1098,10 +1079,10 @@ y^{*}(t)&amp;=\hat{y}^{*}(1+\pi)^{t} \\
 <ul>
 <li><p>Observemos cómo se mueve el estado estacionario con <span class="math inline">\(\alpha\)</span>.</p>
 <ul>
-<li><p>Cuando <span class="math inline">\(\alpha \rightarrow 1\)</span>, de forma que <span class="math inline">\(y(t)=A k(t)\)</span>, el modelo se comporta de manera muy diferente: <span class="math display">\[(1+n) k(t+1)=(1-\delta) k(t)+s A k(t)\]</span></p></li>
-<li><p>Realizando manipulaciones algebraicas: <span class="math display">\[\text { Tasa de crecimiento }= g = \frac{k(t+1)-k(t)}{k(t)}=\frac{s A-(n+\delta)}{1+n}\]</span></p></li>
+<li><p>Cuando <span class="math inline">\(\alpha \rightarrow 1\)</span>, de forma que <span class="math inline">\(y(t)=A k(t)\)</span>, el modelo se comporta de manera muy diferente: <span class="math display">\[\dot{k}(t)=s A k(t) - (n+\delta+\pi) k(t)\]</span></p></li>
+<li><p>Realizando manipulaciones algebraicas: <span class="math display">\[\text { Tasa de crecimiento }= g = \frac{\dot{k}(t)}{k(t)}=s A-(n+\delta+\pi)\]</span></p></li>
 </ul></li>
-<li><p>En su versión aproximada tenemos: <span class="math display">\[s A \simeq g+n+\delta\]</span></p>
+<li><p>Entonces: <span class="math display">\[s A = g+n+\delta\]</span></p>
 <ul>
 <li>Ahora los <strong>parámetros</strong> tienen <strong>efectos permanentes</strong> sobre la tasa de crecimiento, a diferencia del modelo de Solow.</li>
 </ul></li>
@@ -1266,7 +1247,7 @@ y^{*}(t)&amp;=\hat{y}^{*}(1+\pi)^{t} \\
 <section id="enfoque-de-calibración" class="slide level2">
 <h2>Enfoque de calibración</h2>
 <ul>
-<li><p>Recuerde la ecuación que determinaba el stock de capital en unidades efectiva de trabajo en estado estacionario era: <span class="math display">\[\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}} \simeq \frac{n+\delta+\pi}{s}\]</span></p></li>
+<li><p>Recuerde la ecuación que determinaba el stock de capital en unidades efectiva de trabajo en estado estacionario era: <span class="math display">\[\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}} = \frac{n+\delta+\pi}{s}\]</span></p></li>
 <li><p>Usando la función de producción Cobb-Douglas: <span class="math display">\[Y=A K^{\alpha}(e L)^{1-\alpha}\]</span> con <span class="math inline">\(e(t)=(1+\pi)^{t}.\)</span></p></li>
 <li><p>En unidades laborales efectivas:</p></li>
 </ul>
@@ -1275,7 +1256,7 @@ y^{*}(t)&amp;=\hat{y}^{*}(1+\pi)^{t} \\
 <section id="enfoque-de-calibración-1" class="slide level2">
 <h2>Enfoque de calibración</h2>
 <ul>
-<li><p>Combinando ambas ecuaciones tenemos: <span class="math display">\[\frac{n+\delta+\pi}{s} \simeq \frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}=A \hat{ k}^{* \alpha-1}\]</span></p></li>
+<li><p>Combinando ambas ecuaciones tenemos: <span class="math display">\[\frac{n+\delta+\pi}{s} = \frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}=A \hat{ k}^{* \alpha-1}\]</span></p></li>
 <li><p>Finalmente, resolvemos para <span class="math inline">\(\hat{ k}^{*}\)</span>: <span class="math display">\[\hat{k}^{*}=\left(\frac{s A}{n+\delta+\pi}\right)^{1 /(1-\alpha)}\]</span> y para <span class="math inline">\(\hat{y}^{*}\)</span> usando la función de producción: <span class="math display">\[\hat{y}^{*}=A\left(\frac{s A}{n+\delta+\pi}\right)^{\alpha /(1-\alpha)}=A^{1 /(1 -\alpha)}\left(\frac{s}{n+\delta+\pi}\right)^{\alpha /(1-\alpha)}\]</span></p></li>
 </ul>
 </section>
@@ -1322,8 +1303,8 @@ y^{*}(t)&amp;=\hat{y}^{*}(1+\pi)^{t} \\
 </ul></li>
 </ul>
 </section>
-<section id="el-modelo-de-solow-con-tres-insumos" class="slide level2">
-<h2>El modelo de Solow con tres insumos</h2>
+<section id="el-modelo-de-solow-con-tres-insumos-uzawa-lucas" class="slide level2">
+<h2>El modelo de Solow con tres insumos (Uzawa-Lucas)</h2>
 <ul>
 <li><p>Suponga ahora que la función de producción es (usemos una Cobb-Douglas): <span class="math display">\[Y=A K^{\alpha} U^{\beta} H^{\gamma}\]</span> donde <span class="math inline">\(U\)</span> es mano de obra no calificada y <span class="math inline">\(H\)</span> es mano de obra educada.</p></li>
 <li><p>Mantenemos los supuestos de RCE en los 3 insumos y rendimientos marginales decrecientes en cada insumo.</p></li>
@@ -1331,18 +1312,18 @@ y^{*}(t)&amp;=\hat{y}^{*}(1+\pi)^{t} \\
 <li><p>Ahora dividamos entre <span class="math inline">\(U\)</span> para expresar la producción por trabajador no calificado: <span class="math display">\[y=A k^{\alpha} h^{\gamma}\]</span> con <span class="math inline">\(h=H/U\)</span> y <span class="math inline">\(k=K/U\)</span>.</p></li>
 </ul>
 </section>
-<section id="el-modelo-de-solow-con-tres-insumos-1" class="slide level2">
-<h2>El modelo de Solow con tres insumos</h2>
+<section id="el-modelo-de-solow-con-tres-insumos-uzawa-lucas-1" class="slide level2">
+<h2>El modelo de Solow con tres insumos (Uzawa-Lucas)</h2>
 <ul>
 <li><p>Ahora tenemos dos ecuaciones de acumulación:</p>
-<p><span class="math display">\[Ahorros: \ \ \ K(t+1)=\left(1-\delta_{k}\right) K(t)+s_{k} Y(t)\]</span></p>
-<p><span class="math display">\[Educación: \ \ \ H(t+1)=\left(1-\delta_{h}\right) H(t)+s_{h} Y(t)\]</span></p></li>
-<li><p>Supongamos por simplicidad que no existe progreso tecnológico. De nuevo, dividiendo por <span class="math inline">\(U\)</span> tenemos: <span class="math display">\[\qquad(1+n) k(t+1)=\left(1-\delta_{k}\right) k(t)+s_{k} y(t)\]</span> <span class="math display">\[(1+n) h(t+1)=\left(1-\delta_{h}\right) h(t)+s_{h} y(t)\]</span></p></li>
-<li><p>En estado estacionario se cumple <span class="math inline">\(k(t)=k(t+1)=k^{*}\)</span>, <span class="math inline">\(h(t)=h(t+1)=h^{*}\)</span>, <span class="math inline">\(y(t)=y^{*}\)</span>, luego: <span class="math display">\[k^{*}=\frac{s_{k} y^{*}}{n+\delta_{k}}\]</span> <span class="math display">\[h^{*}=\frac{s_{h} y^{*}}{n+\delta_{h}}\]</span></p></li>
+<p><span class="math display">\[Ahorros: \ \ \ \dot{K}(t)=-\delta_{k} K(t)+s_{k} Y(t)\]</span></p>
+<p><span class="math display">\[Educación: \ \ \ \dot{H}(t)=-\delta_{h} H(t)+s_{h} Y(t)\]</span></p></li>
+<li><p>Supongamos por simplicidad que no existe progreso tecnológico. De nuevo, dividiendo por <span class="math inline">\(U\)</span> tenemos: <span class="math display">\[\dot{k}(t)=s_{k} y(t)-\left(n+\delta_{k}\right) k(t)\]</span> <span class="math display">\[\dot{h}(t)=s_{h} y(t)-\left(n+\delta_{h}\right) h(t)\]</span></p></li>
+<li><p>En estado estacionario se cumple <span class="math inline">\(\dot{k}(t)=\dot{h}(t)=0\)</span>, <span class="math inline">\(y(t)=y^{*}\)</span>, luego: <span class="math display">\[k^{*}=\frac{s_{k} y^{*}}{n+\delta_{k}} \ \ \ \ \ \ \ \ \ h^{*}=\frac{s_{h} y^{*}}{n+\delta_{h}}\]</span></p></li>
 </ul>
 </section>
-<section id="el-modelo-de-solow-con-tres-insumos-2" class="slide level2">
-<h2>El modelo de Solow con tres insumos</h2>
+<section id="el-modelo-de-solow-con-tres-insumosuzawa-lucas" class="slide level2">
+<h2>El modelo de Solow con tres insumos(Uzawa-Lucas)</h2>
 <ul>
 <li>Recuerda <span class="math inline">\(y=A k^{\alpha} h^{\gamma}\)</span>. Combinando: <span class="math display">\[y^{*}=A k^{* \alpha} h^{* \gamma}=A\left(\frac{s_{k} y^{*}}{n+\delta_{k}}\right) ^{\alpha}\left(\frac{s_{h} y^{*}}{n+\delta_{h}}\right)^{\gamma},\]</span> <span class="math display">\[y^{*}=A^{1 /(1-\alpha-\gamma)}\left(\frac{s_{k}}{n+\delta_{k}}\right)^{\alpha /(1 -\alpha-\gamma)}\left(\frac{s_{h}}{n+\delta_{h}}\right)^{\gamma /(1-\alpha-\gamma)}\]</span></li>
 </ul>
@@ -1374,19 +1355,19 @@ y^{*}(t)&amp;=\hat{y}^{*}(1+\pi)^{t} \\
 <h1>Crecimiento endógeno</h1>
 
 </section>
-<section id="capital-físico-y-capital-humano-nuevamente" class="slide level2">
-<h2>Capital físico y capital humano (nuevamente)</h2>
+<section id="capital-físico-y-capital-humano-uzawa-lucas-nuevamente" class="slide level2">
+<h2>Capital físico y capital humano (Uzawa-Lucas nuevamente)</h2>
 <ul>
 <li><p>¿Qué sucede si <span class="math inline">\(\alpha+\gamma=1\)</span> en el modelo visto antes? En este caso: <span class="math display">\[y=A k^{\alpha} h^{1-\alpha}\]</span></p></li>
 <li><p>Implicancias (por simplicidad ignoremos el crecimiento de la población y la depreciación, la escencia no cambia):</p>
 <ul>
 <li><p>Definimos <span class="math inline">\(r=h/k\)</span>, entonces: <span class="math display">\[y/k=Ar^{1-\alpha} \ \ \ \ \ \ \ \ y/h=Ar^{-\alpha}\]</span></p></li>
-<li><p>Usando las ecuaciones de acumulación tenemos: <span class="math display">\[g_k(t)=\frac{k(t+1)-k(t)}{k(t)}=s_{k}Ar(t)^{1-\alpha}\]</span> <span class="math display">\[g_h(t)=\frac{h(t+1)-h(t)}{h(t)}=s_{h}Ar(t)^{-\alpha}\]</span></p></li>
+<li><p>Usando las ecuaciones de acumulación tenemos: <span class="math display">\[g_k(t)=\frac{\dot{k}(t)}{k(t)}=s_{k}Ar(t)^{1-\alpha}\]</span> <span class="math display">\[g_h(t)=\frac{\dot{h}(t)}{h(t)}=s_{h}Ar(t)^{-\alpha}\]</span></p></li>
 </ul></li>
 </ul>
 </section>
-<section id="capital-físico-y-capital-humano-nuevamente-1" class="slide level2">
-<h2>Capital físico y capital humano (nuevamente)</h2>
+<section id="capital-físico-y-capital-humano-uzawa-lucas-nuevamente-1" class="slide level2">
+<h2>Capital físico y capital humano (Uzawa-Lucas nuevamente)</h2>
 <ul>
 <li><p>Implicancias (continuación):</p>
 <ul>

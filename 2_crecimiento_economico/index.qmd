@@ -159,7 +159,7 @@ knitr::include_graphics("figs/fig0_saving_investment.png")
 
 - Producción: $Y(t)=C(t)+S(t)=C(t)+I(t)$
 
-- Capital: $K(t+1)=(1-\delta) K(t)+I(t)$
+- Capital: $K(t+\Delta t)-K(t)= ( I(t) -\delta K(t) ) \Delta t$
 
 - Ecuación de [Harrod-Domar]{.emph}:
 **$$s / \theta=(1+g)(1+n)- (1-\delta) \approx g + n + \delta $$**
@@ -168,9 +168,9 @@ knitr::include_graphics("figs/fig0_saving_investment.png")
 
   - $y(t) = Y(t) / P(t)$,
   
-  - $g = [y(t+1) - y(t)] / y(t)$, 
+  - $g = \dot{y}(t)/y(t)$, 
 
-  - $n = [P(t+1) - P(t)] / P(t)$,
+  - $n = \dot{P}(t) / P(t)$,
 
   - $s=S(t)/Y(t)$, 
 
@@ -220,10 +220,10 @@ knitr::include_graphics("figs/fig0_saving_investment.png")
 $$S(t) = I(t) = sY(t)$$
 
 - **Supuesto 2:**: La población crece a tasa $n$:
-$$n = [P(t+1) - P(t)] / P(t)$$
+$$n = \dot{P}(t) / P(t)$$
 
 - Stock de capital per cápita: 
-$$K(t+1)=(1-\delta) K(t)+sY(t) \rightarrow (1+n)k(t+1)=(1-\delta) k(t)+sy(t)$$
+$$\dot{K}(t)= sY(t) - \delta K(t) \rightarrow \dot{k}(t)=sy(t)-(n+\delta) k(t)$$
 con $k=K/P$ y $y=Y/P$. 
 
 ## La función de producción
@@ -368,7 +368,7 @@ $$S(t)=s Y(t)$$
 $$S(t)=I(t)$$
 
 - La inversión incrementa el stock de capital:
-$$K(t+1)=(1-\delta) K(t)+I(t)=(1-\delta) K(t)+s Y(t)$$
+$$\dot{K}(t)=I(t)-\delta K(t)=s Y(t)- \delta K(t)$$
 con $\delta$ la tasa de depreciación.
 
 - Esta es la ecuación de acumulación del stock de capital.
@@ -376,14 +376,14 @@ con $\delta$ la tasa de depreciación.
 ## La ecuación fundamental del modelo de Solow
 
 - Ecuación de acumulación:
-$$K(t+1)=(1-\delta) K(t)+s Y(t)$$
+$$\dot{K}(t)=s Y(t)- \delta K(t)$$
 
 - Para convertir a magnitudes per cápita dividimos entre el trabajo: $k=K / L, y=Y / L$ :
-$$(1+n) k(t+1)=(1-\delta) k(t)+s y(t)$$ 
+$$\dot{k}(t)= \frac{\dot{K(t)}}{L(t)} - n k(t) = s y(t) - (n+\delta) k(t)$$ 
 (usamos $n$ para indicar la tasa de crecimiento de la población).
 
 - Combinamos con la función de producción per cápita $y=f(k)$ :
-**$$(1+n) k(t+1)=(1-\delta) k(t)+s f(k(t))$$**
+**$$\dot{k}(t)=s f(k(t))- (n+\delta) k(t)$$**
 
 - Esta es la **ecuación fundamental** para el modelo de crecimiento. Con ella podemos estudiar la dinámica del stock de capital
 
@@ -394,10 +394,10 @@ $$(1+n) k(t+1)=(1-\delta) k(t)+s y(t)$$
 **Solución de Solow**:
 
 - Ecuación fundamental:
-$$(1+n) k(t+1)=(1-\delta) k(t)+s f(k(t))$$
+$$\dot{k}(t)=s f(k(t))- (n+\delta) k(t)$$
 
-- En términos de variaciones
-$$\Delta k=\frac{(1-\delta) k(t)+s f(k(t)) - (1+n)k(t)}{1+n}$$
+- En términos de variaciones porcentuales (tasa de crecimiento)
+$$\frac{\dot{k}(t)}{k(t)}=s \frac{f(k(t))}{k(t)}- (n+\delta)$$
 :::
 
 :::{.column width="50%"}
@@ -415,11 +415,18 @@ knitr::include_graphics("figs/fig1_solow_plot.png")
 
 - Si $k(0) < k^{*}$, entonces:
 
-  - $\Delta k>0$.
-
-  - $k(t) \rightarrow^{+} k^{*}$ para cualquier $k(0)$
+  - $\dot{k}>0$. $k(t) \rightarrow^{+} k^{*}$ para cualquier $k(0)$
   
   - Donde: $$\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}$$
+  
+  **Convergencia desde un capital alto:**
+
+- Si $k(0) > k^{*}$, entonces:
+
+  - $\dot{k}<0$. $k(t) \rightarrow^{-} k^{*}$ para cualquier $k(0)$
+  
+  - Donde: $$\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}$$
+  
 :::
 
 :::{.column width="50%"}
@@ -430,35 +437,12 @@ knitr::include_graphics("figs/fig2_solow_plot_convergence.png")
 ::::
 
 
-## La dinámica del stock de capital
-
-::::{.columns}
-:::{.column width="50%"}
-**Convergencia desde un capital alto:**
-
-- Si $k(0) > k^{*}$, entonces:
-
-  - $\Delta k<0$.
-
-  - $k(t) \rightarrow^{-} k^{*}$ para cualquier $k(0)$
-  
-  - Donde: $$\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}$$
-:::
-
-:::{.column width="50%"}
-```{r fig3_solow_plot_convergence2, echo=FALSE, out.width="80%"}
-knitr::include_graphics("figs/fig3_solow_plot_convergence2.png")
-```
-:::
-::::
-
-
 ## El estado estacionario
 
 - La **relación capital-trabajo** en estado estacionario es constante:
 $$\frac{y^{*}}{k^{*}}=\frac{f\left(k^{*}\right)}{k^{*}}=\frac{n+\delta}{s}$$
 
-- $k^{*}=K(t) / L(t)$ es constante $(\Delta k = 0)$, pero $K(t)$ y $L(t)$ siguen creciendo a una tasa de $n$.
+- $k^{*}=K(t) / L(t)$ es constante $(\dot{k} = 0)$, pero $K(t)$ y $L(t)$ siguen creciendo a una tasa de $n$.
 
 - Lo mismo ocurre con el producto, $y^{*}=f(k^{*})$ es constante, por lo que $Y(t)$ crece también a tasa $n$.
 
@@ -477,8 +461,9 @@ No hay crecimiento a largo plazo por encima del crecimiento de la población. Cu
 - ¿Cómo $s, n$ y $\delta$ afectan a $k^{*}$:
 
 ```{r fig4_comparative_statics, echo=FALSE, out.width="90%"}
-knitr::include_graphics("figs/fig4_comparative_statics.png")
+knitr::include_graphics("figs/fig4_comparative_statics.png") 
 ```
+
 
 ## El estado estacionario para el caso Cobb-Douglas
 
@@ -494,6 +479,11 @@ $$k^{*}=\left(\frac{s A}{n+\delta}\right)^{1 /(1-\alpha)}$$
 
   - Esto es, encuentre el signo de las derivadas parciales de $k^{*}$ con respecto a $s$, $n$ y $\delta$.
 
+# Dinámica de transición
+
+```{r dinamica_transicion, echo=FALSE, out.width="100%"}
+knitr::include_graphics("figs/dinamica_transicion.png") 
+```
 
 # Fuentes de crecimiento: exógeno vs. endógeno
 
@@ -520,10 +510,10 @@ $$Y(t)=F(K(t), e(t) L(t))$$
 donde $e(t)$ es la eficiencia del trabajo, entonces $e(t) L(t)$ es el trabajo efectivo.
 
 - Progreso tecnológico exógeno: 
-$$e(t+1)=e(t)(1+\pi), \pi>0$$
+$$\dot{e}(t)/e(t)=\pi, \pi>0$$
 
 - Dividamos la ecuación de acumulación por $e(t) L(t)$ en lugar de $L(t)$ :
-$$(1+\pi)(1+n) \hat{k}(t+1)=(1-\delta) \hat{k}(t)+s f(\hat{k}(t))$$
+$$\dot{\hat{k}}(t)=s f(\hat{k}(t))-(n+\delta+\pi) \hat{k}(t)$$
 donde $\hat{k}=K / e L$ está medido en **unidades efectivas per cápita**.
 
 - Todo lo demás es idéntico a los visto antes.
@@ -534,10 +524,7 @@ donde $\hat{k}=K / e L$ está medido en **unidades efectivas per cápita**.
 ::::{.columns}
 :::{.column width="50%"}
 - En estado estacionario:
-$$\begin{aligned}
-\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}&=\frac{(1+n)(1+\pi)-(1- \delta)}{s} \\
-&\simeq \frac{n+\delta+\pi}{s}
-\end{aligned}$$
+$$\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}= \frac{n+\delta+\pi}{s}$$
 
 
 - Note que: 
@@ -572,7 +559,7 @@ $$\hat{y}^{*}=A^{1 /(1-\alpha)}\left(\frac{s}{n+\delta+\pi}\right)^{\alpha /(1-\
 - Trayectoria de la producción per cápita en estado estacionario:
 $$\begin{aligned}
 y^{*}(t)&=\hat{y}^{*}(1+\pi)^{t} \\
-&=A^{1 /(1-\alpha)}\left(\frac{s}{ n+\delta+\pi}\right)^{\alpha /(1-\alpha)}(1+\pi)^{t}
+&=A^{1 /(1-\alpha)}\left(\frac{s}{ n+\delta+\pi}\right)^{\alpha /(1-\alpha)}e(t)
 \end{aligned}$$
 
 - Note que fuera de la trayectoria de estados estacionario, el producto per cápita puede crecer más (o menos) que $\pi$.
@@ -588,7 +575,7 @@ knitr::include_graphics("figs/fig6_path_y.png")
 ## El estado estacionario: estática comparativa
 
 - Trayectoria de la producción per cápita en estado estacionario:
-$$y^{*}(t)=\hat{y}^{*}(1+\pi)^{t}=A^{1 /(1-\alpha)}\left(\frac{s}{n+\delta+\pi}\right)^{\alpha /(1-\alpha)}(1+\pi)^{t}$$
+$$y^{*}(t)=\hat{y}^{*}e(t)=A^{1 /(1-\alpha)}\left(\frac{s}{n+\delta+\pi}\right)^{\alpha /(1-\alpha)}e(t)$$
 
 ```{r fig7, echo=FALSE, out.width="75%"}
 knitr::include_graphics("figs/fig7_comparative_statics_path_y.png")
@@ -599,13 +586,13 @@ knitr::include_graphics("figs/fig7_comparative_statics_path_y.png")
 - Observemos cómo se mueve el estado estacionario con $\alpha$.
 
   - Cuando $\alpha \rightarrow 1$, de forma que $y(t)=A k(t)$,  el modelo se comporta de manera muy diferente:
-$$(1+n) k(t+1)=(1-\delta) k(t)+s A k(t)$$
+$$\dot{k}(t)=s A k(t) - (n+\delta+\pi) k(t)$$
 
   - Realizando manipulaciones algebraicas:
-$$\text { Tasa de crecimiento }= g = \frac{k(t+1)-k(t)}{k(t)}=\frac{s A-(n+\delta)}{1+n}$$
+$$\text { Tasa de crecimiento }= g = \frac{\dot{k}(t)}{k(t)}=s A-(n+\delta+\pi)$$
 
-- En su versión aproximada tenemos:
-$$s A \simeq g+n+\delta$$
+- Entonces:
+$$s A = g+n+\delta$$
 
   - Ahora los **parámetros** tienen **efectos permanentes** sobre la tasa de crecimiento, a diferencia del modelo de Solow.
   
@@ -774,7 +761,7 @@ knitr::include_graphics("figs/fig7_conv1.png")
 ## Enfoque de calibración
 
 - Recuerde la ecuación que determinaba el stock de capital en unidades efectiva de trabajo en estado estacionario era:
-$$\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}} \simeq \frac{n+\delta+\pi}{s}$$
+$$\frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}} = \frac{n+\delta+\pi}{s}$$
 
 - Usando la función de producción Cobb-Douglas: 
 $$Y=A K^{\alpha}(e L)^{1-\alpha}$$
@@ -788,7 +775,7 @@ $$\hat{y}=\frac{Y}{e L}=\frac{A K^{\alpha}(eL)^{1-\alpha}}{eL}=A \left( \frac{K}
 ## Enfoque de calibración
 
 - Combinando ambas ecuaciones tenemos:
-$$\frac{n+\delta+\pi}{s} \simeq \frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}=A \hat{ k}^{* \alpha-1}$$
+$$\frac{n+\delta+\pi}{s} = \frac{f\left(\hat{k}^{*}\right)}{\hat{k}^{*}}=A \hat{ k}^{* \alpha-1}$$
 
 - Finalmente, resolvemos para $\hat{ k}^{*}$:
 $$\hat{k}^{*}=\left(\frac{s A}{n+\delta+\pi}\right)^{1 /(1-\alpha)}$$
@@ -845,7 +832,7 @@ $$\alpha = \frac{PMK \times k}{y}=\frac{q \times k}{y} \in (0,1)$$
   - Se debe considerar la participación de estos otros insumos en los ingresos totales.
   
 
-## El modelo de Solow con tres insumos
+## El modelo de Solow con tres insumos (Uzawa-Lucas)
 
 - Suponga ahora que la función de producción es (usemos una Cobb-Douglas):
 $$Y=A K^{\alpha} U^{\beta} H^{\gamma}$$
@@ -860,24 +847,23 @@ $$y=A k^{\alpha} h^{\gamma}$$
 con $h=H/U$ y $k=K/U$.
 
 
-## El modelo de Solow con tres insumos
+## El modelo de Solow con tres insumos (Uzawa-Lucas)
 
 - Ahora tenemos dos ecuaciones de acumulación:
 
-  $$Ahorros: \ \ \ K(t+1)=\left(1-\delta_{k}\right) K(t)+s_{k} Y(t)$$
+  $$Ahorros: \ \ \ \dot{K}(t)=-\delta_{k} K(t)+s_{k} Y(t)$$
 
-  $$Educación: \ \ \ H(t+1)=\left(1-\delta_{h}\right) H(t)+s_{h} Y(t)$$
+  $$Educación: \ \ \ \dot{H}(t)=-\delta_{h} H(t)+s_{h} Y(t)$$
 
 - Supongamos por simplicidad que no existe progreso tecnológico. De nuevo, dividiendo por $U$ tenemos:
-$$\qquad(1+n) k(t+1)=\left(1-\delta_{k}\right) k(t)+s_{k} y(t)$$
-$$(1+n) h(t+1)=\left(1-\delta_{h}\right) h(t)+s_{h} y(t)$$
+$$\dot{k}(t)=s_{k} y(t)-\left(n+\delta_{k}\right) k(t)$$
+$$\dot{h}(t)=s_{h} y(t)-\left(n+\delta_{h}\right) h(t)$$
 
-- En estado estacionario se cumple $k(t)=k(t+1)=k^{*}$, $h(t)=h(t+1)=h^{*}$, $y(t)=y^{*}$, luego:
-$$k^{*}=\frac{s_{k} y^{*}}{n+\delta_{k}}$$
-$$h^{*}=\frac{s_{h} y^{*}}{n+\delta_{h}}$$
+- En estado estacionario se cumple $\dot{k}(t)=\dot{h}(t)=0$, $y(t)=y^{*}$, luego:
+$$k^{*}=\frac{s_{k} y^{*}}{n+\delta_{k}} \ \ \ \ \ \ \ \ \ h^{*}=\frac{s_{h} y^{*}}{n+\delta_{h}}$$
 
 
-## El modelo de Solow con tres insumos
+## El modelo de Solow con tres insumos(Uzawa-Lucas)
 
 - Recuerda $y=A k^{\alpha} h^{\gamma}$. Combinando:
 $$y^{*}=A k^{* \alpha} h^{* \gamma}=A\left(\frac{s_{k} y^{*}}{n+\delta_{k}}\right) ^{\alpha}\left(\frac{s_{h} y^{*}}{n+\delta_{h}}\right)^{\gamma},$$
@@ -908,7 +894,7 @@ $$\frac{y_1}{y_2}=\left(\frac{A_1}{A_2}\right)^{1 /(1-\alpha-\gamma)}\left(\frac
 # Crecimiento endógeno
 
 
-## Capital físico y capital humano (nuevamente)
+## Capital físico y capital humano (Uzawa-Lucas nuevamente)
 
 - ¿Qué sucede si $\alpha+\gamma=1$ en el modelo visto antes? En este caso:
 $$y=A k^{\alpha} h^{1-\alpha}$$
@@ -919,10 +905,10 @@ $$y=A k^{\alpha} h^{1-\alpha}$$
   $$y/k=Ar^{1-\alpha} \ \ \ \ \ \ \ \ y/h=Ar^{-\alpha}$$
   
   - Usando las ecuaciones de acumulación tenemos:
-$$g_k(t)=\frac{k(t+1)-k(t)}{k(t)}=s_{k}Ar(t)^{1-\alpha}$$
-$$g_h(t)=\frac{h(t+1)-h(t)}{h(t)}=s_{h}Ar(t)^{-\alpha}$$
+$$g_k(t)=\frac{\dot{k}(t)}{k(t)}=s_{k}Ar(t)^{1-\alpha}$$
+$$g_h(t)=\frac{\dot{h}(t)}{h(t)}=s_{h}Ar(t)^{-\alpha}$$
 
-## Capital físico y capital humano (nuevamente)
+## Capital físico y capital humano (Uzawa-Lucas nuevamente)
 
 - Implicancias (continuación):
 

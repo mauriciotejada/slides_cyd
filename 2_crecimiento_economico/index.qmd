@@ -923,21 +923,163 @@ $$r=\frac{s_h}{s_k} \Rightarrow g_k(t)=g_h(t)$$
   $$y=A k^{\alpha} h^{1-\alpha}=y=\frac{A}{r^{\alpha}} h \frac{h+k}{h+k} = A\frac{r^{1-\alpha}}{1+r}\kappa = \tilde{A}\kappa$$
   con $\kappa=h+k$.
   
-  - Si bien, la función de producción tiene retornos marginales decrecientes para $k$ y $y$, presenta retornos marginales constantes para una definición amplia de capital $\kappa$. **Este modelo presenta crecimiento sostenido como el AK**.
+  - Si bien, la función de producción tiene retornos marginales decrecientes para $k$ y $h$ por separado, presenta retornos marginales constantes para una definición amplia de capital $\kappa$. **Este modelo presenta crecimiento sostenido como el AK**.
   
+## El mundo de las ideas (Romer)
 
-## ¿Qué logramos con este ejercicio?
+- Las [ideas mejoran la tecnología de producción]{.emph}. Una nueva idea permite que un conjunto dado de insumos produzca más o mejor producción.
 
-**La convergencia contradice los hechos. Pero ...**
+- Una característica inherente de [las ideas es que son norivales]{.emph} (lo que implica la presencia de rendimientos crecientes a escala).
 
-- La variación observada en el ingreso per cápita se ajusta a las variaciones en el ahorro.
-
-- Usando un modelo que tiene tanto capital físico como humano tenemos las siguientes predicciones
-
-  - **La convergencia condicional (una vez se controla por el capital humano)**: Condicionando por el nivel de capital humano, los países pobres tienden a crecer más deprisa.
+  - La mayoría de los bienes son rivales: el uso del bien por una persona impide su uso por otra. 
   
-  - **La divergencia condicional (una vez controlado por el nivel inicial de ingreso per
-cápita)**: Condicionando por el nivel de renta per cápita, los países que tienen más capital
-humano crecen más deprisa.
+  - Una vez que una idea ha sido creada, cualquier persona con conocimiento de la idea puede aprovecharla.
+  
+- Otra característica de [las ideas es que son parcialmente excluibles]{.emph} (por la existencia de patentes).
 
-**A seguir**: teorías de la divergencia.
+  - El grado en que un bien es excluible es el grado en que el propietario del bien puede cobrar por su uso.
+  
+- Los bienes norivales que son esencialmente noexcluibles son [bienes públicos]{.emph} (algunas ideas califican para este grupo).
+
+  - Los bienes no excluibles genera "spillovers" de beneficios (externalidades) que no son capturados por los productores.
+  
+## El mundo de las ideas (Romer)
+
+- [Crecimiento endógeno]{.emph}: El progreso tecnológico ocurre cuando las empresas o inventores que buscan maximizar sus beneficios.
+
+  - Las mejoras en la tecnología y el proceso de crecimiento económico en sí se entienden como un resultado endógeno de la economía.
+  
+- El **Modelo de Romer** trata el progreso tecnológico como la [adición de nuevas variedades de bienes]{.emph} al menú disponible para la economía.
+
+- Como antes, la función de producción agregada es:
+$$Y=K^\alpha\left(e L_Y\right)^{1-\alpha}$$
+- Si consideramos que las ideas ($e$) son también un insumo en la producción, entonces tenemos [rendimientos crecientes a escala]{.emph}.
+
+  - Como antes la función de producción tiene RCE en el capital y el trabajo.
+  
+  - Pero ahora tiene Retornos Crecientes en los tres insumos: 
+  $$(\lambda K)^\alpha\left(\lambda^2 e L_Y\right)^{1-\alpha}=\lambda^{2-\alpha} K^\alpha\left(e L_Y\right)^{1-\alpha}>\lambda K^\alpha\left(e L_Y\right)^{1-\alpha}$$
+  
+## El mundo de las ideas (Romer)
+
+- El capital físico y el trabajo total se comportan igual que antes:
+$$
+\dot{K}=s Y-\delta K \ \ \ \ \ \ \text{y} \ \ \ \ \ \frac{\dot{L}}{L}=n
+$$
+- e(t) es el stock de conocimiento o el número de ideas que se han inventado a lo largo de la historia hasta el momento $t$.
+
+- [Función de producción de ideas]{.emph}: $\dot{e}$ es el número de nuevas ideas producido en una momento del tiempo como función del número de investigadores $L_e$.
+$$\dot{e}=\pi  e^\phi L_e^\lambda$$
+
+  - Producir nuevas ideas puede ser cada vez más difícil si ya se han producido muchas: $\phi<0$
+  
+  - Las ideas del pasado aumentan la productividad de los investigadores del presente: $\phi>0$
+  
+  - La productividad de los investigadores puede depender del número de persona buscando ideas: $\lambda<1$
+  
+  - Caso especial $\lambda=0$ y $\phi=1$: $\dot{e}=\pi e$ modelo de Solow
+
+## El mundo de las ideas (Romer)
+
+- Asignación de trabajo para producir el bien final y para producir ideas:
+$$L=L_Y+L_e \ \ \ \ \ \ \ \text{suponemos que: } L_e / L = r_e$$
+- [Senda de Crecimiento]{.emph}: Como en el modelo de Solow las variable per cápita todas crecen a la tasa del progreso tecnológico: 
+$$g_y=g_k=g_e$$
+
+- ¿Cómo crece el stock de ideas?
+$$
+g_e = \frac{\dot{e}}{e}=\pi \frac{L_e^\lambda}{e^{1-\phi}}
+$$
+
+- Para que el crecimiento sea constante tiene que ser cierto que:
+$$
+0=\lambda \frac{\dot{L}_e}{L_e}-(1-\phi) \frac{\dot{e}}{e} \ \ \ 
+ \Rightarrow g_e=\frac{\lambda n}{1 - \phi}
+$$
+
+## El mundo de las ideas (Romer)
+
+- [Intuición]{.emph}: Tomemos el caso especial $\lambda=1$ y $\phi=0$, esto es $\dot{e}=\pi  L_e$. En este caso $g_e=n$.
+
+  - Efecto negativo del crecimiento poblacional: reduce el ingreso per cápita (Solow).
+  
+  - Efecto positivo del crecimiento poblacional: Una población más grande genera más ideas, y debido a que las ideas son norivales, todos en la economía se benefician.
+
+- ¿Qué sucede si se incrementa el número de personas dedicadas a I+D? $\uparrow r_e$. Sigamos en el caso especial por simplicidad.
+$$
+g_e = \frac{\dot{e}}{e}=\pi \frac{L_e}{e}=\frac{r_e L}{e}
+$$
+  - $\uparrow r_e$ entonces $r_e L>e$ y $g_e>0$. Pero como $\uparrow e$ el efecto se dicipa a largo plazo y $g_e=n$.
+
+## El mundo de las ideas (Romer)
+
+
+**Gráficamente**:
+```{r fig1_romer, echo=FALSE, out.width="90%"}
+knitr::include_graphics("figs/fig1_romer.png")
+```
+
+# Contabilidad del Crecimiento
+
+## Los determinantes del crecimiento
+
+- Consideremos los determinantes el crecimiento con una función de producción Cobb-Douglas con RCE (donde $\beta=1-\alpha$).
+$$
+Y(t)=A(t) K(t)^{\alpha} L(t)^{1-\alpha}
+$$ con $A(t)=B e(t)^{1-\alpha}$.
+- Denotemos la tasa de crecimiento de $Y(t)$ como $g_{t}^{Y}$. 
+$$
+g_{t}^{Y}=\frac{1}{Y(t)} \frac{d Y(t)}{d t} = \frac{\dot{Y(t)}}{Y(t)}
+$$
+
+- Recordemos la regla de diferenciación del producto:
+$$
+\frac{d A B C}{d x}=B C \frac{d A}{d x}+A C \frac{d B}{d x}+A B \frac{d C}{d x}
+$$
+
+## Los determinantes del crecimiento
+
+- Usando esta regla tenemos:
+$$
+\begin{aligned}
+\frac{d Y(t)}{d t} & =\frac{d A(t) K(t)^{\alpha} L(t)^{1-\alpha}}{d t} \\
+& =K(t)^{\alpha} L(t)^{1-\alpha} \frac{d A(t)}{d t}+A(t) L(t)^{1-\alpha} \frac{d K(t)^{\alpha}}{d t}+A(t) K(t)^{\alpha} \frac{d L(t)^{1-\alpha}}{d t} \\
+& =K(t)^{\alpha} L(t)^{1-\alpha} \frac{d A(t)}{d t}+\alpha A(t) K(t)^{\alpha-1} L(t)^{1-\alpha} \frac{d K(t)}{d t}+(1-\alpha) A(t) K(t)^{\alpha} L(t)^{-\alpha} \frac{d L(t)}{d t}
+\end{aligned}
+$$
+- Dividiendo ente $A(t) K(t)^{\alpha} L(t)^{1-\alpha}$ tenemos:
+$$
+g_{t}^{Y}=g_{t}^{A}+\alpha g_{t}^{K}+(1-\alpha) g_{t}^{L}
+$$
+
+- Esta es la ecuación de la contabilidad del crecimiento: *¿Cuánto del crecimiento del PIB en un período determinado proviene del crecimiento en el número de trabajadores, cuánto proviene del crecimiento en el stock de capital y cuánto proviene de mejoras en la productividad total de los factores (TFP)?*
+
+## Los determinantes del crecimiento
+
+- Para la mayoría de las economías podemos calcular el PIB, el número de trabajadores y obtener una estimación del stock de capital. No observamos directamente el valor del término de Productividad Total de los Factores (TFP), $A(t)$.
+
+- Si conociéramos el valor del parámetro $\alpha$, podríamos calcular la tasa de crecimiento de TFP como un residuo ([el Residuo de Solow (1957)]{.emph}):
+$$
+g_{t}^{A}=g_{t}^{Y}-\alpha g_{t}^{K}-(1-\alpha) g_{t}^{L}
+$$
+
+- Recordemos que:
+$$
+1-\alpha=\frac{W_t L_t}{P_t Y_t}=\frac{\text{Masa Salarial}}{\text{PIB Nominal}}
+$$
+
+- En la mayoría de los países, las cuentas nacionales muestran que los ingresos salariales representan la mayor parte del PIB, lo que significa que $\alpha < 0.5$. Un valor estándar es $\alpha=1/3$.
+
+## Los determinantes del crecimiento
+
+- También se puede estudiar los determinantes del [crecimiento per cápita]{.emph}. Solo tenemos que teescribir la ecuación:
+$$
+g_{t}^{y} = g_{t}^{Y}- g_{t}^{L}=g_{t}^{A}+\alpha g_{t}^{K}+(1-\alpha) g_{t}^{L}- g_{t}^{L} = g_{t}^{A}+\alpha g_{t}^{k}
+$$
+
+- Algunos estudio incorporan factores adicionales, como tener en cuenta las [mejoras en la "calidad" de la fuerza laboral]{.emph} (calificaciones educativas y experiencia laboral de los empleados).
+$$
+Y(t)=A(t) K(t)^{\alpha} (q(t)L(t))^{1-\alpha}
+$$ con $A(t)=B e(t)^{1-\alpha}$ y $q(t)$ una medida de calidad del trabajo. $$
+g_{t}^{Y}=g_{t}^{A}+\alpha g_{t}^{K}+(1-\alpha) (g_{t}^{q}+g_{t}^{L})
+$$

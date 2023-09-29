@@ -13,7 +13,7 @@ format:
     #embed-resources: true
 ---
 
-# Trampas para el Desarrollo
+# Trampas para el Desarrollo: Introducción
 
 ## Los datos muestran muy poca convergencia
 
@@ -65,7 +65,7 @@ Don conceptos centrales para responder a esta pregunta, ambos relacionados con l
 
 Note que este enfoque rompe con la idea de convergencia desde el principio: [La posibilidad de divergencia (o trampas del desarrollo), diferentes resultados dentro de la misma estructura, ocupa un lugar central]{.emph}.
 
-# Complementariedad y multiplicidad de equilibrios
+# Trampas para el Desarrollo: Complementariedad y multiplicidad de equilibrios
 
 ## QUERTY vs DVORAK
 
@@ -386,7 +386,7 @@ knitr::include_graphics("figs/unirse_rev_4.png")
 
 ::::
 
-# El subdesarrollo como un equilibrio entrampado
+# Trampas para el Desarrollo: El subdesarrollo como un equilibrio entrampado
 
 ## Inversiones y complementariedades en la demanda
 

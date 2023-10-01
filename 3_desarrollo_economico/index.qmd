@@ -3,17 +3,17 @@ title: "Crecimiento y Desarrollo Económico"
 subtitle: "**Desarrollo Económico**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
-format:
-  revealjs:
-    theme: serif_mod.scss
-    logo: "figs/logo_econ.png"
+format: 
+  udp-revealjs:
     footer: "Ingeniería Comercial -- Crecimiento y Desarrollo Económico"
-    slide-number: c/t
-    show-slide-number: all
-    #embed-resources: true
+incremental: false
+embed-resources: true
+
 ---
 
-# Trampas para el Desarrollo: Introducción
+# Trampas para el Desarrollo: Introducción {background-color="#CED3DC"}
+
+
 
 ## Los datos muestran muy poca convergencia
 
@@ -26,8 +26,6 @@ format:
 - variables culturales: corrupción o ética laboral;
 
 - variables religiosas ... y un largo etc.
-
-\
 
 [¿Realmente queremos una teoría del subdesarrollo basada en la presunción de que los individuos en diferentes partes del mundo tienen alguna diferencia intrínseca en su disposición —o capacidad— para ahorrar, trabajar o procrear?]{.emph}
 
@@ -65,14 +63,13 @@ Don conceptos centrales para responder a esta pregunta, ambos relacionados con l
 
 Note que este enfoque rompe con la idea de convergencia desde el principio: [La posibilidad de divergencia (o trampas del desarrollo), diferentes resultados dentro de la misma estructura, ocupa un lugar central]{.emph}.
 
-# Trampas para el Desarrollo: Complementariedad y multiplicidad de equilibrios
+# Trampas para el Desarrollo: Complementariedad y multiplicidad de equilibrios {background-color="#CED3DC"}
 
 ## QUERTY vs DVORAK
 
-
-Definición de complementariedad 
-: Situación en la que la realización de alguna acción por parte de un número mayor de individuos anima a más individuos a adoptar dicha acción.
-
+::: {.callout-important title="Definición: Complementariedad" icon=false}
+Situación en la que la realización de alguna acción por parte de un número mayor de individuos anima a más individuos a adoptar dicha acción.
+:::
 
 :::: {.columns}
 
@@ -386,7 +383,7 @@ knitr::include_graphics("figs/unirse_rev_4.png")
 
 ::::
 
-# Trampas para el Desarrollo: El subdesarrollo como un equilibrio entrampado
+# Trampas para el Desarrollo: El subdesarrollo como un equilibrio entrampado  {background-color="#CED3DC"}
 
 ## Inversiones y complementariedades en la demanda
 
@@ -573,5 +570,5 @@ knitr::include_graphics("figs/fig2_5.png")
 
   - Intervenciones temporales versus permanentes; p.ej.: amnistías, salario mínimo, multas temporales, big psuh, acción afirmativa.
 
-# Distribución del Ingreso y Desigualdad
+# Distribución del Ingreso y Desigualdad {background-color="#CED3DC"}
 

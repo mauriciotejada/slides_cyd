@@ -3,14 +3,11 @@ title: "Crecimiento y Desarrollo Económico"
 subtitle: "**Hechos Estilizados sobre el Crecimiento y el Desarrollo Económicos**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
-format:
-  revealjs:
-    theme: serif_mod.scss
-    logo: "figs/logo_econ.png"
-    footer: "Ingeniería Comercial -- Crecimiento y Desarrollo Económico"
-    slide-number: c/t
-    show-slide-number: all
-    #embed-resources: true
+format: 
+  udp-revealjs:
+    footer: "UDP theme for Quarto Presentations"
+incremental: false
+embed-resources: true
 ---
 
 ```{r setup, include=FALSE}
@@ -19,7 +16,7 @@ knitr::opts_chunk$set(echo = FALSE, fig.align = "center",
 knitr::opts_chunk$set(fig.dim=c(9, 6), fig.retina=2, out.width="100%")
 ```
 
-# ¿Qué entendemos por crecimiento y desarrollo económicos?
+# ¿Qué entendemos por crecimiento y desarrollo económicos? {background-color="#CED3DC"}
 
 ## ¿Qué vamos a estudiar en este curso?
 
@@ -60,7 +57,7 @@ Dos **destacados economistas** hablando sobre el desarrollo económico:
 
 *La correlación entre el PNB y otros aspectos deseados del desarrollo no es automática (o puede no existir). El PNB per cápita debe complementarse con otros indicadores directamente para tomar en cuenta el carácter "multidimensional" del desarrollo.*
 
-# Crecimiento y distribución del ingreso mundial
+# Crecimiento y distribución del ingreso mundial {background-color="#CED3DC"}
 
 ## Distribución del ingreso mundial
 
@@ -340,7 +337,7 @@ knitr::include_graphics("figs/fig4_matriz_movilidad.png")
 
 ::::
 
-# Mirando dentro de los países
+# Mirando dentro de los países {background-color="#CED3DC"}
 
 ## Desigualdad e ingreso per cápita
 
@@ -430,7 +427,7 @@ knitr::include_graphics("figs/fig3_inequality_us.png")
 ```
 Fuente: Piketty (2014)
 
-# Las numerosas caras del subdesarrollo
+# Las numerosas caras del subdesarrollo {background-color="#CED3DC"}
 
 ## Desarrollo humano
 
@@ -513,7 +510,7 @@ knitr::include_graphics("figs/fig6_mortality_income.png")
 knitr::include_graphics("figs/fig7_literacy_income.png")
 ```
 
-# Características estructurales de los países en vías de desarrollo
+# Características estructurales de los países en vías de desarrollo {background-color="#CED3DC"}
 
 ## Características demográficas
 
@@ -643,7 +640,7 @@ knitr::include_graphics("figs/fig12_terms_of_trade.png")
 knitr::include_graphics("figs/fig13_imports.png")
 ```
 
-# Crecimiento dispar y aspiraciones
+# Crecimiento dispar y aspiraciones {background-color="#CED3DC"}
 
 ## Aspiraciones y crecimiento dispar
 

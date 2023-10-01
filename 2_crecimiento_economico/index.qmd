@@ -3,14 +3,11 @@ title: "Crecimiento y Desarrollo Económico"
 subtitle: "**Crecimiento Económico**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
-format:
-  revealjs:
-    theme: serif_mod.scss
-    logo: "figs/logo_econ.png"
-    footer: "Ingeniería Comercial -- Crecimiento y Desarrollo Económico"
-    slide-number: c/t
-    show-slide-number: all
-    #embed-resources: true
+format: 
+  udp-revealjs:
+    footer: "UDP theme for Quarto Presentations"
+incremental: false
+embed-resources: true
 ---
 
 ```{r setup, include=FALSE}
@@ -19,7 +16,7 @@ knitr::opts_chunk$set(echo = FALSE, fig.align = "center",
 knitr::opts_chunk$set(fig.dim=c(9, 6), fig.retina=2, out.width="100%")
 ```
 
-# Introducción
+# Introducción {background-color="#CED3DC"}
 
 ## Introducción
 
@@ -107,7 +104,7 @@ Un aumento de la tasa de crecimiento de un punto porcentual puede significar el 
 :::
 ::::
 
-# Punto de partida de la teoría del crecimiento económico
+# Punto de partida de la teoría del crecimiento económico {background-color="#CED3DC"}
 
 ## Stock de capital: fuerte correlación con el ingreso per cápita
 
@@ -204,7 +201,7 @@ knitr::include_graphics("figs/fig0_saving_investment.png")
   
   - Nivel de desarrollo a largo plazo $\uparrow$: las tasas de natalidad $\downarrow$ $\rightarrow n$ nuevamente bajas.
 
-# El Modelo de Solow (endogeneidad de $K/Y$)
+# El Modelo de Solow (endogeneidad de $K/Y$) {background-color="#CED3DC"}
 
 ## El modelo de Solow: idea central
 
@@ -485,7 +482,7 @@ $$k^{*}=\left(\frac{s A}{n+\delta}\right)^{1 /(1-\alpha)}$$
 knitr::include_graphics("figs/dinamica_transicion.png") 
 ```
 
-# Fuentes de crecimiento: exógeno vs. endógeno
+# Fuentes de crecimiento: exógeno vs. endógeno {background-color="#CED3DC"}
 
 
 ## Fuentes de crecimiento
@@ -597,7 +594,7 @@ $$s A = g+n+\delta$$
   - Ahora los **parámetros** tienen **efectos permanentes** sobre la tasa de crecimiento, a diferencia del modelo de Solow.
   
 
-# Convergencia
+# Convergencia {background-color="#CED3DC"}
 
 
 ## Convergencia no condicinal
@@ -722,9 +719,7 @@ knitr::include_graphics("figs/fig4_conv1.png")
 
 - El concepto de convergencia no condicional supone que todos los parámetros que determinan el nivel de ingreso de largo plazo son iguales.
 
-:::{.emph}
-**Convergencia condicional:** 
-
+::: {.callout-important title="Definición: Convergencia condicional:" icon=false}
 El concepto de convergencia tiene sentido solo después de "controlar por" $s$ y $n$ o cualquier parámetro que varíe sistemáticamente entre países
 :::
 
@@ -891,7 +886,7 @@ $$\frac{y_1}{y_2}=\left(\frac{A_1}{A_2}\right)^{1 /(1-\alpha-\gamma)}\left(\frac
 - Mucho mejor!! **Se requieren más componente para que la teoría logre capturar diferencias en ingreso**.  
 
 
-# Crecimiento endógeno
+# Crecimiento endógeno {background-color="#CED3DC"}
 
 
 ## Capital físico y capital humano (Uzawa-Lucas nuevamente)
@@ -1019,7 +1014,7 @@ $$
 knitr::include_graphics("figs/fig1_romer.png")
 ```
 
-# Contabilidad del Crecimiento
+# Contabilidad del Crecimiento {background-color="#CED3DC"}
 
 ## Los determinantes del crecimiento
 

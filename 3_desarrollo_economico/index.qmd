@@ -1069,8 +1069,8 @@ $$\operatorname{CoV}(A)= \frac{1}{9} \sqrt{\frac{1}{3}(3-9)^{2}+\frac{2}{3}(12- 
   Entonces el COV cae al pasar de $A$ a $B$.
 
 - Ahora el Gini:
-  $$G(A)= \frac{[2|3-12|+2|12-3|]}{2.9^{2}}=\frac{18}{81}$$
-  $$G(B)= \frac{[|4-9|+|4-14|+|9-4|+|9-14|+|14-4|+|14-9|]}{2.9 ^{2}}=\frac{20}{81}$$
+  $$G(A)= \frac{[2|3-12|+2|12-3|]}{2 \times 3^2 \times 9}=\frac{18}{81}$$
+  $$G(B)= \frac{[|4-9|+|4-14|+|9-4|+|9-14|+|14-4|+|14-9|]}{2 \times 3^2 \times 9}=\frac{20}{81}$$
   Entonces el Gini sube al pasar de $A$ a $B$.
 
 ## GINI y CoV: Desacuerdos en la vida real
@@ -1237,3 +1237,76 @@ Cuando pensamos en desigualdad, podemos visualizar varias copias de las ecuacion
 
 5. **Políticas y política**: Las distribuciones de ingresos afectan las decisiones del gobierno sobre impuestos al trabajo y a los ingresos de capital. Grupos de presión políticos pueden ser relevantes. 
 
+# Pobreza
+
+## Pobreza
+
+- La [pobreza]{.emph} es una característica del subdesarrollo económico.
+
+- Problemas que lleva aparejada: analfabetismo, desnutrición, mala salud y unas perspectivas futuras sombrías.
+
+- Privar al ser humano de gozar de salud, educación y disfrutar de un nivel de nutrición suficiente, destruye sus aspiraciones y sus esperanzas.
+
+- El mundo ha generado un gran crecimiento del ingreso per cápita, pero su historial en lo que se refiere a la pobreza es bastante patético
+
+- Al igual que la desigualdad, la pobreza tiene:
+
+	- [Valor intrínseco]{.emph}: La mayoría de la gente diría que la erradicación de la pobreza es un objetivo fundamental del desarrollo económico.
+
+	- [Valor funcional]{.emph}: Tiene enormes consecuencias sobre el propio funcionamiento de la economía.
+	
+## Elementos básicos de la pobreza
+
+- [**Umbral de pobreza**]{.emph}: nivel mínimo de participación económica "aceptable" en una determinada sociedad y en un determinado momento.
+
+- Típicamente este umbral se basa en nutrición: gastos necesarios para garantizar un consumo mínimo de calorías.
+
+- Promover el concepto de umbral más allá de la nutrición, para tener en cuenta otros gastos, plantea una serie de problemas.
+
+## Elementos básicos de la pobreza
+
+- [**Gasto total o consumo de diversos artículos?**]{.emph}: 
+
+	- Pobre es aquel que su cesta de consumo es inferior a un umbral o su gasto total (o su ingreso total) is inferior a un mínimo necesario para consumir.
+	
+	- Dos enfoques con resultados distintos. Ejemplo: Los alimentos enlatados pueden ser bastante populares en ciertos niveles de renta, incluso aunque su valor nutritivo sea discutible.
+	
+	- Es posible que la elasticidad ingreso sea alta, mientras que la elasticidades nutrientes no tanto.
+	
+	- El ingreso representa la capacidad para consumir, no el propio consumo. Ahora, en la práctica es más fácil utilizar umbrales de pobreza basados en el ingreso o el gasto (agregado), dada la escasez de datos
+
+## Elementos básicos de la pobreza
+
+- [**¿Absoluta o relativa?**]{.emph}:
+
+	- La pobreza tiene algún  componente absoluto (la gente necesita unos niveles suficientes de alimentos, de ropa y de vivienda), pero también existen diferencias de opinión de lo que se considera "suficiente".
+
+	- No está claro que la expresión "niveles aceptables de participación en la sociedad" tengan un significado absoluto.
+
+	- En algunas sociedades es necesario tener un televisor para vivir una vida "plena", tener un nivel mínimo de ocio, tener acceso a la educación científica, tener propiedad de medios privados de transporte, etc.
+
+	- Deben evaluarse los niveles de pobreza en relación con el nivel socioeconómicos de la sociedad.
+
+	- Aunque los umbrales de pobreza deben incluir (e incluyen) conceptos relativos de lo que constituye una "necesidad", tienen que satisfacer alguna noción absoluta de la capacidad de funcionar en una sociedad.
+	
+## Elementos básicos de la pobreza
+
+- [**¿Temporal o crónica?**]{.emph}:
+
+	- La pobreza es temporal cuando a causa de perturbaciones económicas negativas. Grupos de gente entran temporalmente a formar parte de los pobres.
+
+	- Las medidas necesarias para luchar contra la pobreza temporal son muy distintas que las usadas contra la pobreza crónica.
+
+	- El concepto está estrechamente relacionada con el enfoque del ingreso temporal y el permanente.
+
+## Elementos básicos de la pobreza
+
+- [**¿Hogares o individuos?**]{.emph}:
+
+	- A menudo sólo se dispone de datos sobre los gastos y los ingresos de los hogares.
+	
+	- Expresar el consumo de los hogares en forma de medias individuales para tener en cuenta el tamaño del hogar (per cápita), no tiene en cuenta la distribución de los gastos al interior del hogar suele ser muy desigual.
+	
+	- Es deseable tener en cuenta la presencia de hijos, ya que consumen algo menos que los adultos (escalas de equivalencia: hijos en porcentaje de un adulto representativo).
+	
+	- La creación y gestión de un hogar tiene costos fijos, y hogares más pequeños no pueden repartir estos costos fijos entre muchos miembros (desventaja).

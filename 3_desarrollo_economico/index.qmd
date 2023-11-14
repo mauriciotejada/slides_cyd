@@ -1310,3 +1310,76 @@ Cuando pensamos en desigualdad, podemos visualizar varias copias de las ecuacion
 	- Es deseable tener en cuenta la presencia de hijos, ya que consumen algo menos que los adultos (escalas de equivalencia: hijos en porcentaje de un adulto representativo).
 	
 	- La creación y gestión de un hogar tiene costos fijos, y hogares más pequeños no pueden repartir estos costos fijos entre muchos miembros (desventaja).
+	
+## Medición de la pobreza
+
+- [Umbral de pobreza]{.emph}: Nivel de gasto mínimo necesario para participar "aceptablemente" en la vida económica. Las personas situadas por debajo de este umbral son *pobres*.
+
+- Definimos: $y$ ingreso (o gasto), $i$ índices para denotar individuos, $p$ umbral de pobreza, $m$ ingreso medio de la economía, $n$ número total de individuos.
+
+- Conteo de personas bajo el umbral de pobreza: $$NP=\sum I[y_i<p]$$
+
+- Tasa de pobreza (mide la incidencia relativa de los pobres): $$TP=NP/n$$
+
+## Medición de la pobreza
+
+- [Problema]{.emph}: Estas medidas no recogen el grado en que el ingreso (o el gasto) individual se encuentra por debajo del umbral de pobreza.
+
+	- [La utilización del recuento para medir la pobreza sesga sistemáticamente la política que se adopte en favor de las personas que se encuentran muy cerca del umbral de pobreza (políticamente: resultados).]{.emph}
+
+- Contrarrestar parcialmente el sesgo: Brecha relativa de pobreza BRP (toma en cuenta la distancia entre la renta y el umbral de pobreza). $$BRP=\frac{\sum_{y_i<p} (p-y_i)}{n\times m}$$
+
+	- cociente entre el ingreso (o consumo adicional) media necesaria para situar a todos los pobres en el umbral de pobreza y el ingreso (o consumo) media de la sociedad (recursos potencialmente disponibles para eliminar la pobreza).
+
+## Medición de la pobreza
+
+- Brecha relativa de ingreso (BRI): $$BRI=\frac{\sum_{y_i<p} (p-y_i)}{p\times NP}$$
+
+	- Dividimos ahora por el ingreso total necesaria para situar a todos los pobres en el umbral de pobreza. Mide la gravedad de la pobreza.
+	
+- Otras medidas más sofisticadas (generales) han sido propuestas por Foster, Greer y Thorbecke [1984]. $$FGT_\alpha=\frac{1}{n} \sum_{y_i<p} \left(\frac{p-y_i}{p}\right)^\alpha$$ 
+
+  donde $\alpha$ es parámetro que mide la sensibilidad de la pobreza. 
+
+- El problema con estas que no toman en cuenta las privaciones relativas de los pobres (multidiminsionalidad).
+
+## El efecto funcional de la pobreza
+
+- Analizamos los argumentos que relacionan la incidencia de la pobreza con los mecanismos que la provocan.
+
+- También discutimos los mecanismo informales que surgen espontáneamente para hacer frente a la pobreza.
+
+- La característica fundamental de la pobreza es que afecta al acceso de los pobres a los mercados, y esto tiene repercusiones en toda la economía
+
+  - Casi todos los mercados resultan afectados: crédito, trabajo, tierra, etc.
+  
+## Mercados de Crédito y Pobreza
+
+- El mercado crediticio falla en el caso de los pobres. Tres causas:
+
+1. No existen garantías para avalar el préstamo o proyecto (garantía es un seguro contra fracaso, instrumento para evitar default voluntario, mecanismo de auto-selección de prestatarios de bajo riesgo).
+    
+    - Surgen fuentes informales: diferentes tipos de tipos de garantías (la más importante es el trabajo)*.
+
+2. Los incentivos de los pobres para devolver los préstamos son limitados, esto independientemente su incapacidad para presentar una garantía
+    
+    - Cada unidad adicional de dinero significa más para un pobre que para un rico: utilidad marginal decreciente.
+      
+    - La pérdida de utilidad que experimenta el pobre devolviendo el préstamo es superior a la que experimenta el rico.
+
+## Mercado de Seguros y Pobreza
+
+- El mercado de seguros falla en el caso de los pobres. 
+
+- Los seguros existen porque el futuro es incierto y entraña riesgos.
+
+- Para que un seguro pueda funcionar bien:
+
+  1. El siniestro debe ser verificable.
+  2. No debe ser susceptible de plantear un problema del riesgo moral (evitar el riesgo moral: seguros incompletos - copagos y otras restricciones).
+  
+- Países en vías de desarrollo: es raro que existan sistemas formales de seguro.
+
+  - El sistema jurídico formal es lento (entonces es difícil la verificación). Esto puede agravar el comportamiento asociado al riesgo moral.
+  
+- Surge una red informal de seguridad: con bajo riesgo moral (verificación al interior de la comunidad)

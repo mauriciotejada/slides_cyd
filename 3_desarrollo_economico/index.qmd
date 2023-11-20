@@ -1382,4 +1382,143 @@ Cuando pensamos en desigualdad, podemos visualizar varias copias de las ecuacion
 
   - El sistema jurídico formal es lento (entonces es difícil la verificación). Esto puede agravar el comportamiento asociado al riesgo moral.
   
-- Surge una red informal de seguridad: con bajo riesgo moral (verificación al interior de la comunidad)
+- Surge una red informal de seguridad: con bajo riesgo moral
+  
+  - Verificación al interior de la comunidad.
+  
+  - Menor costo de oportunidad del trabajo (desempleo, subempleo y salarios bajos) y mayor esfuerzo.
+
+## Mercado de Trabajo, Nutrición y Pobreza
+
+- Efectos de la desnutrición son muy diversos:
+
+  - Debilidad muscular
+
+  - Retraso en el crecimiento
+
+  - Enfermedades
+  
+  - Vulnerabilidad a las infecciones
+
+  - Apatía mental y depresión.
+  
+  - Reducción de la capacidad intelectual y falta de motivación.
+
+- Disminución de la capacidad para trabajar $\rightarrow$ relación entre el estado de nutrición y la capacidad para trabajar.
+
+ - Círculo vicioso ([trampa de la pobreza.]{.emph}): pobreza $\rightarrow$ desnutrición $\rightarrow$ incapacidad para trabajar $\rightarrow$ pobreza.
+
+- La [desnutrión desempeña un papel funcional]{.emph}.
+
+## Mercado de Trabajo, Nutrición y Pobreza
+
+- *Balance energético dentro del cuerpo humano*: Componentes
+
+  1. [Aporte de energía]{.emph}: El consumo periódico de alimentos es la principal fuente de aporte de energía al cuerpo humano (relación entre nutrición e ingreso).
+  
+  2. [Metabolismo en reposo]{.emph}: Representa la energía necesaria para mantener las funciones vitales del cuerpo. Para la FAO, para 65 kilos de peso, se requieren 1.700 calorías diarias (Pero una masa corporal mayor eleva el metabolismo en reposo).
+  
+  3. [Energía necesaria para trabajar]{.emph}: Segundo componente importante relacionado con el trabajo físico. Para la  FAO, para 65 kilos de peso, se requieren 400 calorías diarias para una "actividad moderada".
+
+    - Estimación algo conservadora y para pobres de los países menos desarrollados.
+    
+    - El trabajo de los pobres suele ser trabajo físico y el trabajo físico exige una considerable cantidad de energía.
+
+  4. [Almacenamiento y uso de reserva]{.emph}: Se requiere un equilibrio entre (1) y la suma de (2) y (3). Las carencias energéticas se satisfacen recurriendo a las reservas del cuerpo.
+
+## Mercado de Trabajo, Nutrición y Pobreza
+
+- Un déficit de energía continuado lleva a la desnutrición. 
+
+- [Curva de capacidad]{.emph}: Relación entre la nutrición y la capacidad para realizar un trabajo productivo.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+De izquierda a derecha:
+
+1. Nutrición  $\rightarrow$ mantener el metabolismo en reposo (estructura básica del cuerpo) $\rightarrow$ poca capacidad e trabajo.
+
+2. Una vez atendido el metabolismo en reposo, la capacidad para trabajar aumenta considerablemente (energía usada para el trabajo).
+
+3. Rendimiento decrecientes (límite natural del cuerpo) $\rightarrow$ almacenamiento y potenciales problemas de sobrepeso.
+
+:::
+
+::: {.column width="50%"}
+```{r  curva_capacidad, echo=FALSE, out.width="90%"}
+knitr::include_graphics("figs/curva_capacidad.png")
+```
+
+Nota: renta como proxy de nutrición (1).
+:::
+::::
+
+## Mercado de Trabajo, Nutrición y Pobreza
+
+Discusión respecto de la trampa de la pobreza:
+
+1. *Si es posible que exista un círculo de baja renta-desnutrición-baja renta en los países pobres, ¿por qué no es posible que exista en el caso de algunos grupos de personas en los países ricos?*
+
+    - En los países desarrollados los mercados de trabajo tienen menos tensiones y existen más oportunidades. 
+  
+2. *¿No podría la gente pedir un préstamo para salir del círculo vicioso?*
+
+    - Falta de garantías como ya discutimos antes.
+    
+    - Hay otra respuesta más delicada: Una economía con trampas de desnutrición puede  estar en un óptimo de Pareto (no es posible mejorar el bienestar de los pobres, con redistribución, sin empeorar la situación de los demás miembros de la sociedad) 
+  
+  
+## Mercado de Trabajo, Nutrición y Pobreza
+
+Discusión respecto de la trampa de la pobreza:
+
+3. *Si la capacidad para trabajar afecta a la cantidad de trabajo realizada en el futuro, ¿no desearán los empresarios ofrecer contratos de larga duración para aprovechar esa circunstancia?*
+
+    -  Es improbable que una empresa firme un contrato de larga duración con su empleado simplemente para extraer futuras ganancias del aumento de su capacidad de trabajo. 
+    
+    - No existe garantía alguna de que el empleado seguirá ahí mañana: podría trabajar para otra empresa o emigrar.
+    
+4. *Si existieran de alguna manera esas relaciones de larga duración por otros motivos, ¿influiría eso en el estado de nutrición de los trabajadores?*
+
+    - Para que funcine tienen que existir factores de estabilidad en la relación: sustituir al trabajador tiene un costo elevado.
+    
+    - Algunos ejemplos: economía esclavista, industria y alimentación en el trabajo, y servicio doméstico.
+    
+## El desigual reparto de la pobreza en el hogar
+
+- Los pobres no pueden repartir su pobreza por igual entre mimebros de un hogar.
+
+- Cada persona (incluido cada niño) requiere nutrición, cuidado y recursos económicos para que su vida sea productiva y sana.
+
+- En situaciones de extrema pobreza, el reparto igualitario de los recursos del hogar podría no ayudar a nadie.
+
+    - La posible ventaja del reparto desigual radica en que ayuda a algunos miembros del hogar a ser mínimamente productivos.
+
+## El desigual reparto de la pobreza en el hogar
+
+- Curva de capacidad de una familia de dos personas:
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Ingreso total del hogar $Y^*$ y curvas de capacidad idénticas. Dos opciones: 
+
+1. El ingreso se reparte por por igual $Y^*/2$.
+
+2. Una persona la consume todo el ingreso.
+
+Para $Y^*$ ambas opciones dan el mismo resultado (teorema de los triángulos). Pero su $Y<Y^*$ la segunda opción da más capacidad de trabajo al hogar.
+:::
+
+::: {.column width="50%"}
+```{r  curva_capacidad_familia, echo=FALSE, out.width="90%"}
+knitr::include_graphics("figs/curva_capacidad_familia.png")
+```
+
+:::
+::::
+
+# Demografía y desarrollo económico
+

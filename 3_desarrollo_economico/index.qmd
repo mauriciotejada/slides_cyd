@@ -1522,3 +1522,438 @@ knitr::include_graphics("figs/curva_capacidad_familia.png")
 
 # Demografía y desarrollo económico
 
+## Población y desarrollo
+
+| Punto de Referencia Poblacional | Fecha en que se alcanzó | Años necesarios |
+|:------------------------------- | -----------------------:| ---------------:|
+| 1 billón                       |                    1804 |        $\infty$ |
+| 2 billones                     |                    1927 |             123 |
+| 3 billones                       |                    1960 |              33 |
+| 4 billones                       |                    1974 |              14 |
+| 5 billones                       |                    1987 |              13 |
+| 6 billones                       |                    1998 |              11 |
+| 7 billones                       |                    2011 |              13 |
+
+
+- Crecimiento demográfico $\Rightarrow$ desarrollo económico
+
+	- Modelos de crecimiento (Solow, Harrod-Domar)
+
+- Desarrollo económico $\Rightarrow$ crecimiento demográfico
+
+	- Transición demográfica
+
+## ¿Los países en desarrollo están tomándose el mundo?
+
+- ¿A qué nos referimos con sobre-población?
+
+	- Dando valor a los no nacidos.
+
+- Pero dejando eso de lado, toma la perspectiva a largo plazo por un minuto...
+
+|                            | 1650 | 1750 | 1800 |  1850 |  1900 |  1960 |  2008 |
+|:-------------------------- | ----:| ----:| ----:| -----:| -----:| -----:| -----:|
+| Pob mundial $(\mathrm{m})$ |  545 |  728 |  906 | 1,171 | 1,608 | 3,023 | 6,750 |
+| Porcentajes                |      |      |      |       |       |       |       |
+| Europa                     | 18.3 | 19.2 | 20.7 |  22.7 |  24.9 |  20.0 |  10.8 |
+| N. America                 |  0.2 |  0.1 |  0.7 |   2.3 |   5.1 |   6.8 |   5.1 |
+| Oceania                    |  0.4 |  0.3 |  0.2 |   0.2 |   0.4 |   0.5 |   0.5 |
+| L. America                 |  2.2 |  1.5 |  2.1 |   2.8 |   3.9 |   7.3 |   8.5 |
+| Africa                     | 18.3 | 13.1 |  9.9 |   8.1 |   7.4 |   9.4 |  14.6 |
+| Asia                       | 60.6 | 65.8 | 66.4 |  63.9 |  58.3 |  56.0 |  60.4 |
+
+## Algunas preguntas relevantes
+
+- Patrones de población y la **transición demográfica**.
+
+- **Determinantes de la fertilidad** a nivel de hogar.
+
+- **Externalidades sistemáticas en la fertilidad** y suboptimalidad.
+
+- **Efecto del crecimiento demográfico** en el desarrollo económico.
+
+## Conceptos básicos
+
+- **Tasas de natalidad**: expresadas en $x$ por mil.
+
+- **Tasas de mortalidad**: expresadas en $y$ por mil.
+
+- **Tasas de crecimiento demográfico**: resta, exprésalas en %.
+
+
+## Tasas de natalidad y mortalidad para países seleccionados, 1995
+
+| País | Ingreso P.C. | T. Natalidad | T. Mortalidad | Crec. Población |
+| :--- | ---: | ---: | ---: | ---: |
+| I. |  |  |  |  |
+| Mali | 520 | 51 | 20 | 3.1 |
+| Malawi | 690 | 51 | 20 | 3.1 |
+| Sierra Leone | 750 | 49 | 25 | 2.4 |
+| Guinea-Bissau | 840 | 43 | 21 | 2.2 |
+| II. |  |  |  |  |
+| Kenya | 1,290 | 45 | 12 | 3.3 |
+| Nigeria | 1,400 | 45 | 15 | 3.0 |
+| Ghana | 1,970 | 42 | 12 | 3.0 |
+| Pakistan | 2,170 | 41 | 9 | 3.2 |
+| III. |  |  |  |  |
+| India | 1,220 | 29 | 10 | 1.9 |
+| Bangladesh | 1,290 | 36 | 12 | 2.4 |
+
+## Tasas de natalidad y mortalidad para países seleccionados, 1995
+
+| País | Ingreso P.C. | T. Natalidad | T. Mortalidad | Crec. Población |
+| :--- | ---: | ---: | ---: | ---: |
+| IV. |  |  |  |  |
+| China | 2,330 | 18 | 7 | 1.1 |
+| Sri Lanka | 2,990 | 21 | 6 | 1.5 |
+| V. |  |  |  |  |
+| Nicaragua | 1,900 | 41 | 7 | 3.4 |
+| Peru | 3,220 | 27 | 7 | 2.0 |
+| Guatemala | 3,350 | 39 | 8 | 3.1 |
+| Brazil | 5,370 | 25 | 8 | 1.7 |
+| Colombia | 5,490 | 24 | 6 | 1.8 |
+| VI. |  |  |  |  |
+| Thailand | 6,260 | 19 | 6 | 1.3 |
+| Malaysia | 7,930 | 29 | 5 | 2.4 |
+| Republic of Korea | 9,630 | 16 | 6 | 1.0 |
+
+## Una mirada al corte transversal, 2009
+
+:::{.center-x}
+```{r  fig7_1, echo=FALSE, out.width="70%"}
+knitr::include_graphics("figs/fig7_1.png")
+```
+:::
+
+## Transición demográfica
+
+Tres Etapas:
+
+- Inicialmente, **tasas de natalidad y mortalidad elevadas**
+
+	- Las primeras en reacción a las segundas
+
+- Luego, las **tasas de mortalidad disminuyen**
+
+	- Antibióticos, DDT, saneamiento, organizaciones de salud pública
+
+- Finalmente, las **tasas de natalidad disminuyen**
+
+	- Pero, ¿por qué es tan lenta la reacción? (inercia macro vs. micro)
+
+- En particular, las tasas de población siguen un patrón de U invertida.
+
+## Transición demográfica
+
+:::{.center-x}
+```{r  fig7_2, echo=FALSE, out.width="80%"}
+knitr::include_graphics("figs/fig7_2.png")
+```
+:::
+
+http://pages.uwc.edu/keith.montgomery/Demotrans/demtran.htm
+
+## Distribuciones por edades, juventud e inercia
+
+- Cómo se distribuye la población en diferentes grupos de edad (%).
+
+- Varía significativamente a lo largo de la transición demográfica.
+
+- Altas tasas de natalidad y mortalidad correlacionadas con una población más joven.
+
+- La razón es simple:
+
+- Las altas tasas de mortalidad favorecen a los jóvenes: los ancianos mueren relativamente más rápido.
+
+- Las altas tasas de natalidad favorecen a los jóvenes (por supuesto).
+
+## Distribuciones por edades, juventud e inercia
+
+:::{.center-x}
+```{r  fig7_3, echo=FALSE, out.width="70%"}
+knitr::include_graphics("figs/fig7_3.png")
+```
+:::
+
+## Distribuciones por edades, juventud e inercia
+
+[Macro-Inercia]{.emph}
+
+- El resultado en las distribuciones por edades es extremadamente importante.
+
+- Explica en parte por qué las tasas de mortalidad son tan bajas en los países en desarrollo.
+
+- Explica en parte por qué las tasas de natalidad permanecen tan altas. 
+
+[Micro-Inercia]{.emph}
+
+- "Demanda" de hijos (trabajo infantil, seguridad en la vejez)
+
+- "Oferta" de hijos (costo de oportunidad de tenerlos)
+
+## Micro-inercia
+
+[Seguridad en la Vejez]{.emph}
+
+- $p=$ probabilidad de que el hijo cuide de ti en la vejez.
+
+	- Mortalidad infantil y infantil, migración.
+
+- $q=$ probabilidad umbral deseada para ser cuidado.
+
+	- Seguridad social.
+
+	- Ahorros propios.
+
+- Elige $n$ como el entero más pequeño tal que $1-(1-p)^{n} \geq q$.
+
+	- Por ejemplo, si $p=1 / 2$ y $q=9 / 10$, entonces $n=4$.
+
+	- Si $q=95 / 100$, entonces $n=5$. ¿Irracional? No.
+
+	- ¿Necesitas un hijo (por ejemplo, protección de la propiedad)? $n$ aún más alto.
+
+## Micro-inercia
+
+[¿Cómo se estima $p$? A veces, a lo largo de generaciones.]{.emph}
+
+- La historia de Umed Singh según Monica Dasgupta. Sus padres tuvieron 9 hijos, de los cuales 6 fallecieron. Dos niñas y un niño (Umed) sobrevivieron hasta la adultez. Umed se convirtió en policía, un trabajo con pensión. Tuvo dos niñas y luego tres hijos más (dos varones). Todos sobrevivieron.
+
+[Acumulación frente a enfoque selectivo:]{.emph}
+
+- ¿Cuándo se toman las decisiones de fertilidad?
+
+- Se pueden tomar decisiones en respuesta a la mortalidad infantil.
+
+- Es más difícil reaccionar ante la mortalidad infantil.
+
+- Es imposible reaccionar ante la migración.
+
+## Costos de oportunidad
+
+:::{.center-x}
+```{r  fig7_4, echo=FALSE, out.width="90%"}
+knitr::include_graphics("figs/fig7_4.png")
+```
+:::
+
+(a) ingresos por alquiler, salarios de hombres
+
+(b) salarios de mujeres
+
+## Costos de oportunidad
+
+[¿Los costos de oportunidad afectan empíricamente a la fertilidad?]{.emph}
+
+- Ciertamente, los salarios relativos de las mujeres han aumentado constantemente.
+
+- Pero la regresión de la fertilidad en los salarios está plagada de endogeneidad.
+
+- Causalidad inversa: Baja fertilidad $\Rightarrow$ salarios más altos.
+
+- Variables omitidas: educación, habilidad.
+
+[Schultz (1985) sobre Suecia.]{.emph}
+
+- Entre 1750 y 1850, los precios europeos de los cereales aumentaron, luego colapsaron.
+
+- (Estados Unidos y Rusia exportando grandes cantidades de cereales)
+
+- Entre 1880 y 1900, las exportaciones de mantequilla se multiplicaron por 4.
+
+- (progreso tecnológico en cría de ganado, producción láctea, transporte)
+
+## Costos de oportunidad
+
+[Suecia, continuación.]{.emph}
+
+- La producción de productos lácteos era "trabajo de mujeres" en Suecia.
+
+- Producción de cereales: trabajo masculino.
+
+[Instrumento para los salarios de mujeres/hombres: precio relativo de la mantequilla/cereales.]{.emph}
+
+- (Instrumento acompañante para los salarios masculinos: precio del cerdo/cereales).
+
+- 25 condados en Suecia, 6 observaciones decenales cada una, 1860-1910.
+
+  - Durante este período, la TFR disminuyó en un 28%
+
+  - (en un 43% para mujeres nacidas entre 1840 y 1890).
+
+  - 25 % de la disminución de la TFR explicada por un aumento del 10 %$ en la proporción de salarios de mujeres/hombres.
+
+## ¿Es la fertilidad demasiado alta?
+
+Tres fuentes:
+
+- Información incompleta
+
+  - Ejemplo de Umed Singh; puede que no sepa que las tasas de mortalidad disminuyeron.
+
+- Ex-ante versus ex-post
+
+  - "Demasiados" niños sobrevivientes ex-post
+
+  - (suena cruel, pero captas la idea)
+
+- Externalidades
+
+  - Una introducción a las externalidades e ineficiencia.
+
+  - Ganancia/costo privado versus ganancia/costo social.
+
+
+## Externalidades, ejemplo 1
+
+[Subsidios:]{.emph} 
+
+:::{.center-x}
+```{r  fig7_5, echo=FALSE, out.width="95%"}
+knitr::include_graphics("figs/fig7_5.png")
+```
+:::
+
+## Externalidades, ejemplo 2
+
+[Niños vistos como Boletos de Lotería:]{.emph}
+
+- $M$ trabajos disponibles, $N$ solicitantes de empleo.
+
+- $p=$ Probabilidad de conseguir trabajo $=\frac{\text { número total de trabajos }}{\text { número total de solicitantes de empleo }}=\frac{M}{N}$.
+
+- Supongamos que hay $M$ familias en total; una familia por trabajo.
+
+- Pero si tienen $k$ hijos cada una, $N=k M$.
+
+- Supongamos que un niño no cuesta nada: los costos de criar a un hijo son $(k-1)^{2}$ para $k$ niños.
+
+- El resultado perfecto y óptimo: cada familia tiene un hijo.
+
+- pero...
+
+## Externalidades, ejemplo 2
+
+[Externalidad negativa:]{.emph}
+
+- Cada familia maximiza $V p k-(k-1)^{2}$, tomando $p$ como dado.
+
+- El efecto es minúsculo cuando una familia hace esto.
+
+- Pero el efecto general combinado es significativo y negativo.
+
+- Cada familia termina con $k=1+\frac{1}{2} V p=1+\frac{V}{2 k}$ niños.
+
+- El equilibrio de Nash de este "juego" es subóptimo.
+
+- La fertilidad de equilibrio es mayor que la socialmente óptima.
+
+## Externalidades, ejemplo 3
+
+:::{.center-x}
+```{r  fig7_6, echo=FALSE, out.width="95%"}
+knitr::include_graphics("figs/fig7_6.png")
+```
+:::
+
+- Un argumento similar se sostiene cuando los abuelos cuidan de los niños.
+
+## Del crecimiento poblacional al desarrollo económico
+
+[Efectos negativos]{.emph}
+
+**1. Malthus.**
+    
+- Siempre que los salarios superan el nivel de subsistencia, aumento de la procreación.
+
+- Todo excedente es finalmente consumido.
+
+- ¿Se ajusta Malthus? Tal vez en una época en la que no había mucho más que hacer que consumir los ingresos, además...
+
+  - Sin seguridad en la vejez.
+
+  - Sin participación femenina en la fuerza laboral no agrícola.
+
+  - Sin transición de familias extensas a nucleares.
+
+  - Alta mortalidad infantil y juvenil.
+
+## Del crecimiento poblacional al desarrollo económico
+
+[Efectos negativos]{.emph}
+
+**2. Crecimiento con rendimientos decrecientes.**
+    
+- $Y=A K^{\alpha} L^{\beta}$, entonces $y=A K^{\alpha} / L^{1-\beta}$.
+
+- Decreciente en $L$ siempre que $\beta<1$.
+
+- Peste Negra en Gran Bretaña, la población se redujo a la mitad entre 1348-1377.
+
+  - Sufrimiento humano terrible, pero los datos económicos lucen diferentes.
+	  
+  - $w \uparrow$, participación laboral femenina $\uparrow$, fertilidad $\downarrow$.
+
+  - Altos ingresos duraron 100 años o más.
+
+- Epidemia de VIH-SIDA en Sudáfrica (Young 2005).
+
+  - Reducción de la fertilidad (directa y a través de $\uparrow$ participación femenina).
+
+  - Estándares de vida pronosticados más altos para las generaciones futuras.
+
+## Del crecimiento poblacional al desarrollo económico
+
+[Efectos negativos]{.emph}
+
+**3. Efecto en ahorros y crecimiento.**
+    
+- El crecimiento demográfico deprime el ingreso per cápita.
+
+- Ingreso per cápita más bajo reduce las tasas de ahorro.
+
+- Tasas de ahorro más bajas reducen las tasas de crecimiento.
+
+**4. Efecto en recursos comunes.**
+    
+- Medio ambiente: cobertura forestal, contaminación, capa de ozono.
+
+- Los bienes comunes: tierras de pastoreo, poblaciones de peces, aguas subterráneas.
+
+- Peor que el modelo de Solow, porque más población no produce más de estos recursos.
+
+## Del crecimiento poblacional al desarrollo económico
+
+[Efectos positivos]{.emph}
+
+**1. La demanda de innovación.**
+
+- Posiblemente más fuerte en las sociedades agrarias (Boserup, 1981)
+
+  - Densidad de población muy dispersa: Caza y recolección, pastoreo y descanso forestal (uno o dos cultivos, dos décadas de descanso)
+  
+  - Densidad de población medio dispersa: descanso forestal (uno o dos cultivos, una década de descanso)
+  
+  - Densidad de población media: descanso forestal corto (uno o dos cultivos, uno o dos años de descanso), cría de animales domésticos.
+  
+  - Población densa: Cultivo anual con cría de animales intensiva.
+  
+  - Población muy denso:Multicultivo
+
+## Del crecimiento poblacional al desarrollo económico
+
+[Efectos positivos]{.emph}
+
+**2. La oferta de innovación.**
+
+- Más ideas, más progreso técnico (Kremer 1993).
+
+- Induce un camino que relaciona la población inicial con el crecimiento demográfico.
+
+- Ecuación 1, transición demográfica:
+
+  - El crecimiento de la población es en forma de U invertida en el ingreso per cápita.
+
+- Ecuación 2, progreso técnico:
+
+  - La tasa de progreso técnico aumenta con el tamaño de la población.

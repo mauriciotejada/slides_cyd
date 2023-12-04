@@ -1520,7 +1520,7 @@ knitr::include_graphics("figs/curva_capacidad_familia.png")
 :::
 ::::
 
-# Demografía y desarrollo económico
+# Demografía y desarrollo económico {background-color="#CED3DC"}
 
 ## Población y desarrollo
 
@@ -1545,12 +1545,6 @@ knitr::include_graphics("figs/curva_capacidad_familia.png")
 
 ## ¿Los países en desarrollo están tomándose el mundo?
 
-- ¿A qué nos referimos con sobre-población?
-
-	- Dando valor a los no nacidos.
-
-- Pero dejando eso de lado, toma la perspectiva a largo plazo por un minuto...
-
 |                            | 1650 | 1750 | 1800 |  1850 |  1900 |  1960 |  2008 |
 |:-------------------------- | ----:| ----:| ----:| -----:| -----:| -----:| -----:|
 | Pob mundial $(\mathrm{m})$ |  545 |  728 |  906 | 1,171 | 1,608 | 3,023 | 6,750 |
@@ -1562,21 +1556,11 @@ knitr::include_graphics("figs/curva_capacidad_familia.png")
 | Africa                     | 18.3 | 13.1 |  9.9 |   8.1 |   7.4 |   9.4 |  14.6 |
 | Asia                       | 60.6 | 65.8 | 66.4 |  63.9 |  58.3 |  56.0 |  60.4 |
 
-## Algunas preguntas relevantes
-
-- Patrones de población y la **transición demográfica**.
-
-- **Determinantes de la fertilidad** a nivel de hogar.
-
-- **Externalidades sistemáticas en la fertilidad** y suboptimalidad.
-
-- **Efecto del crecimiento demográfico** en el desarrollo económico.
-
 ## Conceptos básicos
 
-- **Tasas de natalidad**: expresadas en $x$ por mil.
+- **Tasas de natalidad**: expresadas en número de niños nacidos $x$ por cada mil habitantes.
 
-- **Tasas de mortalidad**: expresadas en $y$ por mil.
+- **Tasas de mortalidad**: expresadas en número de muertes $y$ por cada mil habitantes.
 
 - **Tasas de crecimiento demográfico**: resta, exprésalas en %.
 
@@ -1635,7 +1619,7 @@ Tres Etapas:
 
 - Luego, las **tasas de mortalidad disminuyen**
 
-	- Antibióticos, DDT, saneamiento, organizaciones de salud pública
+	- Antibióticos, saneamiento, organizaciones de salud pública
 
 - Finalmente, las **tasas de natalidad disminuyen**
 
@@ -1655,17 +1639,17 @@ http://pages.uwc.edu/keith.montgomery/Demotrans/demtran.htm
 
 ## Distribuciones por edades, juventud e inercia
 
-- Cómo se distribuye la población en diferentes grupos de edad (%).
+Cómo se distribuye la población en diferentes grupos de edad (%).
+
+\ 
 
 - Varía significativamente a lo largo de la transición demográfica.
 
-- Altas tasas de natalidad y mortalidad correlacionadas con una población más joven.
+- Altas tasas de natalidad y mortalidad correlacionadas con una población más joven. La razón es simple:
 
-- La razón es simple:
+  - Las altas tasas de mortalidad favorecen a los jóvenes: los ancianos mueren relativamente más rápido.
 
-- Las altas tasas de mortalidad favorecen a los jóvenes: los ancianos mueren relativamente más rápido.
-
-- Las altas tasas de natalidad favorecen a los jóvenes (por supuesto).
+  - Las altas tasas de natalidad favorecen a los jóvenes (por supuesto).
 
 ## Distribuciones por edades, juventud e inercia
 
@@ -1697,9 +1681,9 @@ knitr::include_graphics("figs/fig7_3.png")
 
 - $p=$ probabilidad de que el hijo cuide de ti en la vejez.
 
-	- Mortalidad infantil y infantil, migración.
+	- Mortalidad infantil y migración; Bajos ingresos o decisiones de no cuidar a los padres.
 
-- $q=$ probabilidad umbral deseada para ser cuidado.
+- $q=$ probabilidad umbral deseada por la familia/padres para ser cuidados.
 
 	- Seguridad social.
 
@@ -1711,7 +1695,7 @@ knitr::include_graphics("figs/fig7_3.png")
 
 	- Si $q=95 / 100$, entonces $n=5$. ¿Irracional? No.
 
-	- ¿Necesitas un hijo (por ejemplo, protección de la propiedad)? $n$ aún más alto.
+	- ¿Necesitas un hijo (por ejemplo para ayudarte a proteger la propiedad, cuando los derechos de propiedad no están bien definidos)? $n$ aún más alto.
 
 ## Micro-inercia
 

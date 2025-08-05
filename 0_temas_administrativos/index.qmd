@@ -22,9 +22,9 @@ embed-resources: true
 
 2. *Horarios:*
 
-    - Clases: Martes y Jueves 16:00 a 17:20. Sala por anunciar.
+    - Clases: Martes y Jueves 16:00 a 17:20. Sala B-703.
 
-    - Horas de Oficina: Martes 10:00 a 12:00. Oficia 501 Edificio Cubo.
+    - Horas de Oficina: Martes 10:00 a 12:00. Oficia 502 Edificio Cubo.
 
     - Ayudantía: A ser anunciada.
 
@@ -101,6 +101,10 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 
   [https://www.rug.nl/ggdc/productivity/pwt/](https://www.rug.nl/ggdc/productivity/pwt/)
 
+- Madison Project Database:
+
+  [https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2023](https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2023)
+
 - Barro Lee Educational Attainment:
 
   [https://barrolee.github.io/BarroLeeDataSet/BLv3.html](https://barrolee.github.io/BarroLeeDataSet/BLv3.html)
@@ -116,13 +120,17 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 
 ## Evaluación 
 
-La evaluación final para el curso será determinada de acuerdo al esquema 8445.
+La evaluación final para el curso será determinada de acuerdo al **esquema 8445**.
 
 **Nota de presentación (70\%)**: 
+
 - **Solemne 1 (30\%)**: Semana del 9 al 12 de septiembre.
+
 - **Solemne 2 (30\%)**: Semana del 3 a 7 de noviembre.
-- **Controles (20\%)**: Dos tareas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
-- **Trabajo (20\%)**: Presentación de artículo de la literatura. Esta actividad tributa a su e-portafolio.
+
+- **Controles (Tareas, 20\%)**: Dos tareas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
+
+- **Trabajo (Presentación, 20\%)**: Presentación de artículo de la literatura. Esta actividad tributa a su e-portafolio.
 
 **Examen Final (30%)**: Semana del 12 al 19 de diciembre.
 

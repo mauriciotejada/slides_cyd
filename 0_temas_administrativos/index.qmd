@@ -55,13 +55,13 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 
 ## Contenidos
 
-**Unidad 1**: Introducción
+[**Unidad 1**]{.color-red}: Introducción
 
 - Hechos estilizados sobre el crecimiento y el desarrollo.
   
 \ 
 
-**Unidad 2**: Crecimiento Económico
+[**Unidad 2**]{.color-red}: Crecimiento Económico
 
 - Concepto básicos.
 - El modelo de Solow.
@@ -73,7 +73,7 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 
 ## Contenidos
 
-**Unidad 3**: Desarrollo Económico
+[**Unidad 3**]{.color-red}: Desarrollo Económico
 
 - Trampas para el desarrollo.
 - Desigualdad.
@@ -122,17 +122,17 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 
 La evaluación final para el curso será determinada de acuerdo al **esquema 8445**.
 
-**Nota de presentación (70\%)**: 
+[**Nota de presentación (70\%)**]{.color-red}: 
 
-- **Solemne 1 (30\%)**: Semana del 9 al 12 de septiembre.
+- [**Solemne 1 (30\%)**]{.color-red}: Semana del 9 al 12 de septiembre.
 
-- **Solemne 2 (30\%)**: Semana del 3 a 7 de noviembre.
+- [**Solemne 2 (30\%)**]{.color-red}: Semana del 3 a 7 de noviembre.
 
-- **Controles (Tareas, 20\%)**: Dos tareas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
+- [**Controles (Tareas, 20\%)**]{.color-red}: Dos tareas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
 
-- **Trabajo (Presentación, 20\%)**: Presentación de artículo de la literatura. Esta actividad tributa a su e-portafolio.
+- [**Trabajo (Presentación, 20\%)**]{.color-red}: Presentación de artículo de la literatura. Esta actividad tributa a su e-portafolio.
 
-**Examen Final (30%)**: Semana del 12 al 19 de diciembre.
+[**Examen Final (30%)**]{.color-red}: Semana del 12 al 19 de diciembre.
 
 ## Evaluación 
 
@@ -154,6 +154,8 @@ Para la evaluación del curso tome en cuenta lo siguiente:
 
 ## Sobre el uso de herramientas de inteligencia artificial
 
+::: {.incremental}
+
 - Para garantizar un aprendizaje óptimo y ético usen de forma responsable las herramientas de inteligencia artificial. 
 
 - Usen la herramienta solo si no afecta su rendimiento académico o el de sus compañeros. Usos: (1) Discutir y perfeccionar ideas (brainstorming); (2) Refinar preguntas de investigación; (3) Realizar consultas sobre un tema en particular; (4) Elaborar esquemas para organizar ideas; y (5) Revisar gramática y estilo. 
@@ -165,19 +167,21 @@ actividades: (1) Suplantar la identidad; (2) Completar las partes de un trabajo;
 
 - Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones El uso de herramientas de inteligencia artificial debe estar debidamente documentado y citado.
 
+::: 
+
 ## Programación
 
 - Agosto (8 clases): 
   - Unidad 1 (2), Unidad 2 (6)
 
 - Septiembre (7 clases): 
-  - Unidad 2 (7), **Evaluación 1**
+  - Unidad 2 (7), [**Evaluación 1**]{.color-red}
 
 - Octubre (8 clases): 
-  - Unidad 2 (3), Unidad 3 (4), **Presentaciones** 
+  - Unidad 2 (3), Unidad 3 (4), [**Presentaciones**]{.color-red} 
 
 - Noviembre (6 clases): 
-  - Unidad 3 (6), **Evaluación 2**
+  - Unidad 3 (6), [**Evaluación 2**]{.color-red}
 
 - Diciembre (4 clases): 
-  - Unidad 3 (3), **Presentaciones** 
+  - Unidad 3 (3), [**Presentaciones**]{.color-red} 

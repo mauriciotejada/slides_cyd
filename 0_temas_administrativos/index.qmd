@@ -22,9 +22,9 @@ embed-resources: true
 
 2. *Horarios:*
 
-    - Clases: Lunes y Miércoles 11:30 a 12:40. Sala B-405.
+    - Clases: Martes y Jueves 16:00 a 17:20. Sala por anunciar.
 
-    - Horas de Oficina: Lunes 14:30 a 16:00. Oficia 510 Edificio Cubo.
+    - Horas de Oficina: Martes 10:00 a 12:00. Oficia 501 Edificio Cubo.
 
     - Ayudantía: A ser anunciada.
 
@@ -69,6 +69,7 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 - Capital humano.
 - Convergencia (no condicional y condicional).
 - Contabilidad del crecimiento.
+- Economía de las ideas.
 
 ## Contenidos
 
@@ -78,13 +79,13 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 - Desigualdad.
 - Pobreza.
 - Población.
-- Medio ambiente (si el tiempo lo permite).
+- Recursos naturales (si el tiempo lo permite).
 
 ## Bibliografía
 
 - *Bibliografía básica:*
 
-  - Jones C. and D. Vollrath (2013). Introduction to Economic Growth. Third Edition. Norton \& Company. **[JV]**
+  - Jones C. and D. Vollrath (2023). Introduction to Economic Growth. 4th Edition. Norton \& Company. **[JV]**
   - Ray, D. (2002). Economía del Desarrollo. Antoni Bosch. **[R]**
 
 \ 
@@ -115,13 +116,15 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 
 ## Evaluación 
 
-La evaluación final para el curso será determinada de acuerdo al siguiente esquema:
+La evaluación final para el curso será determinada de acuerdo al esquema 8445.
 
-- **Evaluación Parcial 1 (20 \%)**: hasta el 15 de septiembre. 
-- **Evaluación Parcial 2 (20 \%)**: semana del 6 al 10 de noviembre.
-- **Tareas (15 \%)**: se desarrollarán dos durante el semestre.
-- **Presentación artículo de la literatura (15 \%)**: se desarrollará durante el semestre.
-- **Examen Final (30 \%)**: semana del 11 al 19 de diciembre.
+**Nota de presentación (70\%)**: 
+- **Solemne 1 (30\%)**: Semana del 9 al 12 de septiembre.
+- **Solemne 2 (30\%)**: Semana del 3 a 7 de noviembre.
+- **Controles (20\%)**: Dos tareas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
+- **Trabajo (20\%)**: Presentación de artículo de la literatura. Esta actividad tributa a su e-portafolio.
+
+**Examen Final (30%)**: Semana del 12 al 19 de diciembre.
 
 ## Evaluación 
 
@@ -145,19 +148,28 @@ Para la evaluación del curso tome en cuenta lo siguiente:
 
 - Para garantizar un aprendizaje óptimo y ético usen de forma responsable las herramientas de inteligencia artificial. 
 
-- Usen la herramienta solo si no afecta su rendimiento académico o el de sus compañeros. 
+- Usen la herramienta solo si no afecta su rendimiento académico o el de sus compañeros. Usos: (1) Discutir y perfeccionar ideas (brainstorming); (2) Refinar preguntas de investigación; (3) Realizar consultas sobre un tema en particular; (4) Elaborar esquemas para organizar ideas; y (5) Revisar gramática y estilo. 
 
-- Usen la herramienta cuando logren internalizar y entender los argumentos, puedan citar fuentes, y puedan verificar que los datos sean verídicos. 
+- El uso de herramientas de inteligencia artificial no está permitido en este curso para las siguientes
+actividades: (1) Suplantar la identidad; (2) Completar las partes de un trabajo; (3) Escribir oraciones, párrafos o documentos; y (4) Generar códigos de programación
 
 - Tomen en cuenta cuenta que esta herramientas están en constante evolución y tiene capacidades y limitaciones. 
 
-- Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones.
+- Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones El uso de herramientas de inteligencia artificial debe estar debidamente documentado y citado.
 
 ## Programación
 
-|Agosto|Septiembre|Octubre|Noviembre|Diciembre|
-|:---:|:---:|:---:|:---:|:---:|
-|8 Clases|5 Clases|7 Clases|6 Clases|2 Clases|
-|Unidad 1 (4) | Unidad 2 (5) | Unidad 2 (4) | Unidad 3 (6) | Unidad 3 (2)  |
-|Unidad 2 (4) |              | Unidad 3 (3) |              |               |
-|             |*Evaluación 1* |              | *Evaluación 2* |               | 
+- Agosto (8 clases): 
+  - Unidad 1 (2), Unidad 2 (6)
+
+- Septiembre (7 clases): 
+  - Unidad 2 (7), **Evaluación 1**
+
+- Octubre (8 clases): 
+  - Unidad 2 (3), Unidad 3 (4), **Presentaciones** 
+
+- Noviembre (6 clases): 
+  - Unidad 3 (6), **Evaluación 2**
+
+- Diciembre (4 clases): 
+  - Unidad 3 (3), **Presentaciones** 

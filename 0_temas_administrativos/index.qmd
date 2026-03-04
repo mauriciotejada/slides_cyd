@@ -22,11 +22,11 @@ embed-resources: true
 
 2. *Horarios:*
 
-    - Clases: Martes y Jueves 16:00 a 17:20. Sala B-703.
+    - Clases: Martes y Jueves 11:30 a 12:50. Sala a ser anunciada.
 
-    - Horas de Oficina: Martes 10:00 a 12:00. Oficia 502 Edificio Cubo.
+    - Ayudantías: Jueves 17:25 a 18:45. Sala a ser anunciada.
 
-    - Ayudantía: A ser anunciada.
+    - Horas de Oficina: Jueves 10:00 a 11:00. Edificio Cubo, piso 5, oficina 502.
 
 . . .
 
@@ -70,6 +70,7 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 - Convergencia (no condicional y condicional).
 - Contabilidad del crecimiento.
 - Economía de las ideas.
+- Adopción y difusión de tecnología.
 
 ## Contenidos
 
@@ -124,9 +125,9 @@ La evaluación final para el curso será determinada de acuerdo al **esquema 844
 
 [**Nota de presentación (70\%)**]{.color-red}: 
 
-- [**Solemne 1 (30\%)**]{.color-red}: Semana del 9 al 12 de septiembre.
+- [**Solemne 1 (30\%)**]{.color-red}: 24 de abril de 2026.
 
-- [**Solemne 2 (30\%)**]{.color-red}: Semana del 3 a 7 de noviembre.
+- [**Solemne 2 (30\%)**]{.color-red}: 12 de junio de 2026.
 
 - [**Controles (Tareas, 20\%)**]{.color-red}: Dos tareas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
 
@@ -167,21 +168,39 @@ actividades: (1) Suplantar la identidad; (2) Completar las partes de un trabajo;
 
 - Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones El uso de herramientas de inteligencia artificial debe estar debidamente documentado y citado.
 
-::: 
+:::
+
+## Sobre el uso de Dispositivos Electrónicos en Clase
+
+Dada la exigencia del curso y la necesidad de mantener un alto nivel de concentración, implementaremos una estricta política de **cero pantallas**.
+
+::: {.incremental}
+
+- El uso de celulares, laptops, tablets o smartwatches interrumpe el proceso de aprendizaje y distrae tanto al usuario como a sus compañeros, por lo que su uso está totalmente prohibido durante la clase.
+
+- Les invito a tomar notas a mano (cuaderno y lápiz), una práctica que ha demostrado mejorar la retención y el análisis de la información. Por estas mismas razones pedagógicas, no se autoriza fotografiar la pizarra ni grabar el audio de las sesiones.
+
+- Solo se realizarán excepciones a esta regla para estudiantes que presenten adaptaciones de aprendizaje o necesidades educativas especiales formalmente documentadas.
+
+- El uso de laptops será permitido en las ayudantías solo para aquellas sesiones que lo requieran para el trabajo práctico.
+
+- El cumplimiento de esta política es obligatorio para preservar el ambiente de estudio. En caso de infracción, se le solicitará al estudiante abandonar el aula de clases de manera inmediata.
+
+:::
 
 ## Programación
 
-- Agosto (8 clases): 
+- Marzo (8 clases):
   - Unidad 1 (2), Unidad 2 (6)
 
-- Septiembre (7 clases): 
-  - Unidad 2 (7), [**Evaluación 1**]{.color-red}
+- Abril (7 clases):
+  - Unidad 2 (6), [**Evaluación 1**]{.color-red}
 
-- Octubre (8 clases): 
-  - Unidad 2 (3), Unidad 3 (4), [**Presentaciones**]{.color-red} 
+- Mayo (7 clases):
+  - Unidad 2 (4), Unidad 3 (3)
 
-- Noviembre (6 clases): 
+- Junio (7 clases):
   - Unidad 3 (6), [**Evaluación 2**]{.color-red}
 
-- Diciembre (4 clases): 
-  - Unidad 3 (3), [**Presentaciones**]{.color-red} 
+- Julio (2 clases):
+  - Unidad 3 (1), [**Presentaciones**]{.color-red}

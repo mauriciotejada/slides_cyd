@@ -61,6 +61,8 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
   
 \ 
 
+. . .
+
 [**Unidad 2**]{.color-red}: Crecimiento Económico
 
 - Concepto básicos.
@@ -90,6 +92,8 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
   - Ray, D. (2002). Economía del Desarrollo. Antoni Bosch. **[R]**
 
 \ 
+
+. . .
 
 - *Bibliografía complementaria:*
 
@@ -197,7 +201,7 @@ Dada la exigencia del curso y la necesidad de mantener un alto nivel de concentr
   - Unidad 2 (6), [**Evaluación 1**]{.color-red}
 
 - Mayo (7 clases):
-  - Unidad 2 (4), Unidad 3 (3)
+  - Unidad 2 (4), Unidad 3 (3), [**Presentaciones**]{.color-red}
 
 - Junio (7 clases):
   - Unidad 3 (6), [**Evaluación 2**]{.color-red}

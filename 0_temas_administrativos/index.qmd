@@ -3,9 +3,9 @@ title: "Crecimiento y Desarrollo Económico"
 subtitle: "**Temas Administrativos**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
-format: 
+format:
   udp-revealjs:
-    footer: "UDP theme for Quarto Presentations"
+    footer: "Ingeniería Comercial -- Crecimiento y Desarrollo Económico"
 incremental: false
 embed-resources: true
 ---
@@ -14,25 +14,42 @@ embed-resources: true
 
 1. *Quien es quien:*
 
-    - Profesor: Mauricio Tejada (email: [mauricio.tejada@mail.udp.cl](mailto:mauricio.tejada@mail.udp.cl])).
+    - Profesor: Mauricio Tejada (email: [mauricio.tejada@mail.udp.cl](mailto:mauricio.tejada@mail.udp.cl)).
 
-    - Ayudante: A ser anunciado.
+    - Ayudante: Por anunciar.
 
 . . .
 
 2. *Horarios:*
 
-    - Clases: Martes y Jueves 11:30 a 12:50. Sala a ser anunciada.
+    - Clases: Martes y Jueves 13:00 a 14:20. Sala B-302.
 
-    - Ayudantías: Jueves 17:25 a 18:45. Sala a ser anunciada.
+    - Horas de Oficina: Martes 10:00 a 11:00. Edificio Cubo, piso 5, oficina 502.
 
-    - Horas de Oficina: Jueves 10:00 a 11:00. Edificio Cubo, piso 5, oficina 502.
+    - Ayudantía: Viernes 17:25 a 18:45. Sala a ser anunciada.
 
 . . .
 
 3. *Comunicación:*
 
     - Email y Canvas.
+
+
+## Sobre el curso
+
+**Identificación:** ICO09418 -- 6 créditos -- 7mo semestre (mención Economía) -- Requisito: Macroeconomía II.
+
+. . .
+
+**Descripción:**
+
+- El propósito del curso es [identificar las causas que determinan o influyen en las diferentes trayectorias de crecimiento y desarrollo]{.emph} que observan los países.
+
+- Para abordar este desafío se emplean modelos económicos a nivel macro y micro que ofrecen una visión amplia del problema que enfrentan aquellos países que no han logrado mejorar sustancialmente el bienestar de su población.
+
+- La primera parte del curso se centra en el crecimiento económico; posteriormente examinamos cómo este se relaciona con otros fenómenos relevantes, como la pobreza y la desigualdad.
+
+- La asignatura sintetiza diversos conocimientos teóricos a través de casos exitosos y fallidos de países en su búsqueda del desarrollo.
 
 
 ## Objetivos del Curso
@@ -55,34 +72,21 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 
 ## Contenidos
 
-[**Unidad 1**]{.color-red}: Introducción
+- [**Unidad 1:**]{.color-red} Introducción
 
-- Hechos estilizados sobre el crecimiento y el desarrollo.
-  
-\ 
+  - Hechos estilizados sobre el crecimiento y el desarrollo.
 
 . . .
 
-[**Unidad 2**]{.color-red}: Crecimiento Económico
+- [**Unidad 2:**]{.color-red} Crecimiento Económico
 
-- Concepto básicos.
-- El modelo de Solow.
-- Progreso tecnológico.
-- Capital humano.
-- Convergencia (no condicional y condicional).
-- Contabilidad del crecimiento.
-- Economía de las ideas.
-- Adopción y difusión de tecnología.
+  - Conceptos básicos, el modelo de Solow, progreso tecnológico, capital humano, convergencia (no condicional y condicional), contabilidad del crecimiento, economía de las ideas y progreso tecnológico, adopción y difusión de tecnología.
 
-## Contenidos
+. . .
 
-[**Unidad 3**]{.color-red}: Desarrollo Económico
+- [**Unidad 3:**]{.color-red} Desarrollo Económico
 
-- Trampas para el desarrollo.
-- Desigualdad.
-- Pobreza.
-- Población.
-- Recursos naturales (si el tiempo lo permite).
+  - Trampas para el desarrollo, desigualdad, pobreza, población, recursos naturales (si el tiempo lo permite).
 
 ## Bibliografía
 
@@ -91,18 +95,18 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
   - Jones C. and D. Vollrath (2023). Introduction to Economic Growth. 4th Edition. Norton \& Company. **[JV]**
   - Ray, D. (2002). Economía del Desarrollo. Antoni Bosch. **[R]**
 
-\ 
+\
 
 . . .
 
 - *Bibliografía complementaria:*
 
-  - de Janvry A. and E. Sadoulet (2021). Development Economics: Theory and Practice. Second Edition. Routledge. **[JS]** 
+  - de Janvry A. and E. Sadoulet (2021). Development Economics: Theory and Practice. Second Edition. Routledge. **[JS]**
   - Aghion, P. and P. Howitt (1997). Endogenous Growth Theory. MIT Press. **[AH]**
 
 ## Fuente de datos
 
-- Penn World Table:  
+- Penn World Table:
 
   [https://www.rug.nl/ggdc/productivity/pwt/](https://www.rug.nl/ggdc/productivity/pwt/)
 
@@ -114,63 +118,142 @@ Al finalizar el curso, el estudiante debiera ser capaz de:
 
   [https://barrolee.github.io/BarroLeeDataSet/BLv3.html](https://barrolee.github.io/BarroLeeDataSet/BLv3.html)
 
-- World Development Indicators: 
+- World Development Indicators:
 
   [https://datatopics.worldbank.org/world-development-indicators/](https://datatopics.worldbank.org/world-development-indicators/)
-  
+
 - World Economic Outlook:
 
   [https://www.imf.org/en/publications/weo](https://www.imf.org/en/publications/weo)
 
 
-## Evaluación 
+## Evaluación
 
 La evaluación final para el curso será determinada de acuerdo al **esquema 8445**.
 
-[**Nota de presentación (70\%)**]{.color-red}: 
+* [**Nota de Presentación (70%):**]{.color-red} actividades a llevarse a cabo durante el semestre.
 
-- [**Solemne 1 (30\%)**]{.color-red}: 24 de abril de 2026.
+    * [**Solemne 1 (30%):**]{.color-red} viernes 25 de septiembre de 2026, a las 14:30.
 
-- [**Solemne 2 (30\%)**]{.color-red}: 12 de junio de 2026.
+    * [**Solemne 2 (30%):**]{.color-red} viernes 13 de noviembre de 2026, a las 14:30.
 
-- [**Controles (Tareas, 20\%)**]{.color-red}: Dos tareas a ser entregadas el viernes anterior al inicio de la semana de solemnes.
+    * [**Controles (20%):**]{.color-red} Dos controles tomados en horario de ayudantía (control 1: semana del 24 al 28 de agosto; control 2: semana del 19 al 23 de octubre).
 
-- [**Trabajo (Presentación, 20\%)**]{.color-red}: Presentación de artículo de la literatura. Esta actividad tributa a su e-portafolio.
+    * [**Trabajo (Presentaciones, 20%):**]{.color-red} Dos presentaciones de artículos de la literatura, una para la parte de crecimiento y otra para la de desarrollo. Las fechas serán definidas en clases (esta actividad tributa a su e-portafolio).
 
-[**Examen Final (30%)**]{.color-red}: Semana del 12 al 19 de diciembre.
+* [**Examen Final (30%):**]{.color-red} jueves 17 de diciembre de 2026, a las 14:00.
 
-## Evaluación 
-
-Para la evaluación del curso tome en cuenta lo siguiente:
+## Evaluación: examen y reemplazo de notas
 
 ::: {.incremental}
 
-- No hay eximición de la evaluación final o examen. La nota mínima de presentación al examen es 3,5. 
+- No hay eximición de la evaluación final o examen. La nota mínima de presentación al examen es 3,5.
 
-- Si un/a estudiante falta a una evaluación, deberá rendir de forma obligatoria el examen para reemplazar la nota pendiente (ya no deberá presentar justificación en secretaría de estudios). Quienes estén en esta condición, deben cumplir la misma exigencia de nota mínima de presentación (nota 3.5).
+- Si un/a estudiante falta a una evaluación, deberá rendir de forma obligatoria el examen para reemplazar la nota pendiente (ya no deberá presentar justificación en secretaría de estudios). Quienes estén en esta condición deben cumplir la misma exigencia de nota mínima de presentación (3,5).
 
 - Solo una evaluación (evaluación 1 o 2) puede ser reemplazada con el examen o evaluación final.
 
-- Solo los/as estudiantes que rindieron ambas evaluaciones podrán justificar su inasistencia a su examen. 
+- Solo los/as estudiantes que rindieron ambas evaluaciones podrán justificar su inasistencia a su examen.
+
+- [Cuando el examen final reemplace una nota de solemne, la nota de presentación cambiará de forma retroactiva (*ex-post*)]{.emph}: el cálculo de la nota final utiliza todas las notas ponderadas, incluyendo la nueva nota de reemplazo.
+
+:::
+
+## Evaluación: presentaciones e integridad académica
+
+::: {.incremental}
+
+- Las presentaciones se realizan en la fecha asignada y acordada con anticipación, por lo que la inasistencia a la exposición no es justificable y será evaluada con nota 1,0.
+
+- El material de la presentación deberá estar disponible en CANVAS antes del inicio de la sesión correspondiente.
 
 - Conductas deshonestas, plagio y cualquier acción que vicie el proceso de aprendizaje será llevada al *Comité de Ética*.
 
 :::
 
-## Sobre el uso de herramientas de inteligencia artificial
+## Uso de Sistemas de Inteligencia Artificial (SIA)
+
+Este curso se rige por las *Orientaciones sobre el uso de Sistemas de Inteligencia Artificial* de la **FAE-UDP**. Lo señalado aquí las complementa y en ningún caso las sustituye.
+
+**Nivel de uso autorizado en cada actividad:**
 
 ::: {.incremental}
 
-- Para garantizar un aprendizaje óptimo y ético usen de forma responsable las herramientas de inteligencia artificial. 
+- [**Nivel 1 (uso no autorizado)**]{.color-red} -- Controles, solemnes y examen. No se podrá portar, mantener a la vista ni tener al alcance dispositivos electrónicos (celulares, relojes inteligentes, tablets, computadores, audífonos u otros), los que deberán permanecer apagados y guardados donde se indique.
 
-- Usen la herramienta solo si no afecta su rendimiento académico o el de sus compañeros. Usos: (1) Discutir y perfeccionar ideas (brainstorming); (2) Refinar preguntas de investigación; (3) Realizar consultas sobre un tema en particular; (4) Elaborar esquemas para organizar ideas; y (5) Revisar gramática y estilo. 
+- [**Nivel 2 (uso asistido)**]{.color-red} -- Presentación de artículo de la literatura, [solo en la preparación del material]{.emph} y con declaración obligatoria. Durante la exposición oral rige el Nivel 1.
 
-- El uso de herramientas de inteligencia artificial no está permitido en este curso para las siguientes
-actividades: (1) Suplantar la identidad; (2) Completar las partes de un trabajo; (3) Escribir oraciones, párrafos o documentos; y (4) Generar códigos de programación
+- [**Nivel 3 (uso permitido)**]{.color-red} -- Ayudantías y guías de estudio sin incidencia en la nota. Permitido como apoyo al aprendizaje.
 
-- Tomen en cuenta cuenta que esta herramientas están en constante evolución y tiene capacidades y limitaciones. 
+:::
 
-- Ustedes son los únicos responsables de todo el contenido que presentan en evaluaciones El uso de herramientas de inteligencia artificial debe estar debidamente documentado y citado.
+## Uso de SIA en las presentaciones
+
+::: {.small}
+
+El desempeño evaluado es la exposición oral: leer y comprender el artículo, explicarlo con palabras propias, justificar supuestos y resultados, y responder preguntas.
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+[**Sí está permitido:**]{.color-red}
+
+- Aclarar conceptos, notación o definiciones vistas en clase.
+
+- Mejorar el diseño y la legibilidad de diapositivas **ya estructuradas** por el/la estudiante.
+
+- Elaborar o mejorar gráficos a partir de datos o contenidos **definidos por el/la estudiante**.
+
+- Revisar gramática y estilo de **texto propio**.
+
+:::
+
+::: {.column width="50%"}
+
+[**No está permitido:**]{.color-red}
+
+- Sustituir la lectura del artículo original: toda referencia o resultado debe verificarse en la fuente.
+
+- Resumir o sintetizar el artículo, ni extraer sus resultados o contribuciones principales.
+
+- Definir la estructura o el hilo argumental de la presentación.
+
+- Generar la evaluación crítica del artículo, sus limitaciones o su conexión con el curso.
+
+- Redactar el guion de la exposición.
+
+- Intervenir durante la exposición oral o la ronda de preguntas.
+
+- Completar la parte del trabajo grupal asignada al/a la estudiante, o suplantar su identidad.
+
+:::
+
+::::
+
+:::
+
+## Uso de SIA: declaración y verificación
+
+::: {.small}
+
+::: {.incremental}
+
+- Toda presentación deberá cerrar con una diapositiva de **Declaración de uso de SIA**, se hayan utilizado o no:
+
+  - *"Declaro que, en la elaboración de este trabajo, utilicé [herramienta y versión] con la finalidad de [propósito], específicamente en [etapas o tareas]. Revisé críticamente los resultados obtenidos y asumo la responsabilidad por el contenido presentado."*
+
+  - *"Declaro que no utilicé Sistemas de Inteligencia Artificial en la elaboración de este trabajo."*
+
+- Quien haya utilizado SIA deberá conservar un **registro breve (máximo una página)** con las interacciones relevantes, los resultados obtenidos y las decisiones o descartes que hizo a partir de ellos, y presentarlo si se le solicita.
+
+- Cuando el uso tenga incidencia sustantiva, se citará en **formato APA**: Empresa. (Día de mes de año). *Título del chat* [Chat con IA generativa]. Modelo. URL.
+
+- Ustedes son responsables de verificar la exactitud y veracidad de todo contenido generado. Ante dudas sobre el alcance autorizado, deberán consultar antes de utilizar la herramienta: mientras no exista respuesta expresa, el uso consultado no se entenderá autorizado.
+
+- La exposición oral y la ronda de preguntas son el mecanismo ordinario de verificación. Ante indicios de uso indebido se realizará una revisión académica previa, que podrá incluir una **instancia oral adicional** (asistencia obligatoria). Solo si se mantienen indicios fundados, el caso se derivará al *Comité de Ética*.
+
+:::
 
 :::
 
@@ -184,6 +267,8 @@ Dada la exigencia del curso y la necesidad de mantener un alto nivel de concentr
 
 - Les invito a tomar notas a mano (cuaderno y lápiz), una práctica que ha demostrado mejorar la retención y el análisis de la información. Por estas mismas razones pedagógicas, no se autoriza fotografiar la pizarra ni grabar el audio de las sesiones.
 
+- El uso de tablets está autorizado únicamente para tomar notas manuscritas (como segunda opción al lápiz y papel); no obstante, para evitar distracciones se solicita usarlas en modo de enfoque o modo concentración.
+
 - Solo se realizarán excepciones a esta regla para estudiantes que presenten adaptaciones de aprendizaje o necesidades educativas especiales formalmente documentadas.
 
 - El uso de laptops será permitido en las ayudantías solo para aquellas sesiones que lo requieran para el trabajo práctico.
@@ -192,19 +277,18 @@ Dada la exigencia del curso y la necesidad de mantener un alto nivel de concentr
 
 :::
 
-## Programación
+## Programación tentativa
 
-- Marzo (8 clases):
-  - Unidad 1 (2), Unidad 2 (6)
+| Mes | Clases | Contenido | Evaluaciones |
+| --- | :---: | --- | --- |
+| Agosto | 7 | Unidades 1--2 | [Control 1 (sem. 24--28)]{.color-red} |
+| Septiembre | 5 | Unidad 2 | [Solemne 1: vie 25, 14:30]{.color-red} |
+| Octubre | 9 | Unidades 2--3 | [Control 2 (sem. 19--23)]{.color-red} |
+| Noviembre | 6 | Unidad 3 | [Solemne 2: vie 13, 14:30]{.color-red} |
+| Diciembre | 2 | Unidad 3 | [Examen Final: jue 17, 14:00]{.color-red} |
 
-- Abril (7 clases):
-  - Unidad 2 (6), [**Evaluación 1**]{.color-red}
+: Total: 29 clases (6 de agosto -- 3 de diciembre)
 
-- Mayo (7 clases):
-  - Unidad 2 (4), Unidad 3 (3), [**Presentaciones**]{.color-red}
+**Fechas sin clases:** 15 y 17 de septiembre (Fiestas Patrias), 22 de septiembre y 10 de noviembre (recesos), 8 de diciembre (feriado).
 
-- Junio (7 clases):
-  - Unidad 3 (6), [**Evaluación 2**]{.color-red}
-
-- Julio (2 clases):
-  - Unidad 3 (1), [**Presentaciones**]{.color-red}
+**Presentaciones:** dos sesiones (crecimiento y desarrollo), con fechas a definir en clases.

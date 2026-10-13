@@ -3,12 +3,89 @@ title: "Crecimiento y Desarrollo Económico"
 subtitle: "**Desarrollo Económico**"
 author: "Mauricio M. Tejada"
 institute: "*Departamento de Economía, Universidad Diego Portales*"
-format: 
+format:
   udp-revealjs:
     footer: "Ingeniería Comercial -- Crecimiento y Desarrollo Económico"
 incremental: false
 embed-resources: true
 ---
+
+```{r setup, include=FALSE}
+# Opciones solo para las figuras generadas en R (usar opts.label="modelo").
+# Las figuras PNG existentes mantienen sus opciones.
+knitr::opts_template$set(modelo = list(
+  echo = FALSE, message = FALSE, warning = FALSE,
+  fig.align = "center", fig.retina = 2
+))
+
+# ---- Parámetros de los modelos ----------------------------------------------
+# Cambiar un valor aquí actualiza las figuras y los ejemplos numéricos.
+
+# Modelo 1: inversión con complementariedades (kappa = c/b)
+m1 <- list(kappa_hom = 1,     # caso 1: empresas homogéneas
+           kappa     = 0.2,   # caso 3: múltiples equilibrios (kappa < 1/2)
+           kappa_alt = 0.4)   # caso 3 antes de la política (kappa más alto)
+
+# Modelo 2: big push
+m2 <- list(L = 100, A = 2, w = 1.5, Fc = 20)
+
+# Modelo 3: Solow sin progreso técnico (g_A = 0)
+# (el texto de las slides menciona alpha = 1/3; revisarlo si cambia alpha)
+m3 <- list(alpha = 1/3, delta = 0.05, gL = 0.02, s = 0.2,
+           A1 = 1, A2 = 2, kbar = 7,                        # dos tecnologías
+           s1 = 0.1, s2 = 0.3, ybar_s = 1.6,                # ahorro endógeno
+           g1 = 0.035, g2 = 0.005, ybar_g = 1.7)            # población endógena
+
+# ---- Funciones de los modelos -----------------------------------------------
+# Modelo 1: mapa de complementariedad
+x_map <- function(n, kappa, theta) n^theta / (n^theta + kappa * (1 - n^theta))
+
+# Modelo 2: ingreso agregado, beneficio de invertir y masa crítica
+Y_bp  <- function(n, p = m2) p$A * (p$L - n * p$Fc) / (p$A - (p$A - 1) * n)
+pi_bp <- function(n, p = m2) (1 - p$w / p$A) * Y_bp(n, p) - p$w * p$Fc
+n_bar <- function(p = m2) {
+  (p$A * p$w * p$Fc - (p$A - p$w) * p$L) / (p$A * (p$w - 1) * p$Fc)
+}
+
+# Modelo 3: crecimiento del capital, estados estacionarios y producto
+g_K  <- function(k, A, s, p = m3) s * (A / k)^(1 - p$alpha) - p$delta
+k_ee <- function(A, s, gL, p = m3) A * (s / (gL + p$delta))^(1 / (1 - p$alpha))
+y_ee <- function(A, s, gL, p = m3) A * (s / (gL + p$delta))^(p$alpha / (1 - p$alpha))
+y_k  <- function(k, A, p = m3) k^p$alpha * A^(1 - p$alpha)
+
+# Formato de números en el texto
+num <- function(x, d = 2) formatC(x, format = "f", digits = d)
+
+# ---- Estilo de las figuras (como las de la parte de crecimiento) ------------
+estilo <- function(mar = c(4.6, 4.8, 1, 1)) {
+  par(family = "serif", mar = mar, bty = "l", las = 1, mgp = c(2.9, 0.9, 0),
+      cex.lab = 1.7, cex.axis = 1.5, xaxs = "i", yaxs = "i")
+}
+
+# Lienzo para el mapa de complementariedad, con la recta de 45 grados
+lienzo_mapa <- function() {
+  estilo()
+  plot(NA, xlim = c(0, 1.05), ylim = c(0, 1.05), xaxt = "n", yaxt = "n",
+       xlab = expression(italic(n)), ylab = expression(italic(x)(italic(n))))
+  axis(1, at = c(0, 1))
+  axis(2, at = c(0, 1))
+  segments(0, 0, 1, 1, lwd = 1.5)
+}
+
+# Lienzo para la dinámica del capital: tasa de crecimiento contra k
+lienzo_solow <- function(xlim, ylim) {
+  estilo()
+  plot(NA, xlim = xlim, ylim = ylim, xaxt = "n", yaxt = "n",
+       xlab = expression(italic(k) == italic(K)/italic(L)), ylab = "Tasa de crecimiento")
+  axis(2, at = 0)
+  abline(h = 0, lwd = 1)
+}
+
+# Flechas de la dinámica, dibujadas sobre el eje horizontal
+flechas <- function(desde, hasta, y = par("usr")[3]) {
+  arrows(desde, y, hasta, y, length = 0.14, lwd = 2.5, angle = 22, xpd = NA)
+}
+```
 
 # Trampas para el Desarrollo: Introducción {background-color="#CED3DC"}
 
@@ -142,247 +219,226 @@ knitr::include_graphics("figs/fig4.png")
 
 **Definición**: $r_j(n)$, $j=Q,D$, es el retorno neto dado el número de usuarios $n$. Clave: $r_j'(n)>0$ 
 
-## Otros ejemplos de complemetariedad
+## Un modelo de inversión con complementariedades
 
-- **Plataformas**: Mac vs PC, iOS vs. Android, Facebook, AirBnB, Tinder, etc. 
+Queremos un modelo simple en el que la decisión de invertir de una empresa dependa de cuántas otras empresas invierten.
 
-  - Sitios con muchos usuarios son atractivos para nuevos usuarios por la complementariedad.
+- Hay un continuo de empresas indexadas por $x \in [0,1]$. Cada una decide si **invierte** o **no invierte** en un proyecto.
+- No invertir entrega un pago de $0$.
+- Si invierte y el proyecto **tiene éxito**, la empresa $x$ gana $B(x)$, con $B'(x)<0$: las empresas están ordenadas de mayor a menor rentabilidad.
+- Si invierte y el proyecto **fracasa**, pierde el costo hundido de la inversión, $c$.
+- La probabilidad de éxito es $p(n)$, donde $n$ es la fracción de empresas que invierte, con $p'(n)>0$, $p(0)=0$ y $p(1)=1$.
+  - Más empresas invirtiendo significa un mercado más grande, más proveedores y mejor infraestructura.
 
-- **Infrastructura**: Sistema de transporte público donde $p=v+F/n$.
-.   
-  - Bajo número de usuarios $\rightarrow$ costo fijo por usuario alto $\rightarrow$ disuasión al uso $\rightarrow$  número de usuarios bajo.
-  
-- **Finanzas**: El mercado financiero es atractivo para las personas que buscan rendimientos seguros para sus activos.
+La empresa $x$ invierte si su beneficio esperado es positivo:
+$$p(n)\,B(x)-[1-p(n)]\,c \geq 0$$
 
-  - Más usuarios $\rightarrow$ mayor flujo de dinero $\rightarrow$ mayor diversificación $\rightarrow$ más usuarios.
-  
-- **Corrupción**:
+## Formas paramétricas
 
-  - Evasión de impuestos alta $\rightarrow$ menor % de auditorias (costosas) $\rightarrow$ mayor incentivo a la evasión.
+Para derivar resultados usamos formas funcionales concretas:
+$$B(x)=b\,\frac{1-x}{x} \qquad \text{y} \qquad p(n)=n^{\theta}$$
 
-- **Normas sociales**:
+- $b>0$ mide la rentabilidad de los proyectos exitosos.
+- $\theta \geq 1$ mide la intensidad de la complementariedad: con $\theta$ más alto, el éxito requiere que invierta una fracción mayor de las empresas.
 
-  - Un mismo individuo puede comportarse de formas muy diferentes dependiendo de cómo se comportan los demás (diferentes sociedades y entornos).
+La condición para invertir queda
+$$n^{\theta}\, b\,\frac{1-x}{x} \geq (1-n^{\theta})\,c \quad \Longrightarrow \quad \frac{1-x}{x} \geq \kappa\,\frac{1-n^{\theta}}{n^{\theta}}$$
+donde $\kappa \equiv c/b$ es la razón entre lo que se pierde si el proyecto fracasa y lo que se gana si tiene éxito.
 
-## Mapa de Complementariedades
+## El mapa de complementariedad
 
-**Configuración básica:**
+Si se espera que invierta una fracción $n$, invierten todas las empresas con índice menor al de la empresa indiferente, $x(n)$. Resolviendo la condición anterior con igualdad:
+$$x(n)=\frac{n^{\theta}}{n^{\theta}+\kappa\,(1-n^{\theta})}$$
 
-- Dos acciones o elecciones: llamémoslas QWERTY y DVORAK.
+- $x(0)=0$ y $x(1)=1$: si nadie invierte, nadie quiere invertir; si todos invierten, todos quieren invertir.
+- $x(n)$ cae con $\kappa$: proyectos más riesgosos o menos rentables reducen la inversión.
 
-- $n$ = fracción de la población que **se espera** elija una determinada acción o elección (ejemplo: QUERTY)
+:::{.callout-important}
+## Complementariedad
+El mapa es creciente: mientras más empresas se espera que inviertan, más quieren invertir.
+$$x'(n)=\frac{\theta\, \kappa\, n^{\theta-1}}{\left[n^{\theta}+\kappa\,(1-n^{\theta})\right]^{2}}>0$$
+:::
 
-- $x(n)$ = fracción de población que **quiere elegir** una acción (ejemplo QWERTY), bajo el expectativa de que $n$ lo hará.
+## Equilibrio y estabilidad
 
+Un **equilibrio** es una fracción $n^*$ en la que las expectativas se cumplen:
+$$x(n^*)=n^*$$
+Gráficamente es un cruce del mapa de complementariedad con la recta de $45^{\circ}$.
 
-**Complementariedad:** $x(n)$ es una función creciente. Cuanto mayor sea la fracción de personas $n$ que se espera que sean tomen una acción o elección, mayor será la fracción de personas $x(n)$ que querrán tomar dicha acción o elección. Matemáticamente, $x'(n)>0$.
+- Si $x(n)>n$, quieren invertir más empresas de las esperadas y $n$ aumenta.
+- Si $x(n)<n$, quieren invertir menos empresas de las esperadas y $n$ disminuye.
 
-  - Se puede generalizar esta idea a la **intensidad de las acciones o elecciones**, no solo binarias. Esto es, $x(n)$ es una función continua de $n$
-  
-  - El **mapa de complementariedad** es la representación de la conexión entre la “expectativa” $n$ con la “respuesta” $x(n)$. 
-  
-  - El **equilibrio** ocurre cuando $x(n) = n$. Entonces cada intersección del mapa con la diagonal es un equilibrio potencial.
+Un equilibrio es **estable** si la economía vuelve a él después de una pequeña perturbación. Esto ocurre cuando el mapa cruza la recta de $45^{\circ}$ desde arriba:
+$$x'(n^*)<1$$
 
+En nuestro modelo $n=0$ y $n=1$ siempre son equilibrios. Las preguntas son cuáles son estables y si existen equilibrios interiores.
 
-## Mapa de Complementariedades: QWERTY Revisado
-
-```{r fig6, echo=FALSE, out.width="100%"}
-knitr::include_graphics("figs/fig6.png")
-```
-
-## Mapa de Complementariedades: Congestión revisado
-
-```{r fig8, echo=FALSE, out.width="100%"}
-knitr::include_graphics("figs/fig8.png")
-```
-
-## Mapa de Complementariedades y multiplicidad de equilibrios
-
-```{r fig9, echo=FALSE, out.width="100%"}
-knitr::include_graphics("figs/fig9.png")
-```
-
-\ 
-
-- **Equilibrios**: Intersecciones de $x(n)$ con la línea $45^{\circ}$.
-
-- Resultados **únicos o múltiples**: ¿Cómo se relaciona esto con la convergencia y la divergencia?
-
-## Equilibrios estables e inestables
-
-```{r fig10, echo=FALSE, out.width="83%"}
-knitr::include_graphics("figs/fig10.png")
-```
-
-\ 
-
-- **Estabilidad**: si el sistema retorna al equilibrio en el que se encuentra después de la perturbación. Si $x(n)$ cruza $45^{\circ}$ desde "arriba" (estable) o "abajo" (inestable).
-
-- Discusión: Observe cómo las **políticas temporales** pueden tener **efectos permanentes**.
-
-
-## Nota: multiplicidad de equilibrios como una falla de coordinación
-
-**El dilema de los turistas** 
-
-- Dos amigos están visitando la ciudad de Milan en Italia.
-
-- Se pierden y no saben dónde está cada uno.
-
-- Cada uno "cree" que el otro acudirá a un conocido lugar "turístico" con la esperanza de que el otro piense lo mismo.
-
-- Hay dos lugares posibles: Santa Maria delle Grazie (la última cena) y  el Estadio Giuseppe Meazza.
-
-- Matriz de pagos:
-
-| | SMdG | EGM |
-||::|::|
-|SMdG | (2,2) | (0,0) |
-| EGM |  (0,0) | (1,1) |
-
-\ 
-
-- **Lo mejor para ambos** sería encontrarse en Santa Maria delle Grazie, pero si la comunicación es limitada, es difícil que este resultado esté garantizado.
-
-
-## Historia vs. expectativas
-
-- Recuerde nuestra **configuración básica**:
-
-  - Dos acciones o elecciones: llamémoslas QWERTY y DVORAK.
-
-  - $n$ = fracción de la población que **se espera elija** QWERTY.
-
-  - $x(n)$ = fracción de la población **que quiere elegir** QWERTY, bajo la expectativa de que $n$ lo hará.
-
-- Basado en **expectativas**.
-
-
-## Historia vs. expectativas
-
-- Recuerde nuestra **configuración básica**:
-
-  - Dos acciones o elecciones: llamémoslas QWERTY y DVORAK.
-
-  - $n$ = fracción de la población que <s>se espera que elija</s> **eligió** QWERTY.
-
-  - $x(n)$ = fracción de la población que quiere elegir QWERTY, bajo <s>la expectativa de que</s>  **observación de que**  $n$ lo hizo en el pasado.
-
-  - Basado en la <s>expectativa</s> **historia**.
-
-- Ejemplos:
-
-  - **Expectativas**: Crisis de divisas, saqueos repentinos, moda....
-
-  - **Historia**: Capital social, externalidades de red, discriminación...
-
-*Generalmente tendremos una mezcla de historia y expectativas en todos los ejemplos*. 
-
-## El mapa de complementariedad (nuevamente)
-
-- Mapeo de $n$ la fracción **esperada (u observada)** para realizar una acción a $x(n)$ la fracción entonces incentivada a realizar esa acción.
-
-- En este caso distinguimos entre **Equilibrios** (expectativas) o **estados estacionarios** (historia).
-
-- Todo lo demás aplica a ambos conceptos. Note que la diferenciación es más un tema conceptual y de interpretación que metodológico.
-
-## Ejemplo: unirse o no a la revolución
-
-- Beneficios y costos:
-
-  - Éxito: $B(x)$ a cada participante, con $x\in[0,1]$ la ubicación y $B'(x)<0$. 
-
-  - Fracaso: $L$ a cada participante (ejemplo: encarcelamiento).
-
-  - El espectador obtiene 0 recompensa sin importar lo que suceda.
-
-- Probabilidad de éxito $p(n)$, donde $n$ es número de personas que se unen a la revolución.
-
-  - $p'(n)>0$, $p(0)=0$ y $p(1)=1$. 
-
-- ¿Si se espera que se unan $n$ personas, cuántas quieren unirse?
-  
-  - Unirse si: 
-  $$p(n) B(x)-[1-p(n)] L>0$$
-
-
-## Ejemplo: unirse o no a la revolución
-
-```{r unirse_rev_1, echo=FALSE, out.width="83%"}
-knitr::include_graphics("figs/unirse_rev_1.png")
-```
-
-## Ejemplo: unirse o no a la revolución
-  
+## Caso 1: empresas homogéneas
 
 :::: {.columns}
 
-::: {.column width="50%"}
-**Caso 1**: Beneficio uniforme $B(x)=B$
+::: {.column width="52%"}
+Suponga que todas las empresas ganan lo mismo, $B(x)=b$. Entonces todas toman la misma decisión. Invierten si
+$$n^{\theta}\,b \geq (1-n^{\theta})\,c$$
+es decir, si
+$$n \geq \bar{n} \equiv \left(\frac{\kappa}{1+\kappa}\right)^{1/\theta}$$
 
-- Mapa de complementariedad es:
-$$B>\frac{1-p(n)}{p(n)} L$$
-- **Múltiples equilibrios**, con (y sin) revolución $n=1$ $(n=0)$.
+- Si se espera $n<\bar{n}$ nadie invierte; si se espera $n \geq \bar{n}$ invierten todas.
+- Hay **dos equilibrios estables**: $n=0$ y $n=1$.
+- $\bar{n}$ es la **masa crítica** de inversionistas.
 :::
 
-::: {.column width="50%"}
-```{r unirse_rev_2, echo=FALSE, out.width="90%"}
-knitr::include_graphics("figs/unirse_rev_2.png")
+::: {.column width="48%"}
+```{r m1_homogeneas, opts.label="modelo", fig.dim=c(5, 4.6), out.width="100%"}
+nh <- (m1$kappa_hom / (1 + m1$kappa_hom))   # con theta = 1
+lienzo_mapa()
+segments(nh, 0, nh, 1, lty = 3, lwd = 2, col = "gray40")
+segments(0, 0, nh, 0, lwd = 6, xpd = NA)
+segments(nh, 1, 1, 1, lwd = 6)
+axis(1, at = nh, labels = expression(bar(italic(n))))
+points(c(0, 1), c(0, 1), pch = 19, cex = 2, xpd = NA)
 ```
 :::
 
 ::::
 
-## Ejemplo: unirse o no a la revolución
-
+## Caso 2: empresas heterogéneas con $\theta=1$
 
 :::: {.columns}
 
-::: {.column width="50%"}
-**Caso 2**: Beneficio uniforme $B(x)=\frac{1-x}{x}$ y $p(n)=n$
+::: {.column width="52%"}
+Con $p(n)=n$ el mapa es
+$$x(n)=\frac{n}{n+\kappa\,(1-n)}$$
+Lo comparamos con la recta de $45^{\circ}$:
+$$x(n)>n \iff n+\kappa\,(1-n)<1 \iff \kappa<1$$
 
-- Mapa de complementariedad es:
-$$\frac{1-x(n)}{x(n)}>\frac{1-n}{n} L$$
-- Entonces:
-$$x(n) = \min\left\{1, \frac{n}{n + (1-n)L}\right\}$$
-- Para cualquier parámetro $L>1$ tenemos que $x(n)<n$ cuando $n>0$. **La revolución no ocurre**.
+- Si $\kappa<1$, $x(n)>n$ para todo $n$ interior: el único equilibrio estable es $n=1$.
+- Si $\kappa>1$, $x(n)<n$ para todo $n$ interior: el único equilibrio estable es $n=0$.
 
-- ¿Qué sucede para $L<1$?.
+[Hay complementariedad, pero no multiplicidad: los fundamentales ($\kappa$) determinan el resultado.]{.emph}
 :::
 
-::: {.column width="50%"}
-```{r unirse_rev_3, echo=FALSE, out.width="90%"}
-knitr::include_graphics("figs/unirse_rev_3.png")
+::: {.column width="48%"}
+```{r m1_theta1, opts.label="modelo", fig.dim=c(5, 4.6), out.width="100%"}
+n <- seq(0, 1, length.out = 400)
+lienzo_mapa()
+lines(n, x_map(n, 0.5, 1), lwd = 6)
+lines(n, x_map(n, 2, 1), lwd = 6, lty = 2)
+text(0.22, 0.62, expression(kappa < 1), cex = 1.9)
+text(0.78, 0.40, expression(kappa > 1), cex = 1.9)
+points(c(0, 1), c(0, 1), pch = 19, cex = 2, xpd = NA)
 ```
 :::
 
 ::::
 
-## Ejemplo: unirse o no a la revolución
+## Caso 3: empresas heterogéneas con $\theta=2$
 
 :::: {.columns}
 
-::: {.column width="50%"}
-**Caso 3**: Beneficio uniforme $B(x)=\frac{1-x}{x}$ y $p(n)=n^2$
+::: {.column width="52%"}
+Con $p(n)=n^{2}$ el mapa es
+$$x(n)=\frac{n^{2}}{n^{2}+\kappa\,(1-n^{2})}$$
+Un equilibrio interior cumple $x(n)=n$:
+$$n=n^{2}+\kappa\,(1-n^{2})$$
+$$n\,(1-n)=\kappa\,(1-n)(1+n)$$
+y por tanto
+$$n^*=\frac{\kappa}{1-\kappa}$$
 
-- Mapa de complementariedad es:
-$$\frac{1-x(n)}{x(n)}>\frac{1-n^2}{n^2} L$$
-- Entonces:
-$$x(n) = \min\left\{1, \frac{n^2}{n^2 + (1-n^2)L}\right\}$$
-- $L \leq 1$: en el equilibrio estable **La revolución no ocurre**.
-
-- $L>1$: **múltiples equilibrios**, con (y sin) revolución cuando $x(n)<n$ $(x(n)>n)$ 
+- $n^*$ está entre 0 y 1 solo si $\kappa<1/2$.
+- En ese caso hay **tres equilibrios**: $n=0$, $n^*$ y $n=1$.
 :::
 
-::: {.column width="50%"}
-```{r unirse_rev_4, echo=FALSE, out.width="90%"}
-knitr::include_graphics("figs/unirse_rev_4.png")
+::: {.column width="48%"}
+```{r m1_theta2, opts.label="modelo", fig.dim=c(5, 4.6), out.width="100%"}
+n  <- seq(0, 1, length.out = 400)
+ns <- m1$kappa / (1 - m1$kappa)
+lienzo_mapa()
+segments(ns, 0, ns, ns, lty = 3, lwd = 2, col = "gray40")
+lines(n, x_map(n, m1$kappa, 2), lwd = 6)
+axis(1, at = ns, labels = expression(italic(n)^"*"))
+flechas(ns - 0.05, 0.09)
+flechas(ns + 0.05, 0.91)
+points(c(0, 1), c(0, 1), pch = 19, cex = 2, xpd = NA)
+points(ns, ns, pch = 21, bg = "white", cex = 2, lwd = 2.5)
 ```
 :::
 
 ::::
 
-# Trampas para el Desarrollo: El subdesarrollo como un equilibrio entrampado  {background-color="#CED3DC"}
+## Estabilidad y masa crítica
+
+Evaluamos la pendiente del mapa, $x'(n)=\dfrac{2\,\kappa\, n}{\left[n^{2}+\kappa\,(1-n^{2})\right]^{2}}$, en cada equilibrio cuando $\kappa<1/2$:
+
+| Equilibrio | Pendiente del mapa | Estabilidad |
+| :--- | :---: | :---: |
+| $n=0$ | $0$ | Estable |
+| $n^*=\dfrac{\kappa}{1-\kappa}$ | $2\,(1-\kappa)>1$ | Inestable |
+| $n=1$ | $2\,\kappa<1$ | Estable |
+
+- $n^*$ es la **masa crítica**: si se espera $n>n^*$ la economía termina en $n=1$; si se espera $n<n^*$ termina en $n=0$.
+- Dos economías con los mismos parámetros pueden terminar en lugares distintos: las **expectativas** se autocumplen.
+- Si $\kappa \geq 1/2$ el único equilibrio estable es $n=0$. En ese caso el problema no es de coordinación, es de fundamentales.
+
+## Estática comparativa
+
+La masa crítica en términos de los parámetros originales es
+$$n^*=\frac{\kappa}{1-\kappa}=\frac{c}{b-c}$$
+
+- $n^*$ aumenta con $c$: si fracasar es más costoso, se necesita que más empresas inviertan para que valga la pena invertir.
+- $n^*$ disminuye con $b$: proyectos más rentables hacen más fácil la coordinación.
+
+:::{.callout-important}
+## Masa crítica
+Mientras menor es $n^*$, más fácil es que la economía termine en el equilibrio bueno: basta con que una fracción pequeña de las empresas espere que las demás inviertan.
+:::
+
+## Política: una garantía temporal
+
+:::: {.columns}
+
+::: {.column width="54%"}
+Una garantía estatal reduce la pérdida en caso de fracaso de $c_0$ a $c_1$. La masa crítica baja de $n_0^*$ a $n_1^*$.
+
+- Si las expectativas están entre $n_1^*$ y $n_0^*$, la economía deja de ir hacia $n=0$ y converge a $n=1$.
+- En $n=1$ ningún proyecto fracasa: la garantía no se usa y puede retirarse.
+- Sin la garantía la economía sigue en $n=1$, que es un equilibrio estable.
+
+[Una política temporal tiene efectos permanentes.]{.emph}
+:::
+
+::: {.column width="46%"}
+```{r m1_politica, opts.label="modelo", fig.dim=c(5, 4.6), out.width="100%"}
+n   <- seq(0, 1, length.out = 400)
+n0s <- m1$kappa_alt / (1 - m1$kappa_alt)
+n1s <- m1$kappa / (1 - m1$kappa)
+lienzo_mapa()
+segments(c(n0s, n1s), 0, c(n0s, n1s), c(n0s, n1s), lty = 3, lwd = 2, col = "gray40")
+lines(n, x_map(n, m1$kappa_alt, 2), lwd = 6, lty = 2)
+lines(n, x_map(n, m1$kappa, 2), lwd = 6)
+axis(1, at = c(n1s, n0s), labels = expression(italic(n)[1]^"*", italic(n)[0]^"*"))
+text(0.30, 0.74, expression(italic(c)[1] < italic(c)[0]), cex = 1.9)
+text(0.80, 0.46, expression(italic(c)[0]), cex = 1.9)
+points(c(n0s, n1s), c(n0s, n1s), pch = 21, bg = "white", cex = 2, lwd = 2.5)
+points(c(0, 1), c(0, 1), pch = 19, cex = 2, xpd = NA)
+```
+:::
+
+::::
+
+## Lecciones del modelo de inversión
+
+- La **complementariedad** es necesaria para que haya múltiples equilibrios, pero no es suficiente (caso 2).
+- La multiplicidad requiere que el mapa cruce la recta de $45^{\circ}$ desde abajo en algún punto: la complementariedad debe ser suficientemente fuerte.
+- Los equilibrios se pueden **ordenar**: en $n=1$ cada empresa gana $B(x)\geq 0$, mientras que en $n=0$ todas ganan $0$.
+- Ninguna empresa puede sacar a la economía de $n=0$ por sí sola: es una [falla de coordinación]{.emph}.
+
+:::{.callout-important}
+## Trampa de subdesarrollo
+Una economía puede quedar atrapada en el equilibrio malo aunque sus parámetros fundamentales sean idénticos a los de una economía que está en el equilibrio bueno.
+:::
+
+# Trampas para el Desarrollo: Relaciones intersectoriales y big push {background-color="#CED3DC"}
 
 ## Inversiones y complementariedades en la demanda
 
@@ -427,135 +483,197 @@ knitr::include_graphics("figs/fig2_1.png")
 
 ::::
 
-## Mapa de complementariedad para el proceso de industrialización
+## Un modelo de big push
 
-- Supongamos que una economía tiene muchas empresas.
+Formalizamos la idea de Rosenstein-Rodan (1943) siguiendo a Murphy, Shleifer y Vishny (1989), en la versión simplificada de Krugman (1995).
 
-- Cada empresas está indexadas por $x$ en el intervalos $[0,1]$:
+- La economía tiene un continuo de sectores indexados por $i \in [0,1]$. Cada sector produce un bien distinto.
+- Hay $L$ trabajadores, que son también los consumidores y los dueños de las empresas.
+- Los consumidores gastan la misma fracción de su ingreso en cada bien.
+  - Si el ingreso agregado es $Y$ y el precio de cada bien es 1, **cada sector vende $Y$ unidades**.
+- La demanda que enfrenta un sector depende del ingreso que se genera en todos los demás. Este es el vínculo entre sectores.
 
-- La empresa puede usar un método de **producción simple**, o puede **invertir** y aumentar su producción utilizando una **tecnología altamente productiva**.
+En cada sector se puede producir con una tecnología **tradicional** o invertir en una tecnología **moderna**.
 
-- La nueva tecnología es productiva pero es **costosa de implementar**. Los empresas con $x$ de bajo tienen costos de instalación más bajos.
+## Dos tecnologías
 
-- Cada uno puede estar **inactivo o invirtiendo**.
+**Tecnología tradicional**
 
-  - Inactividad $\mapsto$ bajo beneficio (normalizamos a 0)
+- Un trabajador produce una unidad del bien.
+- Hay muchos productores: el precio es 1, el salario es 1 y el beneficio es 0.
 
-  - Inversión  $\mapsto$ ingresos $R(n)$ (depende de cuántas empresas $n$ inviertan, vínculos sectoriales)
+**Tecnología moderna**
 
-- **Beneficios netos** de una empresa inversora 
-$$x: \pi(n, x) \equiv R(n)-s(x)$$
-donde $s(x)$ es el costo de instalación específico de la empresa $x$. 
+- Requiere una inversión inicial: un costo fijo de $F$ trabajadores.
+- Después cada trabajador produce $A>1$ unidades.
+- Paga un salario $w \geq 1$: trabajar en la fábrica exige un premio salarial.
+- Solo una empresa por sector tiene acceso a ella. No puede cobrar más de 1 porque compite con los productores tradicionales.
 
+Suponemos $A>w$: la tecnología moderna deja un margen positivo por unidad vendida.
 
-## Mapa de complementariedad para el proceso de industrialización
+## El beneficio de invertir
 
-Ordenemos las empresas de menor a mayor costo de instalación en $s(x)$. El **Mapa de complementariedad** es $n \mapsto R(n) \mapsto x(n)$ donde $x=x(n)$ es el índice más grande tal que $\pi(x, n)=R(n)-s(x) \geq 0$.
+Una empresa moderna vende $Y$ unidades a precio 1. Para producirlas necesita $Y/A$ trabajadores, más los $F$ del costo fijo. Su beneficio es
+$$\pi = Y - w\left(F+\frac{Y}{A}\right) = \left(1-\frac{w}{A}\right)Y - wF$$
 
-```{r fig2_2, echo=FALSE, out.width="85%"}
-knitr::include_graphics("figs/fig2_2.png")
-```
+- $\left(1-\frac{w}{A}\right)$ es el margen por unidad vendida.
+- $wF$ es el costo de la inversión.
+- El beneficio depende del **ingreso agregado** $Y$.
 
-Siempre que $R(n)$ sea creciente en $n$, $x(n)$ también lo será.
+Pero el ingreso agregado depende de cuántos sectores invierten. Sea $n$ la fracción de sectores que usa la tecnología moderna. Necesitamos encontrar $Y(n)$.
 
-## Mapa de complementariedad para el proceso de industrialización
+## El ingreso agregado
 
-```{r fig2_3, echo=FALSE, out.width="80%"}
-knitr::include_graphics("figs/fig2_3.png")
-```
+El ingreso es la suma de beneficios y salarios. Si $L_M = n\left(F + \frac{Y}{A}\right)$ trabajadores están en los sectores modernos:
+$$Y = \underset{\text{Beneficios}}{n\,\pi} + \underset{\text{Salarios modernos}}{w\,L_M} + \underset{\text{Salarios tradicionales}}{(L-L_M)}$$
+Como $n\,\pi = nY - w\,L_M$, el premio salarial se cancela (es una transferencia de las empresas a los trabajadores):
+$$Y = nY + L - nF - \frac{nY}{A}$$
+Resolviendo para $Y$:
+$$Y(n)=\frac{A\,(L-nF)}{A-(A-1)\,n}$$
 
-En el punto $n_{1}^{*}$, solo las empresas hasta $x\left(n_{1}^{*}\right)$ quieren invertir (equilibrio localmente estable).
+- Sin industrialización: $Y(0)=L$.
+- Con industrialización completa: $Y(1)=A\,(L-F)$.
 
-En $n_{3}^{*}$ todas las empresas están mejor, pero ninguna empresa puede alcanzarlo unilateralmente desde $n_{1}^{*}$. Se requeriría un **big push**.
+## Complementariedad entre sectores
 
-## Mapa de complementariedad para el proceso de industrialización
+El ingreso aumenta con el número de sectores que invierten si
+$$Y'(n)=\frac{A\left[(A-1)L-AF\right]}{\left[A-(A-1)\,n\right]^{2}}>0 \iff A\,(L-F)>L$$
+Suponemos que esto se cumple: la industrialización es socialmente eficiente.
 
-- Hemos discutido las **externalidades** creadas por cada empresa al **invertir**.  
+Entonces el beneficio de invertir también aumenta con $n$:
+$$\pi(n)=\left(1-\frac{w}{A}\right)Y(n)-wF \qquad \Longrightarrow \qquad \pi'(n)=\left(1-\frac{w}{A}\right)Y'(n)>0$$
 
-  - Dado que las empresas invierten mirando la rentabilidad privada, los resultados en equilibrio podrían ser ineficientes y podrían existir múltiples equilibrios con diferentes niveles de eficiencia.
-  
-- Adam Smith en **La Riqueza de las Nacionaes** defiende la idea que los precios de mercado y los intereses privados serán suficientes para manejar todos los beneficios sociales.
-
-  - ¿Puede calzar esta historia con nuestro mapa de complementariedad?
-
-- Miremos el caso en que al argumento de Adam Smith funciona. 
-
-  - Supongamos que solo hay una externalidad del acto de inversión: las ganancias de la empresa aumentan el ingreso nacional y estimulan otras inversiones.
-  
-  - Si bien las empresas no están interesadas en aumentar el ingreso nacional, su búsqueda de ganancias puede incentivarlos a actuar por el bien de la sociedad.
-
-
-## Mapa de complementariedad para el proceso de industrialización
-
-:::: {.columns}
-
-::: {.column width="50%"}
-- Mapa de complementariedad con una forma particular: 
-
-  - $x(n)>n$: la empresa marginal $x(n)$ supera a la última empresa $n$ que se espera invierta, pero $n$ tiene un costo de instalación más bajo que $x(n)$ $\Rightarrow$ ganancia positiva $\Rightarrow$ ingreso nacional $\uparrow$
-  
-  - $x(n)<n$: la empresa $n$ que se espera invierta excede a la empresa marginal $x(n)$ $\Rightarrow$ ganancia negativa $\Rightarrow$ ingreso nacional $\downarrow$
-
-**Intuición**: Las complementariedades duran mientras el beneficio de la industrialización sea positivo. 
+:::{.callout-important}
+## Complementariedad en la demanda
+Cuando un sector invierte aumenta el ingreso agregado, lo que aumenta la demanda y el beneficio de invertir en todos los demás sectores.
 :::
 
-::: {.column width="50%"}
-```{r fig2_4, echo=FALSE, out.width="100%"}
-knitr::include_graphics("figs/fig2_4.png")
+## Beneficio e ingreso según cuántos sectores invierten
+
+```{r m2_beneficio_ingreso, opts.label="modelo", fig.dim=c(10.5, 4.4), out.width="92%"}
+nn <- seq(0, 1, length.out = 200)
+nh <- n_bar()
+par(mfrow = c(1, 2))
+
+# Beneficio de invertir
+estilo(mar = c(4.6, 5.2, 3, 1.5))
+rango <- range(pi_bp(c(0, 1)))
+plot(NA, xlim = c(0, 1.04), ylim = rango + c(-0.25, 0.15) * diff(rango),
+     xaxt = "n", yaxt = "n", xlab = expression(italic(n)), ylab = expression(pi(italic(n))))
+abline(h = 0, lty = 2, lwd = 3, col = "gray50")
+segments(nh, par("usr")[3], nh, 0, lty = 3, lwd = 2, col = "gray40")
+lines(nn, pi_bp(nn), lwd = 6)
+axis(1, at = c(0, nh, 1), labels = expression(0, bar(italic(n)), 1))
+axis(2, at = c(pi_bp(0), 0, pi_bp(1)), labels = round(c(pi_bp(0), 0, pi_bp(1)), 1))
+title(main = "Beneficio de invertir", font.main = 1, cex.main = 1.8)
+
+# Ingreso agregado
+estilo(mar = c(4.6, 5.2, 3, 1.5))
+rango <- range(Y_bp(c(0, 1)))
+plot(NA, xlim = c(0, 1.04), ylim = rango + c(-0.25, 0.15) * diff(rango),
+     xaxt = "n", yaxt = "n", xlab = expression(italic(n)), ylab = expression(italic(Y)(italic(n))))
+segments(nh, par("usr")[3], nh, Y_bp(nh), lty = 3, lwd = 2, col = "gray40")
+lines(nn, Y_bp(nn), lwd = 6)
+axis(1, at = c(0, nh, 1), labels = expression(0, bar(italic(n)), 1))
+axis(2, at = Y_bp(c(0, 1)), labels = round(Y_bp(c(0, 1))))
+title(main = "Ingreso agregado", font.main = 1, cex.main = 1.8)
 ```
+
+Ejemplo con $L=`r m2$L`$, $A=`r m2$A`$, $w=`r m2$w`$ y $F=`r m2$Fc`$. Si invierten pocos sectores el beneficio es negativo; sobre $\bar{n}$ es positivo.
+
+## Equilibrios
+
+Como todos los sectores son iguales, buscamos equilibrios con $n=0$ o con $n=1$.
+
+**Sin industrialización** ($n=0$) es un equilibrio si a una empresa no le conviene invertir sola:
+$$\pi(0)=\left(1-\frac{w}{A}\right)L-wF<0 \iff F>\frac{(A-w)\,L}{A\,w}$$
+
+**Industrialización completa** ($n=1$) es un equilibrio si conviene invertir cuando todos invierten:
+$$\pi(1)=A\,(L-F)-wL \geq 0 \iff F \leq \frac{(A-w)\,L}{A}$$
+
+:::{.callout-important}
+## Múltiples equilibrios
+Ambos equilibrios coexisten si el costo fijo es intermedio:
+$$\frac{(A-w)\,L}{A\,w}<F\leq\frac{(A-w)\,L}{A}$$
 :::
 
-::::
+## ¿Cuándo basta el mercado?
 
-\ 
+**Sin premio salarial** ($w=1$) las dos cotas coinciden y el equilibrio es único:
+$$\text{se invierte} \iff F<\frac{(A-1)\,L}{A} \iff A\,(L-F)>L$$
 
-[Pero el beneficio privado no es la única contribución de nuestra empresa a otras empresas.]{.emph}
+- Se invierte exactamente cuando la industrialización aumenta el ingreso: el mercado coordina bien.
+- La única externalidad pasa por los beneficios, y una empresa con pérdidas reduce el ingreso de los demás.
 
-## Rompiendo un mal equilibrio: Debáte de política
+**Con premio salarial** ($w>1$) una empresa que invierte sola cambia el ingreso en
+$$\underset{\text{Efecto sobre el ingreso}}{\left(1-\frac{1}{A}\right)L-F} = \underset{\text{Beneficio privado}}{\pi(0)} + \underset{\text{Mayores salarios}}{(w-1)\left(F+\frac{L}{A}\right)}$$
+
+- El beneficio privado puede ser negativo aunque el efecto sobre el ingreso sea positivo.
+- La empresa no considera los mayores salarios que paga: es una [externalidad]{.emph}.
+
+## Masa crítica y PIB en cada equilibrio
+
+El beneficio de invertir es cero cuando invierte una fracción $\bar{n}$ de los sectores. De $\pi(\bar{n})=0$:
+$$\bar{n}=\frac{A\,w\,F-(A-w)\,L}{A\,(w-1)\,F}$$
+Si se espera $n>\bar{n}$ todos invierten; si se espera $n<\bar{n}$ nadie invierte.
+
+| | Equilibrio bajo ($n=0$) | Equilibrio alto ($n=1$) |
+| :--- | :---: | :---: |
+| PIB | $L$ | $A\,(L-F)$ |
+| Salario | $1$ | $w$ |
+| Beneficio por sector | $0$ | $A\,(L-F)-wL$ |
+
+- La masa crítica es menor si el mercado es más grande ($L$) o la tecnología es más productiva ($A$), y mayor si el costo fijo ($F$) es más alto.
+- En el ejemplo: $\bar{n}=`r num(n_bar(), 2)`$ y el PIB pasa de $`r num(Y_bp(0), 0)`$ a $`r num(Y_bp(1), 0)`$.
+- Todos están mejor en el equilibrio alto, pero ningún sector quiere invertir primero.
+
+## Rompiendo un mal equilibrio: Debate de política
 
 [Los equilibrios o estados estacionarios **múltiples**  que surgen a partir de **complementariedades** tienen una característica distintiva: las **políticas temporales** pueden tener **efectos permanentes**.]{.emph}
 
-\ 
+\
 
 - Estos modelos sientan una base (limitada) para los debates políticos (Rosenstein-Rodan, 1943,1961; Nurkse, 1952,1953; Hirschman, 1958):
 
 - **Política del big push de Rosenstein-Rodan**: Una política capaz de aumentar simultáneamente la inversión en muchos sectores diferentes de la economía.
-  
-- **Características**: 
-  
+
+  - En el modelo: coordinar la inversión de al menos una fracción $\bar{n}$ de los sectores.
+
+- **Características**:
+
   (1) Requiere una inversión masiva (presumiblemente pública) en muchos sectores diferentes de la economía a la vez.
-  
+
   (2) Es necesario tener una idea cuantitativa de la distribución de la inversión entre los sectores (mezcla correcta de inversiones).
 
-## Rompiendo un mal equilibrio: Debáte de política
+## Rompiendo un mal equilibrio: Debate de política
 
 - Algunos problemas con la idea Rosenstein-Rodan:
 
   - Los requerimientos informacionales y el tamaño de las inversiones (en ese orden) son problemáticos.
-  
+
   - La política no explota el hecho que el resultado deseado también es un equilibrio (incentivos que corrijan la falla de coordinación).
 
-- **Propuesta de Hirschman**: En luigar de usar el big push (homologo de crecimiento equilibrado), usar una política deliberada de crecimeinto desequilibrado.
+- **Propuesta de Hirschman**: En lugar de usar el big push (homólogo de crecimiento equilibrado), usar una política deliberada de crecimiento desequilibrado.
 
-- Promover el desarrollo de ciertos sectores de la economía de tal manera que los vínculos generen inversiones espontáneas. 
+- Promover el desarrollo de ciertos sectores de la economía de tal manera que los vínculos generen inversiones espontáneas.
 
-- ¿Cómo elegir un sector líder?: 
+- ¿Cómo elegir un sector líder?:
 
   (1) Vínculos y fuerza de los vínculos.
-  
-  (2) Invertir en la actividad menos rentable (que tenga vínculos).
 
+  (2) Invertir en la actividad menos rentable (que tenga vínculos).
 
 ## Transiciones: ¿por qué la historia importa?
 
 Externalidades rezagadas; nadie quiere ir primero...
 
-```{r fig2_5, echo=FALSE, out.width="80%"}
+```{r fig2_5, echo=FALSE, out.width="72%"}
 knitr::include_graphics("figs/fig2_5.png")
 ```
 
-- **La historia es el punto inicial** ¿Quién se mueve de al equilibrio si los rendimientos tardan en acumularse? QWERTY vs. moda (historia vs. creencias) 
+- **La historia es el punto inicial** ¿Quién se mueve de al equilibrio si los rendimientos tardan en acumularse? QWERTY vs. moda (historia vs. creencias)
 
+- Si $n$ es lo que **se espera**, hablamos de equilibrios múltiples. Si $n$ es lo que **ya ocurrió**, hablamos de estados estacionarios múltiples y de dependencia histórica.
 
 ## Resumen
 
@@ -574,22 +692,22 @@ knitr::include_graphics("figs/fig2_5.png")
 
 ## Dependencia histórica
 
-Murray Gell-Mann, Premio Nobel de Física 1969: 
+Murray Gell-Mann, Premio Nobel de Física 1969:
 
-> Jorge Luis Borges escribió una historia sobre alguien que hizo un modelo con posibles historias alternativas para el universo, en forma de un jardín de senderos que se bifurcan... La historia que realmente se observa está co-determinada por simples leyes fundamentales y por una secuencia inconcebiblemente larga de accidentes o eventos fortuitos, que pueden ocurrir de varias maneras y sólo se puede predecir de antemano las probabilidades de ocurrencia de los diferentes resultados... algunos de estos accidentes producen una gran cantidad de impacto en el futuro. A esos los podemos llamar **accidentes congelados**. 
+> Jorge Luis Borges escribió una historia sobre alguien que hizo un modelo con posibles historias alternativas para el universo, en forma de un jardín de senderos que se bifurcan... La historia que realmente se observa está co-determinada por simples leyes fundamentales y por una secuencia inconcebiblemente larga de accidentes o eventos fortuitos, que pueden ocurrir de varias maneras y sólo se puede predecir de antemano las probabilidades de ocurrencia de los diferentes resultados... algunos de estos accidentes producen una gran cantidad de impacto en el futuro. A esos los podemos llamar **accidentes congelados**.
 
 ## Dependencia histórica
 
 - **Retroalimentación macroeconómica**
 
-  - Resultados que afectan parámetros aparentemente exógenos, como $s$ o $n$.
+  - Resultados que afectan parámetros aparentemente exógenos, como $s$ o $g_L$.
 
   - Desigualdad autosostenida.
 
 - **Rendimientos crecientes a escala**
 
-  - Costos fijos para iniciar un negocio o emprendimiento. 
-  
+  - Costos fijos para iniciar un negocio o emprendimiento.
+
   - Aprendizajes en la práctica (*learning by doing*).
 
 - **Sesgos por el statu quo**
@@ -599,6 +717,38 @@ Murray Gell-Mann, Premio Nobel de Física 1969:
 - **Industrias extractivas e instituciones coloniales**
 
   - Influencia sobre los esquemas políticos y legales posteriores.
+
+Nos concentramos en las dos primeras, usando el modelo de Solow.
+
+## Punto de partida: el modelo de Solow
+
+Usamos el modelo de Solow de la parte de crecimiento, con $Y_t=K_t^{\alpha}(A L_t)^{1-\alpha}$. Para concentrarnos en los niveles suponemos que no hay progreso técnico, $g_A=0$.
+
+Con $k=K/L$, la tasa de crecimiento del capital es
+$$g_K = s\left(\frac{A}{k}\right)^{1-\alpha}-\delta$$
+El capital por trabajador es constante cuando $g_K=g_L$. Resolviendo:
+$$k^*=A\left(\frac{s}{g_L+\delta}\right)^{\frac{1}{1-\alpha}} \qquad \text{y} \qquad y^*=A\left(\frac{s}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}}$$
+
+- El estado estacionario es **único y estable**.
+- La historia no importa: cualquiera sea el capital inicial $k_0$, la economía llega al mismo $y^*$.
+
+## Punto de partida: el modelo de Solow
+
+```{r m3_base, opts.label="modelo", fig.dim=c(8, 4.9), out.width="72%"}
+kk <- seq(0.8, 13.5, length.out = 400)
+ks <- k_ee(1, m3$s, m3$gL)
+lienzo_solow(xlim = c(0, 13.5), ylim = c(-0.03, 0.2))
+abline(h = m3$gL, lty = 2, lwd = 3, col = "gray50")
+segments(ks, par("usr")[3], ks, m3$gL, lty = 3, lwd = 2, col = "gray40")
+lines(kk, g_K(kk, 1, m3$s), lwd = 6)
+axis(1, at = ks, labels = expression(italic(k)^"*"))
+flechas(1, ks - 0.5)
+flechas(13, ks + 0.5)
+text(12.3, m3$gL + 0.012, expression(italic(g)[italic(L)]), cex = 1.8)
+text(6.6, 0.12, expression(italic(g)[italic(K)] == italic(s) * bgroup("(", frac(italic(A), italic(k)), ")")^{1 - alpha} - delta), cex = 1.8)
+```
+
+Con un solo cruce, toda economía converge a $k^*$: hay convergencia.
 
 ## Retroalimentación macroeconómica: Endogeneidad de $s$
 
@@ -627,7 +777,41 @@ knitr::include_graphics("figs/fig3_1.png")
 
 ::::
 
-## Retroalimentación macroeconómica: Endogeneidad de $n$
+## Endogeneidad de $s$: una versión paramétrica
+
+Suponga que la tasa de ahorro depende del ingreso: cerca de la subsistencia se ahorra poco y sobre un umbral $\bar{y}$ se ahorra más.
+$$s(y)=\begin{cases} s_1 & \text{si } y<\bar{y} \\ s_2 & \text{si } y\geq\bar{y} \end{cases} \qquad \text{con } s_2>s_1$$
+Hay un estado estacionario para cada tasa de ahorro:
+$$y_1^*=A\left(\frac{s_1}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}} \qquad \text{y} \qquad y_2^*=A\left(\frac{s_2}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}}$$
+
+- Ambos existen si $y_1^*<\bar{y}\leq y_2^*$: cada nivel de ingreso justifica la tasa de ahorro que lo genera.
+- La brecha de ingreso es $\dfrac{y_2^*}{y_1^*}=\left(\dfrac{s_2}{s_1}\right)^{\frac{\alpha}{1-\alpha}}$. Con $\alpha=1/3$, pasar de $s_1=`r m3$s1`$ a $s_2=`r m3$s2`$ multiplica el ingreso por $`r num((m3$s2 / m3$s1)^(m3$alpha / (1 - m3$alpha)))`$.
+
+## Endogeneidad de $s$: dinámica
+
+```{r m3_s_endogeno, opts.label="modelo", fig.dim=c(8, 4.9), out.width="72%"}
+kb <- m3$ybar_s^(1 / m3$alpha)                 # umbral en términos de k (A = 1)
+kL <- k_ee(1, m3$s1, m3$gL)
+kH <- k_ee(1, m3$s2, m3$gL)
+ka <- seq(0.45, kb, length.out = 300)
+kc <- seq(kb, 13.5, length.out = 300)
+lienzo_solow(xlim = c(0, 13.5), ylim = c(-0.03, 0.13))
+abline(h = m3$gL, lty = 2, lwd = 3, col = "gray50")
+segments(c(kL, kH), par("usr")[3], c(kL, kH), m3$gL, lty = 3, lwd = 2, col = "gray40")
+segments(kb, par("usr")[3], kb, g_K(kb, 1, m3$s2), lty = 3, lwd = 2, col = "gray40")
+lines(ka, g_K(ka, 1, m3$s1), lwd = 6)
+lines(kc, g_K(kc, 1, m3$s2), lwd = 6)
+axis(1, at = c(kL, kb, kH), labels = expression(italic(k)[1]^"*", bar(italic(k)), italic(k)[2]^"*"))
+flechas(0.4, kL - 0.4); flechas(kb - 0.25, kL + 0.4)
+flechas(kb + 0.25, kH - 0.4); flechas(13.2, kH + 0.4)
+text(12.6, m3$gL + 0.009, expression(italic(g)[italic(L)]), cex = 1.8)
+text(2.3, 0.075, expression(italic(s) == italic(s)[1]), cex = 1.8)
+text(7.2, 0.075, expression(italic(s) == italic(s)[2]), cex = 1.8)
+```
+
+En $\bar{k}$ el ingreso alcanza $\bar{y}$ y la tasa de ahorro salta: la curva $g_K$ cruza dos veces a $g_L$.
+
+## Retroalimentación macroeconómica: Endogeneidad de $g_L$
 
 :::: {.columns}
 
@@ -638,174 +822,202 @@ knitr::include_graphics("figs/fig3_2.png")
 :::
 
 ::: {.column width="60%"}
-- Línea Azul: Cómo $n$ se ve afectado por el ingreso de estado estacionario $y^{*}$.
+- Línea Azul: Cómo $g_L$ se ve afectado por el ingreso de estado estacionario $y^{*}$ (en la figura, $n$ denota a $g_L$).
 
   - bajo ingreso $\Rightarrow$ mortalidad alta y natalidad alta.
-  
+
   - ingreso medio $\Rightarrow$ mortalidad cae y natalidad se ajusta lentamente.
-  
+
   - ingreso alto $\Rightarrow$ mortalidad baja y natalidad baja.
 
-- Línea Roja: Cómo $y^{*}$ está determinado por $n$. 
+- Línea Roja: Cómo $y^{*}$ está determinado por $g_L$.
 
-  - Modelo de Solow. 
+  - Modelo de Solow.
 :::
 
 ::::
+
+## Endogeneidad de $g_L$: una versión paramétrica
+
+Suponga ahora que el crecimiento de la población depende del ingreso: sobre un umbral $\bar{y}$ la economía completa su transición demográfica.
+$$g_L(y)=\begin{cases} g_1 & \text{si } y<\bar{y} \\ g_2 & \text{si } y\geq\bar{y} \end{cases} \qquad \text{con } g_1>g_2$$
+Los estados estacionarios son
+$$y_1^*=A\left(\frac{s}{g_1+\delta}\right)^{\frac{\alpha}{1-\alpha}} \qquad \text{y} \qquad y_2^*=A\left(\frac{s}{g_2+\delta}\right)^{\frac{\alpha}{1-\alpha}}$$
+
+- Ambos existen si $y_1^*<\bar{y}\leq y_2^*$.
+- La brecha de ingreso es $\dfrac{y_2^*}{y_1^*}=\left(\dfrac{g_1+\delta}{g_2+\delta}\right)^{\frac{\alpha}{1-\alpha}}$. Con $\alpha=1/3$ y $\delta=`r m3$delta`$, pasar de $g_1=`r m3$g1`$ a $g_2=`r m3$g2`$ multiplica el ingreso por $`r num(((m3$g1 + m3$delta) / (m3$g2 + m3$delta))^(m3$alpha / (1 - m3$alpha)))`$.
+
+## Endogeneidad de $g_L$: dinámica
+
+```{r m3_gl_endogeno, opts.label="modelo", fig.dim=c(8, 4.9), out.width="72%"}
+kb <- m3$ybar_g^(1 / m3$alpha)                 # umbral en términos de k (A = 1)
+kL <- k_ee(1, m3$s, m3$g1)
+kH <- k_ee(1, m3$s, m3$g2)
+kk <- seq(1.15, 10, length.out = 400)
+lienzo_solow(xlim = c(0, 10), ylim = c(-0.03, 0.13))
+segments(0, m3$g1, kb, m3$g1, lty = 2, lwd = 3, col = "gray50")
+segments(kb, m3$g2, 10, m3$g2, lty = 2, lwd = 3, col = "gray50")
+segments(kL, par("usr")[3], kL, m3$g1, lty = 3, lwd = 2, col = "gray40")
+segments(kH, par("usr")[3], kH, m3$g2, lty = 3, lwd = 2, col = "gray40")
+segments(kb, par("usr")[3], kb, m3$g1, lty = 3, lwd = 2, col = "gray40")
+lines(kk, g_K(kk, 1, m3$s), lwd = 6)
+axis(1, at = c(kL, kb, kH), labels = expression(italic(k)[1]^"*", bar(italic(k)), italic(k)[2]^"*"))
+flechas(0.4, kL - 0.3); flechas(kb - 0.2, kL + 0.3)
+flechas(kb + 0.2, kH - 0.3); flechas(9.8, kH + 0.3)
+text(1.2, m3$g1 + 0.009, expression(italic(g)[italic(L)] == italic(g)[1]), cex = 1.8)
+text(9, m3$g2 + 0.009, expression(italic(g)[italic(L)] == italic(g)[2]), cex = 1.8)
+text(3.0, 0.078, expression(italic(g)[italic(K)]), cex = 1.8)
+```
+
+En $\bar{k}$ el ingreso alcanza $\bar{y}$ y el crecimiento poblacional cae: de nuevo hay dos cruces.
+
+## Retroalimentación macroeconómica: balance
+
+- Con $s$ o $g_L$ endógenos el modelo de Solow tiene **dos estados estacionarios estables**, separados por un umbral.
+- [La historia importa]{.emph}: una economía que parte bajo el umbral se queda en $y_1^*$; una que parte sobre el umbral llega a $y_2^*$.
+- Pero las brechas de ingreso que resultan son modestas. El exponente $\frac{\alpha}{1-\alpha}$ es solo $1/2$ cuando $\alpha=1/3$.
+  - Es la misma lección de la parte de crecimiento: las diferencias en $s$ y $g_L$ explican poco de las diferencias de ingreso entre países.
+- Para generar brechas grandes necesitamos diferencias en **productividad**. Eso nos lleva a los rendimientos crecientes.
 
 ## Rendimientos crecientes: Modelo de crecimiento
 
 - Función de producción: $y=f(k)$, pero $f$ tiene dos tecnologías integradas.
 
-- $f_{1}(k)=A k^{\alpha}$ y $f_{2}(k)=B k^{\beta}-C$, con $B \gg A$ y $C$ es un costo hundido.
+- La tecnología moderna ($f_2$) es más productiva que la tradicional ($f_1$), pero exige pagar un costo hundido: solo conviene a partir de cierta escala.
 
 ```{r fig3_3, echo=FALSE, out.width="85%"}
 knitr::include_graphics("figs/fig3_3.png")
 ```
 
-## Rendimientos crecientes: Iniciando un negocio
+## Dos tecnologías: versión paramétrica
+
+Para obtener soluciones cerradas representamos el costo hundido como una **escala mínima**: la tecnología moderna solo puede usarse si el capital por trabajador es al menos $\bar{k}$.
+$$Y=\begin{cases} K^{\alpha}(A_1 L)^{1-\alpha} & \text{si } k<\bar{k} \quad \text{(tradicional)} \\ K^{\alpha}(A_2 L)^{1-\alpha} & \text{si } k\geq\bar{k} \quad \text{(moderna)} \end{cases} \qquad \text{con } A_2>A_1$$
+
+- Cada tecnología tiene rendimientos constantes a escala, como en Solow.
+- En conjunto hay **rendimientos crecientes**: al cruzar $\bar{k}$ el producto por trabajador salta de $\bar{k}^{\alpha}A_1^{1-\alpha}$ a $\bar{k}^{\alpha}A_2^{1-\alpha}$.
+- El resto del modelo no cambia: $s$, $g_L$ y $\delta$ son constantes y $g_A=0$.
+
+La tasa de crecimiento del capital ahora depende de la tecnología en uso:
+$$g_K=s\left(\frac{A_j}{k}\right)^{1-\alpha}-\delta \qquad \text{con } j=1 \text{ si } k<\bar{k} \text{ y } j=2 \text{ si } k\geq\bar{k}$$
+
+## Dos tecnologías: dinámica
+
+```{r m3_dos_tecnologias, opts.label="modelo", fig.dim=c(8, 4.9), out.width="72%"}
+kb  <- m3$kbar
+k1s <- k_ee(m3$A1, m3$s, m3$gL)
+k2s <- k_ee(m3$A2, m3$s, m3$gL)
+ka  <- seq(1.2, kb, length.out = 300)
+kc  <- seq(kb, 14.5, length.out = 300)
+lienzo_solow(xlim = c(0, 14.5), ylim = c(-0.03, 0.13))
+abline(h = m3$gL, lty = 2, lwd = 3, col = "gray50")
+segments(c(k1s, k2s), par("usr")[3], c(k1s, k2s), m3$gL, lty = 3, lwd = 2, col = "gray40")
+segments(kb, par("usr")[3], kb, g_K(kb, m3$A2, m3$s), lty = 3, lwd = 2, col = "gray40")
+lines(ka, g_K(ka, m3$A1, m3$s), lwd = 6)
+lines(kc, g_K(kc, m3$A2, m3$s), lwd = 6)
+axis(1, at = c(k1s, kb, k2s), labels = expression(italic(k)[1]^"*", bar(italic(k)), italic(k)[2]^"*"))
+flechas(0.5, k1s - 0.4); flechas(kb - 0.25, k1s + 0.4)
+flechas(kb + 0.25, k2s - 0.4); flechas(14.2, k2s + 0.4)
+text(0.75, m3$gL + 0.01, expression(italic(g)[italic(L)]), cex = 1.8)
+text(5.3, 0.092, expression("Tradicional (" * italic(A)[1] * ")"), cex = 1.7)
+text(10.4, 0.06, expression("Moderna (" * italic(A)[2] * ")"), cex = 1.7)
+```
+
+Bajo $\bar{k}$ la economía converge a $k_1^*$; sobre $\bar{k}$ adopta la tecnología moderna y converge a $k_2^*$.
+
+## PIB per cápita en ambos estados estacionarios
+
+Cada tecnología $j=1,2$ tiene su propio estado estacionario, con la fórmula de Solow de siempre:
+$$k_j^*=A_j\left(\frac{s}{g_L+\delta}\right)^{\frac{1}{1-\alpha}} \qquad \text{y} \qquad y_j^*=A_j\left(\frac{s}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}}$$
+
+- **Estado estacionario bajo**: $y_1^*$, con la tecnología tradicional. Existe si $k_1^*<\bar{k}$.
+- **Estado estacionario alto**: $y_2^*$, con la tecnología moderna. Existe si $k_2^*\geq\bar{k}$.
+
+:::{.callout-important}
+## Brecha de ingreso
+Con los mismos $s$, $g_L$ y $\delta$, y con acceso a las mismas tecnologías, dos economías pueden diferir de forma permanente en su PIB per cápita:
+$$\frac{y_2^*}{y_1^*}=\frac{A_2}{A_1}$$
+:::
+
+## ¿Cuándo hay trampa?
+
+Los dos estados estacionarios coexisten si $k_1^*<\bar{k}\leq k_2^*$. En términos de la tasa de ahorro, si $s_{\min}\leq s<s_{\max}$, donde
+$$s_{\min}=(g_L+\delta)\left(\frac{\bar{k}}{A_2}\right)^{1-\alpha} \qquad \text{y} \qquad s_{\max}=(g_L+\delta)\left(\frac{\bar{k}}{A_1}\right)^{1-\alpha}$$
+
+| Tasa de ahorro | Estados estacionarios | Resultado |
+| :--- | :---: | :--- |
+| $s<s_{\min}$ | Solo el bajo | Pobreza por fundamentales |
+| $s_{\min}\leq s<s_{\max}$ | Bajo y alto | Trampa: la historia decide |
+| $s\geq s_{\max}$ | Solo el alto | No hay trampa |
+
+- Un mayor $g_L$ o una mayor escala mínima $\bar{k}$ suben ambas cotas: es más difícil escapar.
+- Un aumento temporal de $s$ por sobre $s_{\max}$, sostenido hasta cruzar $\bar{k}$, saca a la economía de la trampa.
+- Ejemplo con $\alpha=1/3$, $s=`r m3$s`$, $g_L=`r m3$gL`$, $\delta=`r m3$delta`$, $A_1=`r m3$A1`$, $A_2=`r m3$A2`$ y $\bar{k}=`r m3$kbar`$: $y_1^*=`r num(y_ee(m3$A1, m3$s, m3$gL))`$, $y_2^*=`r num(y_ee(m3$A2, m3$s, m3$gL))`$, $s_{\min}=`r num((m3$gL + m3$delta) * (m3$kbar / m3$A2)^(1 - m3$alpha))`$ y $s_{\max}=`r num((m3$gL + m3$delta) * (m3$kbar / m3$A1)^(1 - m3$alpha))`$.
+
+## La historia importa
 
 :::: {.columns}
 
 ::: {.column width="50%"}
-```{r fig3_4, echo=FALSE, out.width="100%"}
-knitr::include_graphics("figs/fig3_4.png")
-```
+- El capital inicial decide: con $k_0<\bar{k}$ la economía converge a $y_1^*$; con $k_0\geq\bar{k}$, a $y_2^*$.
+- Suponga que una economía en $y_1^*$ recibe una transferencia de capital:
+  - Si no alcanza a cruzar $\bar{k}$, el efecto se disipa y la economía vuelve a $y_1^*$.
+  - Si cruza $\bar{k}$, adopta la tecnología moderna y converge a $y_2^*$.
+- En el modelo de Solow estándar esto no ocurre: después de la guerra, Alemania volvió a su misma senda.
+
+[Un shock temporal puede tener efectos permanentes.]{.emph}
 :::
 
 ::: {.column width="50%"}
-**Ejemplo**: Empresa establecida (digamos autos convencionales) vs. Empresa nueva que busca entrar (nuevo autos híbridos).
-
-- **Clave**: Retornos Crecientes a Escala $\rightarrow$ La escala permite reducir costos.
-
-- Cuando una empresa entra tienen que soportar pérdidas por el periodo de **transición**. Si no lo hace no habrá entrada.
-
-
-- Razones:
-
-  - Altos costos para escala pequeña. 
-
-  - Cambio gradual.
-
-  - Mercados de capitales imperfectos.
+```{r m3_trayectorias, opts.label="modelo", fig.dim=c(5.2, 4.6), out.width="100%"}
+# Economía en el estado estacionario bajo que recibe una transferencia de capital
+simular <- function(transferencia, T = 110, dt = 0.25, t0 = 15) {
+  t <- seq(0, T, by = dt)
+  k <- numeric(length(t))
+  k[1] <- k_ee(m3$A1, m3$s, m3$gL)
+  for (i in 2:length(t)) {
+    A    <- if (k[i - 1] >= m3$kbar) m3$A2 else m3$A1
+    k[i] <- k[i - 1] * (1 + dt * (g_K(k[i - 1], A, m3$s) - m3$gL))
+    if (i == which.min(abs(t - t0))) k[i] <- k[i] + transferencia
+  }
+  data.frame(t = t, y = y_k(k, ifelse(k >= m3$kbar, m3$A2, m3$A1)))
+}
+brecha  <- m3$kbar - k_ee(m3$A1, m3$s, m3$gL)
+chica   <- simular(0.7 * brecha)
+grande  <- simular(1.1 * brecha)
+y1s <- y_ee(m3$A1, m3$s, m3$gL)
+y2s <- y_ee(m3$A2, m3$s, m3$gL)
+estilo(mar = c(4.6, 4.8, 1, 1))
+plot(NA, xlim = c(0, 112), ylim = c(y1s - 0.45, y2s + 0.35), xaxt = "n", yaxt = "n",
+     xlab = "Tiempo", ylab = "PIB per cápita")
+abline(h = c(y1s, y2s), lty = 3, lwd = 2, col = "gray40")
+lines(chica$t, chica$y, lwd = 6, lty = 2)
+lines(grande$t, grande$y, lwd = 6)
+axis(1, at = 15, labels = "Transferencia")
+axis(2, at = c(y1s, y2s), labels = expression(italic(y)[1]^"*", italic(y)[2]^"*"))
+text(72, y2s - 0.38, "Transferencia grande", cex = 1.6)
+text(72, y1s + 0.24, "Transferencia chica", cex = 1.6)
+```
 :::
 
 ::::
 
-## Rendimientos crecientes: Producción circular
+## Resumen: trampas para el desarrollo
 
-- Función de producción:
-$$Y=\left[Q_{1}^{\alpha}+Q_{2}^{\alpha}+\cdots+Q_{n }^{\alpha}\right]^{1 / \alpha}$$
-
-  - El presupuesto de capital disponible es de $K$.
-
-  - Una unidad de $K$ hace una unidad de cualquier intermedio: $Q_i=K$.
-
-- Función de producción indirecta: dividir $K$ en partes iguales entre $n$, por lo que:
-$$Y=\left[n\left(\frac{K}{n}\right)^{\alpha}\right]^{1 / \alpha}=n^{(1-\alpha) / \alpha} K$$
-
-  - La productividad total de los factores (PTF) aumenta con el número de intermediarios.
-
-- Imagine un costo fijo a pagar por cada nuevo bien intermedio utilizado.
-
-  - Producción a pequeña escala $\Rightarrow$ pocos productos intermedios $\Rightarrow$ PTF es baja $\Rightarrow$ ingresos bajos $\Rightarrow$ demanda baja $\Rightarrow$ producción a pequeña escala
-
-## Sesgo por Status Quo
-
-- **Fernández y Rodrik (1991)**: Piensen en un proyecto que debe ser votado para su aprobación. Todo proyecto tiene ganadores y perdedores. 
-
-- Suponga que no hay un mecanismo de compensación de ganadores a perdedores. 
-
-- El **proyecto propuesto** paga $+1$ a un beneficiario y $-1$ a un perdedor. Si el proyecto no pasa todos quedan con 0.
-
-- Se sabe que $70\%$ serán beneficiarios. Casos:
-
-  1. Identidad del beneficiario desconocida: todos votan sí, proyecto pasa.
-  $$0.7(1) + 0.3(-1) = 0.4 > 0$$
-
-  2. Se conoce la identidad del beneficiario: $70 \%$ vote sí, se aprueba el proyecto.
-
-  3. Identidad del beneficiario parcialmente conocida: Digamos que el $45\%$ sabe que se beneficiará. ¡Entonces el resto vota no!
-  $$0.25(1) + 0.75(-1) = -0.5 < 0$$
-
-- El proyecto (una vez dentro) será rechazado. Pero si no existe, no se vota.
-
-## Instituciones
-
-:::{.emph}
-**Instituciones**: Reglas ambientales (formales o informales) para la conducción y ordenamiento de relaciones económicas, sociales y políticas.
+:::{.small}
+| | Inversión | Big push | Solow con dos tecnologías |
+| :--- | :---: | :---: | :---: |
+| **Mecanismo** | Complementariedad en la probabilidad de éxito | Complementariedad en la demanda | Rendimientos crecientes |
+| **Resultado bajo** | $n=0$ | $Y=L$ | $y_1^*=A_1\left(\frac{s}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}}$ |
+| **Resultado alto** | $n=1$ | $Y=A\,(L-F)$ | $y_2^*=A_2\left(\frac{s}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}}$ |
+| **Umbral** | $n^*=\frac{\kappa}{1-\kappa}$ | $\bar{n}=\frac{AwF-(A-w)L}{A(w-1)F}$ | $\bar{k}$ |
+| **Qué decide** | Expectativas | Expectativas | Historia ($k_0$) |
+| **Política** | Garantía temporal | Inversión coordinada | Transferencia de capital |
 :::
 
-Ejemplos:
-
-- Protegen los derechos de propiedad (aplicación de la ley).
-
-- Proporcionan pensiones de vejez (seguridad social).
-
-- Proporcionan un seguro contra una crisis bancaria (Banco Central, Super. de Bancos).
-
-- Habilitan participaciones financieras en empresas (el mercado de valores).
-
-- Garantizan que los contratos se cumplirán (tribunales).
-
-- Supervisan elecciones seguras y justas (Comisiones Electorales, Ej. SERVEL).
-
-- Generan normas de reciprocidad y sanciones (informales).
-
-## Instituciones
-
-- Las **buenas instituciones** económicas promueven la inversión y el crecimiento
-
-- Pero la creación de instituciones está profundamente condicionada por la historia.
-
-- Las **malas instituciones** (como las autocracias) se autogeneran o generan peores
-instituciones (dictaduras), ya que los beneficiarios luchan por mantener sus beneficios.
-
-- Sokoloff y Engerman (2000) a propósito de América del Norte y América del Sur:
-
-> Voltaire, por ejemplo, pensó que el conflicto entre franceses y británicos en América del Norte, durante la Guerra de los Siete Años (1756-63), era una locura y lo caracterizó como dos países luachando por unos pocos acres de nieve. Los británicos victoriosos participarían más tarde en un acalorado debate público sobre qué territorio debe tomarse de los franceses como reparación, la isla caribeña de Guadalupe (con una superficie de 563 millas cuadradas) o Canadá!!
-
-## Instituciones
-
-**América del Sur**: 
-
-- Enormes riquezas minerales, mucha mano de obra nativa.
-
-- Economías extractivas (derechos mineros, tributos, etc.).
-
-- Economías de plantación con mano de obra esclava; pocos grandes terratenientes.
-
-- Derechos cedidos en forma controlada y restringida. 
-
-  - Ejemplo: estrictas restricciones a la migración al Nuevo Mundo.
-
-  - $\Rightarrow$ élite desigualmente situada que trató de aferrarse al poder.
-
-- Restricciones al comercio y participación política.
-
-  - Ejemplo: era necesario poseer una gran cantidad de tierra para poder votar.
-
-## Instituciones
-
-**América del Norte**: EE. UU. y Canadá
-
-- Sin grandes cantidades de mano de obra nativa.
-
-- Sin clima apropiado para plantaciones de azúcar excepto en el Sur (pero incluso ahí, el tamaño de las plantaciones de azúcar era relativamente pequeño).
-
-- Trabajadores de ascendencia europea, igualdad en el capital humano.
-
-- Latifundios relativamente pequeños, inmigración abierta.
-
-- Dificultad para crear instituciones con poder político desigual.
-
-- Votación restringida al principio, pero la franquicia se extendió rápidamente. 
-  
-## Instituciones
-  
-- Sokoloff y Engermann (2000) concluyen:
-
-> "Estas primeras diferencias en el grado de desigualdad entre las economías del Nuevo Mundo pueden haber sido preservadas por los tipos de instituciones económicas y por los efectos de esas instituciones sobre el acceso a oportunidades económicas. Este camino de desarrollo institucional puede haber afectado el crecimiento económico. Donde había una desigualdad extrema, y las instituciones favorecían a las élites y limitaban el acceso de gran parte de la población a las oportunidades económicas, los miembros de las élites podían mantener mejor su estatus de élite a lo largo del tiempo, pero a costa de que la sociedad no se diera cuenta del potencial económico de los grupos desfavorecidos... [E]stos sesgos en los caminos del desarrollo institucional probablemente explican en gran medida la persistencia de la desigualdad a largo plazo en América Latina y en otras partes del Nuevo Mundo".
+- Economías con los mismos parámetros fundamentales pueden terminar en lugares muy distintos: la convergencia no es automática.
+- El subdesarrollo puede ser un equilibrio, no la consecuencia de una diferencia intrínseca entre países.
+- Las políticas temporales pueden tener efectos permanentes.
 
 # Distribución del Ingreso y Desigualdad {background-color="#CED3DC"}
 

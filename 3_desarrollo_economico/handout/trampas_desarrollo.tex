@@ -1,0 +1,951 @@
+% !TEX program = pdflatex
+% Apuntes de clase: trampas para el desarrollo.
+% Acompañan las slides de 3_desarrollo_economico/index.qmd (misma notación y mismos ejemplos).
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot,es-noshorthands]{babel}
+\usepackage{amsmath}
+%\usepackage{newpxtext,newpxmath}
+\usepackage[top=2.0cm,bottom=2.0cm,left=2.0cm,right=2.0cm,headheight=14pt]{geometry}
+\usepackage{microtype}
+\usepackage{booktabs,array}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{pgfplots}
+\usetikzlibrary{arrows.meta,babel}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage[section]{placeins}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage[colorlinks=true,linkcolor=udprojo,urlcolor=udprojo]{hyperref}
+
+\definecolor{udprojo}{HTML}{D31E25}
+
+% ---- Formato --------------------------------------------------------------
+\titleformat{\section}{\Large\bfseries\color{udprojo}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{2.2ex plus .6ex minus .2ex}{1.1ex}
+\titlespacing*{\subsection}{0pt}{1.8ex plus .5ex minus .2ex}{0.8ex}
+\setlength{\parskip}{0.45em}
+\setlist{itemsep=0.15em, topsep=0.3em}
+
+%\pagestyle{fancy}
+%\fancyhf{}
+%\fancyhead[L]{\small Crecimiento y Desarrollo Económico}
+%\fancyhead[R]{\small Trampas para el desarrollo}
+%\fancyfoot[C]{\small\thepage}
+%\renewcommand{\headrulewidth}{0.3pt}
+
+% Recuadros: intuición y ejemplos (gris), resultados (rojo)
+\newtcolorbox{intuicion}[1][Intuición]{enhanced, breakable, sharp corners, frame hidden,
+  colback=black!4, boxrule=0pt, borderline west={2.5pt}{0pt}{black!50},
+  left=11pt, right=9pt, top=6pt, bottom=6pt, before skip=9pt, after skip=9pt,
+  title={#1.}, fonttitle=\bfseries, coltitle=black, attach title to upper={\ }}
+\newtcolorbox{resultado}[1]{enhanced, breakable, sharp corners, frame hidden,
+  colback=udprojo!6, boxrule=0pt, borderline west={2.5pt}{0pt}{udprojo},
+  left=11pt, right=9pt, top=6pt, bottom=6pt, before skip=9pt, after skip=9pt,
+  title={#1.}, fonttitle=\bfseries, coltitle=udprojo, attach title to upper={\ }}
+
+% ---- Parámetros de los ejemplos (los mismos de las slides) ------------------
+% Las figuras se dibujan con estos valores. Los números citados en el texto
+% corresponden a estos mismos valores: si se cambian aquí, hay que revisar el texto.
+\newcommand{\pkap}{0.2}      % kappa = c/b en el caso 3
+\newcommand{\pkapalt}{0.4}   % kappa antes de la garantía
+\newcommand{\pL}{100}        % big push: trabajadores
+\newcommand{\pA}{2}          % big push: productividad moderna
+\newcommand{\pw}{1.5}        % big push: salario moderno
+\newcommand{\pF}{20}         % big push: costo fijo
+\newcommand{\palfa}{0.3333}  % Solow: alpha
+\newcommand{\pdel}{0.05}     % Solow: delta
+\newcommand{\pgL}{0.02}      % Solow: g_L
+\newcommand{\ps}{0.2}        % Solow: s
+\newcommand{\pAuno}{1}       % tecnología tradicional
+\newcommand{\pAdos}{2}       % tecnología moderna
+\newcommand{\pkbar}{7}       % escala mínima
+\newcommand{\psuno}{0.1}     % ahorro endógeno: s_1, s_2 y umbral de ingreso
+\newcommand{\psdos}{0.3}
+\newcommand{\pybars}{1.6}
+\newcommand{\pguno}{0.035}   % población endógena: g_1, g_2 y umbral de ingreso
+\newcommand{\pgdos}{0.005}
+\newcommand{\pybarg}{1.7}
+
+% ---- Figuras ----------------------------------------------------------------
+\pgfplotsset{compat=1.18,
+  apunte/.style={axis lines=left, axis line style={-}, clip=false,
+    tick align=outside, tick style={black, thin},
+    ticklabel style={font=\footnotesize}, label style={font=\small},
+    title style={font=\small, yshift=-2pt},
+    every axis plot/.append style={line width=1.5pt, black, mark=none},
+    samples=160},
+  mapa/.style={apunte, width=5.5cm, height=5.5cm, xmin=0, xmax=1.06, ymin=0, ymax=1.06,
+    xtick={0,1}, ytick={0,1}, xlabel={$n$}},
+  solow/.style={apunte, xtick=\empty, ytick={0}, xlabel={$k=K/L$},
+    ylabel={Tasa de crecimiento}},
+}
+\tikzset{flecha/.style={-{Latex[length=5.5pt,width=4.5pt]}, line width=1pt},
+  punteada/.style={densely dotted, black!60, line width=0.6pt},
+  lleno/.style={only marks, mark=*, mark size=2.3pt, black},
+  hueco/.style={only marks, mark=*, mark size=2.3pt, black, mark options={fill=white, line width=0.9pt}}}
+
+% Valores calculados para las figuras
+\pgfmathsetmacro{\nstar}{\pkap/(1-\pkap)}
+\pgfmathsetmacro{\nstaralt}{\pkapalt/(1-\pkapalt)}
+\pgfmathsetmacro{\nbarbp}{(\pA*\pw*\pF-(\pA-\pw)*\pL)/(\pA*(\pw-1)*\pF)}
+\pgfmathsetmacro{\ybp}{\pA*(\pL-\nbarbp*\pF)/(\pA-(\pA-1)*\nbarbp)}
+\pgfmathsetmacro{\expk}{1/(1-\palfa)}
+\pgfmathsetmacro{\expy}{\palfa/(1-\palfa)}
+\pgfmathsetmacro{\kss}{\pAuno*(\ps/(\pgL+\pdel))^\expk}
+\pgfmathsetmacro{\kbs}{\pybars^(1/\palfa)}
+\pgfmathsetmacro{\ksuno}{(\psuno/(\pgL+\pdel))^\expk}
+\pgfmathsetmacro{\ksdos}{(\psdos/(\pgL+\pdel))^\expk}
+\pgfmathsetmacro{\gksalto}{\psdos*(1/\kbs)^(1-\palfa)-\pdel}
+\pgfmathsetmacro{\kbg}{\pybarg^(1/\palfa)}
+\pgfmathsetmacro{\kguno}{(\ps/(\pguno+\pdel))^\expk}
+\pgfmathsetmacro{\kgdos}{(\ps/(\pgdos+\pdel))^\expk}
+\pgfmathsetmacro{\ktuno}{\pAuno*(\ps/(\pgL+\pdel))^\expk}
+\pgfmathsetmacro{\ktdos}{\pAdos*(\ps/(\pgL+\pdel))^\expk}
+\pgfmathsetmacro{\gktsalto}{\ps*(\pAdos/\pkbar)^(1-\palfa)-\pdel}
+% Trayectorias: k^(1-alpha) converge exponencialmente a su valor de estado estacionario
+\pgfmathsetmacro{\lam}{(1-\palfa)*(\pgL+\pdel)}
+\pgfmathsetmacro{\zuno}{\ps*\pAuno^(1-\palfa)/(\pgL+\pdel)}
+\pgfmathsetmacro{\zdos}{\ps*\pAdos^(1-\palfa)/(\pgL+\pdel)}
+\pgfmathsetmacro{\zch}{(\ktuno+0.7*(\pkbar-\ktuno))^(1-\palfa)}
+\pgfmathsetmacro{\zgr}{(\ktuno+1.1*(\pkbar-\ktuno))^(1-\palfa)}
+\pgfmathsetmacro{\yuno}{\pAuno^(1-\palfa)*\zuno^\expy}
+\pgfmathsetmacro{\ydos}{\pAdos^(1-\palfa)*\zdos^\expy}
+\pgfmathsetmacro{\ych}{\pAuno^(1-\palfa)*\zch^\expy}
+\pgfmathsetmacro{\ygr}{\pAdos^(1-\palfa)*\zgr^\expy}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries\color{udprojo} Trampas para el desarrollo}\\[0.5em]
+  {\large Complementariedades y dependencia histórica}\\[0.9em]
+  {\small Apuntes de clase \,\textbullet\, Crecimiento y Desarrollo Económico \,\textbullet\, Ingeniería Comercial}\\[0.2em]
+  {\small Mauricio M. Tejada \,\textbullet\, Departamento de Economía, Universidad Diego Portales}
+\end{center}
+\vspace{0.6em}
+
+%\noindent Estos apuntes acompañan las slides de la parte de trampas para el desarrollo. Siguen el mismo orden y usan la misma notación y los mismos ejemplos numéricos. Lo que agregan son las derivaciones paso a paso y la intuición detrás de cada resultado, que en clases comentamos de palabra.
+
+% =============================================================================
+\section{La pregunta}
+
+En la parte de crecimiento vimos que el modelo de Solow predice convergencia: dos países con los mismos parámetros terminan con el mismo PIB per cápita, sin importar dónde partieron. En los datos esa convergencia aparece solo cuando condicionamos en la tasa de ahorro, el crecimiento de la población, el capital humano y una larga lista de variables políticas y culturales. Eso deja una pregunta incómoda: ¿por qué esas variables son tan distintas entre países? Una teoría del subdesarrollo que descanse en que las personas de distintos lugares tienen, por naturaleza, una disposición distinta a ahorrar, trabajar o tener hijos no es una buena respuesta.
+
+Aquí desarrollamos una respuesta alternativa. Economías con \emph{los mismos} parámetros fundamentales pueden terminar en lugares muy distintos, porque el modelo que las describe tiene más de un equilibrio. Cuál de ellos se observa depende de dos cosas:
+\begin{itemize}
+  \item las \textbf{expectativas}: lo que cada agente cree que harán los demás;
+  \item la \textbf{historia}: el punto desde el que parte la economía.
+\end{itemize}
+Este enfoque tiene cuatro ventajas. La convergencia deja de ser automática. No necesita suponer diferencias intrínsecas entre pueblos o culturas. No es un <<todo puede pasar>>: el modelo dice cuáles resultados son posibles y cuáles no. Y cambia el papel de la política económica, porque una política \emph{temporal} puede tener efectos \emph{permanentes}.
+
+Veremos tres modelos. La Sección~\ref{sec:comp} presenta un modelo de inversión en el que el resultado depende de las expectativas. La Sección~\ref{sec:bp} lleva la misma idea a una economía con muchos sectores y nos entrega el PIB en cada equilibrio. La Sección~\ref{sec:hist} vuelve al modelo de Solow y muestra cómo la historia puede decidir entre dos estados estacionarios.
+
+% =============================================================================
+\section{Complementariedades}\label{sec:comp}
+
+\subsection{Dos ejemplos: carreteras y teclados}
+
+Decimos que hay \textbf{complementariedad} cuando el beneficio de tomar una acción aumenta con el número de personas que la toman. El caso contrario es la \textbf{congestión}: el beneficio cae cuando más personas hacen lo mismo. La diferencia parece menor, pero lleva a conclusiones opuestas.
+
+\textbf{Carreteras.} Dos rutas, A y B, unen dos ciudades. Una fracción $n$ de los conductores usa la ruta A y el resto usa la B. Mientras más autos hay en una ruta, más lento es el viaje, así que el retorno de cada ruta cae con sus propios usuarios. En el panel (a) de la Figura~\ref{fig:ejemplos} el retorno de A cae con $n$ y el de B sube con $n$ (porque B se vacía). Si hay <<demasiados>> conductores en A, esa ruta es la más lenta y algunos se cambian a B; si hay <<muy pocos>>, ocurre lo contrario. La economía vuelve siempre al mismo punto, donde ambas rutas rinden igual. Hay un solo equilibrio y la historia no importa: si un día un accidente manda a todos a la ruta B, al poco tiempo el reparto es el de siempre.
+
+\textbf{Teclados.} El teclado QWERTY se diseñó en la década de 1870 para las primeras máquinas de escribir. En 1936 August Dvorak patentó una distribución alternativa que, según sus defensores, permite escribir más rápido. Casi nadie la usa. La razón es que el retorno de aprender un teclado \emph{sube} con el número de personas que lo usan: hay más equipos con esa distribución, más empleadores que la exigen y más gente que puede enseñarla. En el panel (b) el retorno de QWERTY sube con $n$ y el de Dvorak baja con $n$. Ahora el punto donde ambos rinden igual es inestable: si un poco más de la mitad usa QWERTY, QWERTY rinde más, más gente se cambia a él y la ventaja crece. La economía termina en uno de los extremos, y en cuál termina depende de dónde partió. En la figura Dvorak es mejor (cuando todos lo usan rinde más que QWERTY cuando todos usan QWERTY), pero una economía que parte a la derecha del cruce termina igual con QWERTY.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[baseline]
+\begin{axis}[apunte, width=7.2cm, height=5.3cm, xmin=0, xmax=1, ymin=0, ymax=1.25,
+  xtick={0,0.5,1}, xticklabels={0,$\tfrac{1}{2}$,1}, ytick=\empty,
+  xlabel={$n$: fracción que usa la ruta A}, ylabel={Retorno},
+  title={(a) Congestión: dos carreteras}]
+  \draw[punteada] (axis cs:0.5,0) -- (axis cs:0.5,0.6);
+  \addplot[domain=0:1, samples=2] {1-0.8*x};
+  \addplot[domain=0:1, samples=2, dashed] {0.2+0.8*x};
+  \node[font=\footnotesize, anchor=south west] at (axis cs:0.03,1.0) {Ruta A};
+  \node[font=\footnotesize, anchor=south east] at (axis cs:0.97,1.0) {Ruta B};
+  \draw[flecha] (axis cs:0.10,0.09) -- (axis cs:0.42,0.09);
+  \draw[flecha] (axis cs:0.90,0.09) -- (axis cs:0.58,0.09);
+  \addplot[lleno] coordinates {(0.5,0.6)};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}[baseline]
+\begin{axis}[apunte, width=7.2cm, height=5.3cm, xmin=0, xmax=1, ymin=0, ymax=1.25,
+  xtick={0,1}, ytick=\empty,
+  xlabel={$n$: fracción que usa QWERTY}, ylabel={Retorno},
+  title={(b) Complementariedad: dos teclados}]
+  \draw[punteada] (axis cs:0.5625,0) -- (axis cs:0.5625,0.65);
+  \addplot[domain=0:1, samples=2] {0.2+0.8*x};
+  \addplot[domain=0:1, samples=2, dashed] {1.1-0.8*x};
+  \node[font=\footnotesize, anchor=south east] at (axis cs:0.97,1.02) {QWERTY};
+  \node[font=\footnotesize, anchor=south west] at (axis cs:0.03,1.1) {Dvorak};
+  \draw[flecha] (axis cs:0.50,0.09) -- (axis cs:0.10,0.09);
+  \draw[flecha] (axis cs:0.625,0.09) -- (axis cs:0.92,0.09);
+  \addplot[hueco] coordinates {(0.5625,0.65)};
+\end{axis}
+\end{tikzpicture}
+\caption{Con congestión el cruce es estable y único. Con complementariedad el cruce es inestable y la economía termina en un extremo.}
+\label{fig:ejemplos}
+\end{figure}
+
+La misma lógica aparece en las plataformas y redes sociales (valen más mientras más usuarios tienen), en la evasión de impuestos (si muchos evaden, la probabilidad de ser fiscalizado es baja) y en las normas sociales. Lo que nos interesa es su versión económica más importante: la inversión.
+
+\subsection{Un modelo de inversión}
+
+Queremos un modelo en el que la decisión de invertir de una empresa dependa de cuántas otras empresas invierten. Los supuestos son los siguientes.
+\begin{itemize}
+  \item Hay un continuo de empresas indexadas por $x\in[0,1]$. Cada una decide si invierte o no en un proyecto. No invertir entrega un pago de $0$.
+  \item Si la empresa $x$ invierte y el proyecto tiene éxito, gana $B(x)$, con $B'(x)<0$. Las empresas están ordenadas de mayor a menor rentabilidad: la empresa $x=0$ tiene el mejor proyecto.
+  \item Si invierte y el proyecto fracasa, pierde el costo hundido de la inversión, $c$.
+  \item La probabilidad de éxito es $p(n)$, donde $n$ es la fracción de empresas que invierte, con $p'(n)>0$, $p(0)=0$ y $p(1)=1$.
+\end{itemize}
+El último supuesto es el que introduce la complementariedad. La idea es que un proyecto funciona mejor cuando otros también invierten: el mercado es más grande, hay proveedores, hay trabajadores calificados, hay infraestructura.
+
+La empresa $x$ invierte si su beneficio esperado es positivo:
+\begin{equation}\label{eq:regla}
+  p(n)\,B(x)-\left[1-p(n)\right]c\;\geq\;0 .
+\end{equation}
+
+\begin{intuicion}
+La condición \eqref{eq:regla} se puede escribir como $\dfrac{p(n)}{1-p(n)}\geq\dfrac{c}{B(x)}$. A la izquierda están las chances de éxito, que dependen de lo que hagan \emph{los demás}. A la derecha está la razón entre lo que la empresa arriesga y lo que puede ganar, que depende solo de \emph{ella}. Una empresa invierte cuando las chances de éxito superan esa razón.
+\end{intuicion}
+
+\subsection{Formas paramétricas y el mapa de complementariedad}
+
+Para derivar resultados usamos formas funcionales concretas:
+\[
+  B(x)=b\,\frac{1-x}{x}\qquad\text{y}\qquad p(n)=n^{\theta}.
+\]
+El parámetro $b>0$ mide la rentabilidad de los proyectos exitosos. Con esta forma la empresa $x=0.1$ gana $9b$ si tiene éxito, la empresa $x=0.5$ gana $b$ y la empresa $x=0.9$ gana $b/9$. El parámetro $\theta\geq1$ mide la intensidad de la complementariedad: con $\theta$ más alto, la probabilidad de éxito es baja a menos que invierta casi todo el mundo.
+
+Reemplazando en \eqref{eq:regla} y dividiendo por $b\,n^{\theta}$:
+\[
+  n^{\theta}\,b\,\frac{1-x}{x}\geq(1-n^{\theta})\,c
+  \quad\Longleftrightarrow\quad
+  \frac{1-x}{x}\geq\kappa\,\frac{1-n^{\theta}}{n^{\theta}},
+  \qquad\text{donde }\kappa\equiv\frac{c}{b}.
+\]
+El parámetro $\kappa$ resume los fundamentales del modelo: es lo que se pierde si el proyecto fracasa por cada peso de rentabilidad. Como $\frac{1-x}{x}=\frac{1}{x}-1$, la condición equivale a
+\[
+  \frac{1}{x}\geq\frac{n^{\theta}+\kappa\,(1-n^{\theta})}{n^{\theta}}
+  \quad\Longleftrightarrow\quad
+  x\leq\frac{n^{\theta}}{n^{\theta}+\kappa\,(1-n^{\theta})}.
+\]
+Invierten entonces todas las empresas con índice menor o igual al de la \emph{empresa indiferente}, que llamamos $x(n)$:
+\begin{equation}\label{eq:mapa}
+  x(n)=\frac{n^{\theta}}{n^{\theta}+\kappa\,(1-n^{\theta})} .
+\end{equation}
+Como las empresas están repartidas de manera uniforme entre 0 y 1, $x(n)$ es también la \emph{fracción} de empresas que quiere invertir. La función \eqref{eq:mapa} es el \textbf{mapa de complementariedad}: toma como entrada la fracción que \emph{se espera} que invierta y devuelve la fracción que \emph{quiere} invertir dada esa expectativa.
+
+El mapa tiene tres propiedades.
+\begin{enumerate}
+  \item $x(0)=0$ y $x(1)=1$. Si nadie invierte, el proyecto fracasa con seguridad y nadie quiere invertir. Si todos invierten, el proyecto tiene éxito con seguridad y todas ganan $B(x)\geq0$.
+  \item $x(n)$ cae con $\kappa$. Proyectos más riesgosos o menos rentables reducen la inversión para cualquier expectativa.
+  \item $x(n)$ es creciente en $n$. Para verlo, sea $u=n^{\theta}$, de modo que $x=\dfrac{u}{u+\kappa(1-u)}$. Entonces
+  \[
+    \frac{dx}{du}=\frac{\kappa}{\left[u+\kappa(1-u)\right]^{2}}
+    \qquad\text{y}\qquad\frac{du}{dn}=\theta\,n^{\theta-1},
+  \]
+  y por la regla de la cadena
+  \begin{equation}\label{eq:pendiente}
+    x'(n)=\frac{\theta\,\kappa\,n^{\theta-1}}{\left[n^{\theta}+\kappa\,(1-n^{\theta})\right]^{2}}>0 .
+  \end{equation}
+\end{enumerate}
+
+\begin{resultado}{Complementariedad}
+Mientras más empresas se espera que inviertan, más empresas quieren invertir: $x'(n)>0$.
+\end{resultado}
+
+\subsection{Equilibrio y estabilidad}
+
+Un \textbf{equilibrio} es una fracción $n^*$ en la que las expectativas se cumplen: se esperaba que invirtiera $n^*$ y efectivamente quiere invertir $n^*$,
+\[
+  x(n^*)=n^* .
+\]
+En un gráfico con $n$ en el eje horizontal y $x(n)$ en el vertical, los equilibrios son los cruces del mapa con la recta de $45^{\circ}$. Por la primera propiedad, $n=0$ y $n=1$ siempre son equilibrios. Lo que hay que averiguar es cuáles son estables y si existen equilibrios interiores.
+
+Para hablar de estabilidad necesitamos decir qué ocurre fuera del equilibrio. La historia natural es la siguiente. Si $x(n)>n$, quieren invertir más empresas de las que se esperaba, la expectativa se corrige hacia arriba y $n$ aumenta. Si $x(n)<n$, ocurre lo contrario y $n$ disminuye. Un equilibrio es \textbf{estable} si, después de una perturbación pequeña, la economía vuelve a él.
+
+\begin{intuicion}[Por qué la pendiente decide]
+Supongamos que el mapa cruza la recta de $45^{\circ}$ <<desde arriba>>: a la izquierda del cruce está sobre la recta y a la derecha está bajo ella. Si $n$ se desvía un poco hacia la derecha, $x(n)<n$ y $n$ vuelve a bajar; si se desvía hacia la izquierda, $x(n)>n$ y $n$ vuelve a subir. El equilibrio es estable. Cruzar desde arriba es lo mismo que tener pendiente menor que uno: $x'(n^*)<1$. Si el mapa cruza <<desde abajo>>, con $x'(n^*)>1$, cualquier desviación se amplifica y el equilibrio es inestable.
+\end{intuicion}
+
+\subsection{Tres casos}
+
+\textbf{Caso 1: empresas homogéneas.} Supongamos primero que todas las empresas ganan lo mismo, $B(x)=b$. Entonces todas toman la misma decisión. Invierten si $n^{\theta}\,b\geq(1-n^{\theta})\,c$, es decir, si $n^{\theta}(1+\kappa)\geq\kappa$, o
+\[
+  n\;\geq\;\bar n\equiv\left(\frac{\kappa}{1+\kappa}\right)^{1/\theta}.
+\]
+Si se espera $n<\bar n$ nadie invierte, y si se espera $n\geq\bar n$ invierten todas. El mapa es un escalón (panel (a) de la Figura~\ref{fig:mapas}) y hay dos equilibrios estables, $n=0$ y $n=1$. El umbral $\bar n$ es la \textbf{masa crítica} de inversionistas. Este es un problema de coordinación puro: todas las empresas prefieren el equilibrio en que todas invierten, pero ninguna quiere invertir si cree que las demás no lo harán.
+
+\textbf{Caso 2: empresas heterogéneas con $\theta=1$.} Con $p(n)=n$ el mapa es $x(n)=\dfrac{n}{n+\kappa\,(1-n)}$. Para compararlo con la recta de $45^{\circ}$, notemos que para $0<n<1$
+\[
+  x(n)>n\;\Longleftrightarrow\;n+\kappa\,(1-n)<1\;\Longleftrightarrow\;\kappa\,(1-n)<1-n\;\Longleftrightarrow\;\kappa<1 .
+\]
+Si $\kappa<1$ el mapa está sobre la recta en todo el interior, $n$ siempre aumenta y el único equilibrio estable es $n=1$. Si $\kappa>1$ el mapa está siempre bajo la recta y el único equilibrio estable es $n=0$ (panel (b)). Hay complementariedad, pero no hay multiplicidad: los fundamentales, resumidos en $\kappa$, determinan el resultado.
+
+\begin{intuicion}
+De \eqref{eq:pendiente}, con $\theta=1$ la pendiente del mapa en el origen es $x'(0)=1/\kappa$. Si $\kappa<1$ esa pendiente es mayor que uno: basta con que se espere que invierta un grupo pequeño para que quiera invertir un grupo algo más grande, y el proceso se alimenta solo hasta $n=1$. Las empresas con los mejores proyectos ($x$ cercano a cero) tienen tanto que ganar que invierten aunque la probabilidad de éxito sea baja, y al hacerlo arrastran a las siguientes.
+\end{intuicion}
+
+\textbf{Caso 3: empresas heterogéneas con $\theta=2$.} Con $p(n)=n^{2}$ el mapa es
+\[
+  x(n)=\frac{n^{2}}{n^{2}+\kappa\,(1-n^{2})} .
+\]
+Un equilibrio interior cumple $x(n)=n$ con $0<n<1$. Dividiendo por $n$ y reordenando:
+\[
+  n=n^{2}+\kappa\,(1-n^{2})
+  \;\Longrightarrow\;
+  n\,(1-n)=\kappa\,(1-n)(1+n)
+  \;\Longrightarrow\;
+  n=\kappa\,(1+n),
+\]
+y por tanto
+\begin{equation}\label{eq:nstar}
+  n^*=\frac{\kappa}{1-\kappa} .
+\end{equation}
+Este valor está entre 0 y 1 solo si $\kappa<1/2$. En ese caso hay tres equilibrios: $n=0$, $n^*$ y $n=1$ (panel (c)).
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[baseline]
+\begin{axis}[mapa, ylabel={$x(n)$}, title={(a) Caso 1: homogéneas},
+  extra x ticks={0.5}, extra x tick labels={$\bar n$}]
+  \addplot[thin, domain=0:1, samples=2, line width=0.5pt] {x};
+  \draw[punteada] (axis cs:0.5,0) -- (axis cs:0.5,1);
+  \addplot[line width=1.8pt] coordinates {(0,0) (0.5,0)};
+  \addplot[line width=1.8pt] coordinates {(0.5,1) (1,1)};
+  \addplot[lleno] coordinates {(0,0) (1,1)};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}[baseline]
+\begin{axis}[mapa, title={(b) Caso 2: $\theta=1$}]
+  \addplot[domain=0:1, samples=2, line width=0.5pt] {x};
+  \addplot[domain=0:1] {x/(x+0.5*(1-x))};
+  \addplot[domain=0:1, dashed] {x/(x+2*(1-x))};
+  \node[font=\footnotesize] at (axis cs:0.22,0.66) {$\kappa<1$};
+  \node[font=\footnotesize] at (axis cs:0.76,0.36) {$\kappa>1$};
+  \addplot[lleno] coordinates {(0,0) (1,1)};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}[baseline]
+\begin{axis}[mapa, title={(c) Caso 3: $\theta=2$},
+  extra x ticks={\nstar}, extra x tick labels={$n^*$}]
+  \addplot[domain=0:1, samples=2, line width=0.5pt] {x};
+  \draw[punteada] (axis cs:\nstar,0) -- (axis cs:\nstar,\nstar);
+  \addplot[domain=0:1] {x^2/(x^2+\pkap*(1-x^2))};
+  \draw[flecha] (axis cs:0.20,0) -- (axis cs:0.08,0);
+  \draw[flecha] (axis cs:0.30,0) -- (axis cs:0.92,0);
+  \addplot[lleno] coordinates {(0,0) (1,1)};
+  \addplot[hueco] coordinates {(\nstar,\nstar)};
+\end{axis}
+\end{tikzpicture}
+\caption{El mapa de complementariedad en los tres casos. Los puntos negros son equilibrios estables y el punto blanco es inestable. El panel (c) usa $\kappa=0.2$.}
+\label{fig:mapas}
+\end{figure}
+
+\begin{intuicion}[Por qué $\theta=2$ cambia todo]
+Con $p(n)=n^{2}$ los primeros inversionistas casi no mejoran las chances de los demás. Si se espera que invierta el 10\% de las empresas, la probabilidad de éxito es apenas 1\%, y con $\kappa=0.2$ solo quiere invertir el 4.8\%: menos de lo esperado, así que la inversión se desarma. Si se espera que invierta el 50\%, la probabilidad de éxito es 25\% y quiere invertir el 62.5\%: más de lo esperado, así que la inversión crece. En algún punto intermedio las dos fuerzas se igualan, y ese punto es $n^*$. Con $\theta=1$ esto no ocurre porque la pendiente en el origen es $1/\kappa$ en lugar de cero.
+\end{intuicion}
+
+\subsection{Estabilidad y masa crítica}
+
+Con $\theta=2$ la pendiente \eqref{eq:pendiente} es $x'(n)=\dfrac{2\,\kappa\,n}{\left[n^{2}+\kappa\,(1-n^{2})\right]^{2}}$. La evaluamos en cada equilibrio suponiendo $\kappa<1/2$.
+\begin{itemize}
+  \item En $n=0$ el numerador es cero: $x'(0)=0<1$.
+  \item En $n=1$ el denominador es uno: $x'(1)=2\kappa<1$.
+  \item En $n^*$ usamos que el equilibrio cumple $n^*=n^{*2}+\kappa\,(1-n^{*2})$, de modo que el corchete del denominador es igual a $n^*$:
+  \[
+    x'(n^*)=\frac{2\,\kappa\,n^*}{n^{*2}}=\frac{2\,\kappa}{n^*}=2\,(1-\kappa)>1 .
+  \]
+\end{itemize}
+Los equilibrios $n=0$ y $n=1$ son estables y $n^*$ es inestable. El equilibrio interior no es un lugar donde la economía pueda quedarse: es la frontera entre las dos cuencas de atracción. Por eso lo llamamos \textbf{masa crítica}. Si se espera $n>n^*$ la economía termina en $n=1$, y si se espera $n<n^*$ termina en $n=0$.
+
+\begin{intuicion}[Ejemplo numérico]
+Con $\kappa=0.2$ la masa crítica es $n^*=0.2/0.8=0.25$. Supongamos que la expectativa se corrige período a período según $n_{t+1}=x(n_t)$. Si partimos de $n_0=0.30$, justo sobre la masa crítica, la secuencia es $0.30,\;0.33,\;0.38,\;0.46,\;0.57,\;0.71,\;0.83,\dots$ y converge a 1. Si partimos de $n_0=0.20$, justo bajo ella, la secuencia es $0.20,\;0.17,\;0.13,\;0.08,\;0.03,\dots$ y converge a 0. Dos economías idénticas en todo, salvo en una diferencia pequeña de expectativas, terminan en extremos opuestos.
+\end{intuicion}
+
+Cuando $\kappa\geq1/2$ la fórmula \eqref{eq:nstar} da $n^*\geq1$: no hay equilibrio interior y el mapa queda bajo la recta de $45^{\circ}$ en todo el interior. El punto $n=1$ sigue siendo un equilibrio, pero es inestable (su pendiente es $2\kappa\geq1$) y la menor duda lo desarma. El único equilibrio estable es $n=0$. En ese caso el problema de la economía no es de coordinación, es de fundamentales: los proyectos son demasiado riesgosos o muy poco rentables.
+
+\subsection{Estática comparativa y política}
+
+En términos de los parámetros originales la masa crítica es
+\[
+  n^*=\frac{\kappa}{1-\kappa}=\frac{c}{b-c},
+  \qquad\text{con}\qquad
+  \frac{\partial n^*}{\partial c}=\frac{b}{(b-c)^{2}}>0
+  \quad\text{y}\quad
+  \frac{\partial n^*}{\partial b}=-\frac{c}{(b-c)^{2}}<0 .
+\]
+La masa crítica aumenta con $c$: si fracasar es más costoso, se necesita que más empresas inviertan para que valga la pena invertir. Y disminuye con $b$: proyectos más rentables hacen más fácil la coordinación. Mientras menor es $n^*$, más fácil es que la economía termine en el equilibrio bueno.
+
+Esto sugiere una política. Supongamos que el Estado ofrece una \textbf{garantía} que cubre parte de la pérdida cuando un proyecto fracasa, de modo que la pérdida para la empresa baja de $c_0$ a $c_1$. La masa crítica baja de $n_0^*$ a $n_1^*$ (Figura~\ref{fig:politica}). Si las expectativas estaban entre ambos valores, la economía deja de ir hacia $n=0$ y converge a $n=1$.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[baseline]
+\begin{axis}[mapa, width=7cm, height=6.2cm, ylabel={$x(n)$},
+  extra x ticks={\nstar,\nstaralt}, extra x tick labels={$n_1^*$,$n_0^*$}]
+  \addplot[domain=0:1, samples=2, line width=0.5pt] {x};
+  \draw[punteada] (axis cs:\nstar,0) -- (axis cs:\nstar,\nstar);
+  \draw[punteada] (axis cs:\nstaralt,0) -- (axis cs:\nstaralt,\nstaralt);
+  \addplot[domain=0:1, dashed] {x^2/(x^2+\pkapalt*(1-x^2))};
+  \addplot[domain=0:1] {x^2/(x^2+\pkap*(1-x^2))};
+  \node[font=\footnotesize, anchor=east] at (axis cs:0.46,0.74) {con garantía};
+  \node[font=\footnotesize, anchor=west] at (axis cs:0.71,0.44) {sin garantía};
+  \addplot[hueco] coordinates {(\nstar,\nstar) (\nstaralt,\nstaralt)};
+  \addplot[lleno] coordinates {(0,0) (1,1)};
+\end{axis}
+\end{tikzpicture}
+\caption{Una garantía que reduce la pérdida desplaza el mapa hacia arriba y reduce la masa crítica. La figura usa $\kappa_0=0.4$ sin garantía y $\kappa_1=0.2$ con garantía.}
+\label{fig:politica}
+\end{figure}
+
+\begin{intuicion}[Ejemplo numérico]
+Sea $b=5$. Con $c_0=2$ tenemos $\kappa_0=0.4$ y $n_0^*=0.4/0.6\approx0.67$: se necesita que dos tercios de las empresas esperen invertir. Una garantía que cubre la mitad de la pérdida deja $c_1=1$, $\kappa_1=0.2$ y $n_1^*=0.25$. Si la expectativa inicial era $n=0.5$, sin garantía la economía iba a $n=0$ y con garantía va a $n=1$.
+
+Ahora viene lo interesante. En $n=1$ la probabilidad de éxito es uno: ningún proyecto fracasa y la garantía nunca se paga. Y si el Estado la retira, la economía sigue en $n=1$, porque ese equilibrio es estable también sin garantía ($2\kappa_0=0.8<1$). Es el mismo mecanismo de un seguro de depósitos creíble: evita la corrida bancaria y, justamente por eso, casi nunca hay que pagarlo.
+\end{intuicion}
+
+La garantía funciona solo si es creíble, y solo si el equilibrio bueno existe sin ella. Si $\kappa_0\geq1/2$, al retirar la garantía la economía vuelve a $n=0$: una política temporal no arregla malos fundamentales.
+
+\begin{resultado}{Lecciones del modelo de inversión}
+(i) La complementariedad es necesaria para que haya múltiples equilibrios, pero no es suficiente: el caso 2 tiene complementariedad y un solo equilibrio estable. (ii) La multiplicidad requiere que el mapa cruce la recta de $45^{\circ}$ desde abajo en algún punto, es decir, que la complementariedad sea suficientemente fuerte. (iii) Los equilibrios se pueden ordenar: en $n=1$ cada empresa gana $B(x)\geq0$, y en $n=0$ todas ganan cero. (iv) Ninguna empresa puede sacar a la economía de $n=0$ por sí sola. Es una \emph{falla de coordinación}, y por eso una economía puede quedar atrapada en el equilibrio malo aunque sus parámetros sean idénticos a los de una economía que está en el bueno.
+\end{resultado}
+
+% =============================================================================
+\section{Relaciones intersectoriales y big push}\label{sec:bp}
+
+\subsection{La idea}
+
+El modelo anterior deja dos cosas sin explicar: de dónde viene la complementariedad (la supusimos a través de $p(n)$) y cuánto vale el PIB en cada equilibrio. El modelo de esta sección responde ambas.
+
+La idea es de Rosenstein-Rodan (1943). Imaginemos que en una economía pobre se instala una gran fábrica de zapatos que paga buenos salarios. Sus trabajadores tienen más ingreso, pero no lo gastan solo en zapatos: lo reparten entre comida, ropa, vivienda y muchos otros bienes. La fábrica no encuentra demanda suficiente para lo que produce y fracasa. Si en cambio se instalan al mismo tiempo fábricas en \emph{muchos} sectores, los trabajadores de cada una son clientes de todas las demás y el conjunto crea su propio mercado. Cada inversión por separado es mal negocio, pero todas juntas son buen negocio.
+
+Hirschman (1958) agregó que los sectores están conectados también por sus insumos. Un sector que invierte demanda insumos de otros (\emph{vínculos hacia atrás}) y abastece a otros con su producto (\emph{vínculos hacia adelante}). El modelo que sigue captura el vínculo por el lado de la demanda, que es el más simple de formalizar. Lo propusieron Murphy, Shleifer y Vishny (1989); usamos la versión simplificada de Krugman (1995).
+
+\subsection{El modelo}
+
+\textbf{Sectores y demanda.} La economía tiene un continuo de sectores indexados por $i\in[0,1]$, y cada sector produce un bien distinto. Hay $L$ trabajadores, que son también los consumidores y los dueños de las empresas. Los consumidores gastan la misma fracción de su ingreso en cada bien. Como normalizamos el número de bienes a uno, si el ingreso agregado es $Y$ y el precio de cada bien es 1, \emph{cada sector vende $Y$ unidades}. Este es el vínculo entre sectores: la demanda que enfrenta cada uno depende del ingreso que se genera en todos los demás.
+
+\textbf{Tecnología tradicional.} Un trabajador produce una unidad del bien. Cualquiera puede usar esta tecnología, así que hay muchos productores que compiten: el precio es igual al costo. Tomamos el salario tradicional como unidad de cuenta, de modo que el salario es 1, el precio es 1 y el beneficio es 0.
+
+\textbf{Tecnología moderna.} En cada sector hay una empresa que puede invertir en una tecnología mejor. La inversión es un costo fijo de $F$ trabajadores. Después de pagarlo, cada trabajador produce $A>1$ unidades. La empresa moderna debe pagar un salario $w\geq1$, mayor que el tradicional: trabajar en la fábrica es más exigente que el trabajo tradicional (horarios, disciplina, mudarse a la ciudad) y los trabajadores solo aceptan si se les compensa. Suponemos $A>w$, de modo que producir una unidad cuesta $w/A<1$.
+
+La empresa moderna cobra un precio de 1. No puede cobrar más, porque los productores tradicionales le quitarían el mercado. Y no le conviene cobrar menos: como los consumidores gastan un monto fijo $Y$ en el bien, bajar el precio no aumenta sus ingresos y sí aumenta sus costos.
+
+\subsection{El beneficio de invertir}
+
+Una empresa moderna vende $Y$ unidades a precio 1. Para producirlas necesita $Y/A$ trabajadores, más los $F$ del costo fijo. Su beneficio es
+\begin{equation}\label{eq:pi}
+  \pi=Y-w\left(F+\frac{Y}{A}\right)=\left(1-\frac{w}{A}\right)Y-wF .
+\end{equation}
+El primer término es el margen por unidad, $1-w/A$, multiplicado por las ventas. El segundo es el costo de la inversión. La empresa gana dinero solo si vende lo suficiente para cubrir el costo fijo:
+\[
+  \pi\geq0\quad\Longleftrightarrow\quad Y\geq\frac{A\,w\,F}{A-w}.
+\]
+El beneficio depende entonces del \emph{tamaño del mercado}, $Y$. Y el tamaño del mercado depende de cuántos sectores invierten. Sea $n$ la fracción de sectores que usa la tecnología moderna. Necesitamos encontrar $Y(n)$.
+
+\subsection{El ingreso agregado}
+
+El ingreso es la suma de beneficios y salarios. Si $L_M=n\left(F+\frac{Y}{A}\right)$ trabajadores están en los sectores modernos y el resto en los tradicionales,
+\[
+  Y=\underbrace{n\,\pi}_{\text{beneficios}}+\underbrace{w\,L_M}_{\text{salarios modernos}}+\underbrace{(L-L_M)}_{\text{salarios tradicionales}} .
+\]
+De \eqref{eq:pi}, $n\,\pi=nY-w\,L_M$. Al reemplazar, el término $w\,L_M$ se cancela:
+\[
+  Y=nY+L-L_M=nY+L-nF-\frac{nY}{A}.
+\]
+Despejando $Y$:
+\begin{equation}\label{eq:Y}
+  Y(n)=\frac{L-nF}{1-n\left(1-\frac{1}{A}\right)}=\frac{A\,(L-nF)}{A-(A-1)\,n} .
+\end{equation}
+Sin industrialización el ingreso es $Y(0)=L$, y con industrialización completa es $Y(1)=A\,(L-F)$.
+
+Que el salario $w$ no aparezca en \eqref{eq:Y} tiene una explicación simple: el premio salarial es una transferencia de las empresas a los trabajadores. Cambia quién recibe el ingreso, no cuánto ingreso hay.
+
+\begin{intuicion}[Otra forma de llegar a lo mismo]
+El ingreso agregado es también la producción, y la producción está limitada por el trabajo disponible. Cada sector produce $Y$ unidades. Un sector tradicional necesita $Y$ trabajadores para hacerlo; un sector moderno necesita $F+Y/A$. Como todos los trabajadores están ocupados,
+\[
+  (1-n)\,Y+n\left(F+\frac{Y}{A}\right)=L ,
+\]
+que al despejar $Y$ entrega exactamente \eqref{eq:Y}. Esta versión muestra de dónde sale el mayor ingreso: cada sector que se moderniza produce lo mismo con menos trabajadores, y los que libera se reparten entre todos los sectores para producir más de todo.
+\end{intuicion}
+
+¿Aumenta el ingreso cuando más sectores invierten? Derivando \eqref{eq:Y},
+\[
+  Y'(n)=\frac{A\left[(A-1)L-AF\right]}{\left[A-(A-1)\,n\right]^{2}}>0
+  \quad\Longleftrightarrow\quad A\,(L-F)>L .
+\]
+La condición dice que modernizar toda la economía produce más que no modernizar nada. Suponemos que se cumple: la industrialización es socialmente eficiente. Si no lo fuera, no habría nada que discutir.
+
+\subsection{Complementariedad entre sectores}
+
+Reemplazando $Y(n)$ en \eqref{eq:pi}, el beneficio de invertir cuando una fracción $n$ de los sectores invierte es
+\[
+  \pi(n)=\left(1-\frac{w}{A}\right)Y(n)-wF,
+  \qquad\text{con}\qquad
+  \pi'(n)=\left(1-\frac{w}{A}\right)Y'(n)>0 .
+\]
+
+\begin{resultado}{Complementariedad en la demanda}
+Cuando un sector invierte, aumenta el ingreso agregado. Eso aumenta la demanda, y por tanto el beneficio de invertir, en todos los demás sectores.
+\end{resultado}
+
+A diferencia del modelo de la Sección~\ref{sec:comp}, aquí la complementariedad no es un supuesto. Es un resultado que sale de la tecnología y de cómo gastan los consumidores.
+
+\subsection{Equilibrios}
+
+Como todos los sectores son iguales, todos toman la misma decisión, y buscamos equilibrios con $n=0$ o con $n=1$.
+
+\emph{Sin industrialización} ($n=0$) es un equilibrio si a una empresa no le conviene invertir cuando nadie más lo hace:
+\[
+  \pi(0)=\left(1-\frac{w}{A}\right)L-wF<0
+  \quad\Longleftrightarrow\quad
+  F>\frac{(A-w)\,L}{A\,w}.
+\]
+
+\emph{Industrialización completa} ($n=1$) es un equilibrio si conviene invertir cuando todos invierten:
+\[
+  \pi(1)=\left(1-\frac{w}{A}\right)A\,(L-F)-wF=A\,(L-F)-wL\geq0
+  \quad\Longleftrightarrow\quad
+  F\leq\frac{(A-w)\,L}{A}.
+\]
+
+\begin{resultado}{Múltiples equilibrios}
+Ambos equilibrios coexisten si el costo fijo es intermedio:
+\[
+  \underbrace{\frac{(A-w)\,L}{A\,w}}_{F_{\min}}<F\leq\underbrace{\frac{(A-w)\,L}{A}}_{F_{\max}} .
+\]
+\end{resultado}
+
+\noindent Si $F\leq F_{\min}$ la inversión es rentable incluso para una empresa sola y la economía se industrializa. Si $F>F_{\max}$ la inversión no es rentable ni siquiera cuando todos invierten y la economía sigue siendo tradicional. Entre ambas cotas el resultado depende de las expectativas.
+
+\subsection{Por qué hace falta el premio salarial}
+
+Las dos cotas difieren solo en el factor $w$ del denominador. Sin premio salarial ($w=1$) coinciden, el rango intermedio desaparece y el equilibrio es único:
+\[
+  \text{se invierte}\quad\Longleftrightarrow\quad F<\frac{(A-1)\,L}{A}\quad\Longleftrightarrow\quad A\,(L-F)>L .
+\]
+Con $w=1$ se invierte exactamente cuando la industrialización aumenta el ingreso. El mercado coordina bien.
+
+Para entender por qué, calculemos en cuánto cambia el ingreso cuando una empresa invierte sola. De \eqref{eq:Y}, $Y'(0)=\left(1-\frac{1}{A}\right)L-F$, y esto se puede descomponer como
+\begin{equation}\label{eq:descomp}
+  \underbrace{\left(1-\frac{1}{A}\right)L-F}_{\text{efecto sobre el ingreso}}
+  =\underbrace{\pi(0)}_{\text{beneficio privado}}
+  +\underbrace{(w-1)\left(F+\frac{L}{A}\right)}_{\text{mayores salarios}} .
+\end{equation}
+La empresa aporta al ingreso de dos maneras: con su beneficio y con el premio salarial que paga a sus $F+L/A$ trabajadores. Cuando decide si invertir mira solo lo primero.
+
+\begin{itemize}
+  \item Con $w=1$ el segundo término es cero. El beneficio privado es igual al efecto sobre el ingreso, así que la empresa invierte justo cuando conviene a la sociedad. Una empresa con pérdidas \emph{reduce} el ingreso y la demanda de las demás. Este es el caso en que funciona el argumento de Adam Smith: la búsqueda del beneficio privado lleva al mejor resultado.
+  \item Con $w>1$ el beneficio privado puede ser negativo aunque el efecto sobre el ingreso sea positivo. Los salarios más altos que paga la empresa se gastan en los productos de los demás sectores, pero la empresa no recibe nada por eso. Es una \emph{externalidad}.
+\end{itemize}
+
+\begin{intuicion}[Ejemplo numérico]
+Sea $L=100$, $A=2$, $w=1.5$ y $F=20$. El margen es $1-w/A=0.25$ y el costo de la inversión es $wF=30$, así que la empresa necesita vender al menos $30/0.25=120$ unidades. Si invierte sola el mercado es $Y=100$ y pierde: $\pi(0)=0.25\times100-30=-5$. Pero emplea a $F+L/A=70$ trabajadores y a cada uno le paga $0.5$ más que en el sector tradicional, un total de $35$. El ingreso de la economía sube en $-5+35=30$, que es lo que dice \eqref{eq:descomp}: $(1-\tfrac12)\times100-20=30$. La empresa pierde 5 y la sociedad gana 30.
+\end{intuicion}
+
+\subsection{Masa crítica y PIB en cada equilibrio}
+
+Entre los dos equilibrios hay un punto en que el beneficio de invertir es cero. De $\pi(\bar n)=0$ se obtiene $Y(\bar n)=\frac{A\,w\,F}{A-w}$, y usando \eqref{eq:Y}:
+\[
+  (L-\bar nF)(A-w)=wF\left[A-(A-1)\,\bar n\right]
+  \;\Longrightarrow\;
+  \bar n\,A\,(w-1)\,F=A\,w\,F-(A-w)\,L ,
+\]
+de donde
+\begin{equation}\label{eq:nbar}
+  \bar n=\frac{A\,w\,F-(A-w)\,L}{A\,(w-1)\,F} .
+\end{equation}
+Si se espera $n>\bar n$ todos los sectores invierten, y si se espera $n<\bar n$ ninguno lo hace. El mapa de complementariedad es un escalón en $\bar n$, igual que en el caso de empresas homogéneas de la Sección~\ref{sec:comp}. La masa crítica es menor si el mercado es más grande ($L$) o la tecnología es más productiva ($A$), y mayor si el costo fijo ($F$) es más alto. La Tabla~\ref{tab:bp} resume los dos equilibrios.
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+ & \multicolumn{2}{c}{Fórmula} & \multicolumn{2}{c}{Ejemplo} \\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+ & Bajo ($n=0$) & Alto ($n=1$) & Bajo & Alto \\
+\midrule
+PIB & $L$ & $A\,(L-F)$ & 100 & 160 \\
+Salario & $1$ & $w$ & 1 & 1.5 \\
+Beneficio por sector & $0$ & $A\,(L-F)-wL$ & 0 & 10 \\
+\bottomrule
+\end{tabular}
+\caption{Los dos equilibrios del modelo de big push. El ejemplo usa $L=100$, $A=2$, $w=1.5$ y $F=20$.}
+\label{tab:bp}
+\end{table}
+
+En el ejemplo las cotas son $F_{\min}=16.7$ y $F_{\max}=25$, de modo que $F=20$ está en el rango de multiplicidad. La masa crítica es $\bar n=(60-50)/20=0.5$: cuando la mitad de los sectores invierte, el ingreso es $Y(0.5)=120$, justo las ventas que cada empresa necesita para no perder (Figura~\ref{fig:bp}). En el equilibrio alto el PIB es 60\% mayor, los trabajadores ganan 50\% más y además reciben los beneficios de las empresas. Todos están mejor, pero ningún sector quiere ser el primero en invertir.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[baseline]
+\begin{axis}[apunte, width=7.3cm, height=5.4cm, xmin=0, xmax=1.04, ymin=-8.5, ymax=12.5,
+  xtick={0,1}, ytick={-5,0,10}, xlabel={$n$}, ylabel={$\pi(n)$},
+  extra x ticks={\nbarbp}, extra x tick labels={$\bar n$},
+  title={(a) Beneficio de invertir}]
+  \addplot[dashed, gray, line width=0.9pt, domain=0:1.04, samples=2] {0};
+  \draw[punteada] (axis cs:\nbarbp,-8.5) -- (axis cs:\nbarbp,0);
+  \addplot[domain=0:1] {(1-\pw/\pA)*\pA*(\pL-\pF*x)/(\pA-(\pA-1)*x)-\pw*\pF};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}[baseline]
+\begin{axis}[apunte, width=7.3cm, height=5.4cm, xmin=0, xmax=1.04, ymin=86, ymax=172,
+  xtick={0,1}, ytick={100,120,160}, xlabel={$n$}, ylabel={$Y(n)$},
+  extra x ticks={\nbarbp}, extra x tick labels={$\bar n$},
+  title={(b) Ingreso agregado}]
+  \draw[punteada] (axis cs:\nbarbp,86) -- (axis cs:\nbarbp,\ybp) -- (axis cs:0,\ybp);
+  \addplot[domain=0:1] {\pA*(\pL-\pF*x)/(\pA-(\pA-1)*x)};
+\end{axis}
+\end{tikzpicture}
+\caption{Beneficio e ingreso según la fracción de sectores que invierte, con los parámetros del ejemplo. Bajo $\bar n$ invertir da pérdidas y sobre $\bar n$ da ganancias.}
+\label{fig:bp}
+\end{figure}
+
+\subsection{Política: el gran empujón}
+
+Rosenstein-Rodan propuso un \emph{big push}: una política que aumente la inversión en muchos sectores a la vez. En el modelo eso significa lograr que invierta al menos una fracción $\bar n$ de los sectores, o cambiar los incentivos para que invertir convenga aunque los demás no lo hagan.
+
+\begin{intuicion}[Cuánto cuesta]
+En el ejemplo una empresa que invierte sola pierde 5. Un subsidio de 5 por empresa hace que invertir no dé pérdidas incluso en el peor caso, así que todos los sectores invierten. Una vez que lo hacen, cada empresa gana $\pi(1)=10$ por su cuenta y el subsidio deja de ser necesario. El costo del subsidio es 5 y el PIB pasa de 100 a 160. El Estado ni siquiera necesita pagar: basta con que prometa de manera creíble cubrir las pérdidas de quien invierta solo. Como con la garantía de la Sección~\ref{sec:comp}, si la promesa es creíble nunca hay que cumplirla.
+\end{intuicion}
+
+La propuesta tiene problemas prácticos. Exige mucha información (qué sectores, en qué proporciones) y, si se hace con inversión pública directa, muchos recursos. Hirschman propuso lo contrario, un crecimiento deliberadamente \emph{desequilibrado}: concentrar el esfuerzo en unos pocos sectores líderes, elegidos porque tienen muchos vínculos con el resto, y dejar que esos vínculos induzcan inversiones espontáneas en los demás. Nuestro modelo no puede decir cuáles serían esos sectores, porque en él todos son iguales. Esa es una limitación del modelo, no del argumento.
+
+% =============================================================================
+\section{Dependencia histórica}\label{sec:hist}
+
+\subsection{De las expectativas a la historia}
+
+En los dos modelos anteriores $n$ era la fracción que \emph{se espera} que invierta, y el equilibrio dependía de las creencias. Las creencias pueden cambiar de un día para otro, y por eso esos equilibrios se parecen a las modas o a las corridas bancarias. Otras decisiones se acumulan lentamente. El capital de una economía es el resultado de décadas de ahorro, y no se puede cambiar por decreto ni por un cambio de ánimo. Cuando la variable relevante es de ese tipo, lo que decide el resultado no es lo que se espera sino lo que ya ocurrió: el punto de partida.
+
+En ese caso hablamos de \textbf{estados estacionarios múltiples} y de \textbf{dependencia histórica}. La herramienta es la misma (un cruce estable, un umbral, otro cruce estable), pero la interpretación cambia: un accidente del pasado puede dejar a una economía de un lado u otro del umbral para siempre.
+
+\subsection{Punto de partida: el modelo de Solow}
+
+Usamos el modelo de Solow de la parte de crecimiento, con $Y=K^{\alpha}(AL)^{1-\alpha}$. Para concentrarnos en los niveles suponemos que no hay progreso técnico, $g_A=0$, de modo que $A$ es constante. Sea $k=K/L$ el capital por trabajador. La tasa de crecimiento del capital es
+\begin{equation}\label{eq:gK}
+  g_K=s\,\frac{Y}{K}-\delta=s\left(\frac{A}{k}\right)^{1-\alpha}-\delta ,
+\end{equation}
+y el capital por trabajador crece a la tasa $g_K-g_L$. Hay un estado estacionario cuando $g_K=g_L$. Despejando $k$ de $s\left(A/k\right)^{1-\alpha}=g_L+\delta$, y usando $y=k^{\alpha}A^{1-\alpha}$:
+\begin{equation}\label{eq:ee}
+  k^*=A\left(\frac{s}{g_L+\delta}\right)^{\frac{1}{1-\alpha}}
+  \qquad\text{y}\qquad
+  y^*=A\left(\frac{s}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}} .
+\end{equation}
+Son las fórmulas de la parte de crecimiento con $g_A=0$.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[baseline]
+\pgfmathsetmacro{\ka}{\kss-0.5}\pgfmathsetmacro{\kb}{\kss+0.5}
+\begin{axis}[solow, width=9.4cm, height=5.8cm, xmin=0, xmax=13.5, ymin=-0.03, ymax=0.2,
+  extra x ticks={\kss}, extra x tick labels={$k^*$}]
+  \draw[line width=0.4pt] (axis cs:0,0) -- (axis cs:13.5,0);
+  \addplot[dashed, gray, line width=0.9pt, domain=0:13.5, samples=2] {\pgL};
+  \draw[punteada] (axis cs:\kss,-0.03) -- (axis cs:\kss,\pgL);
+  \addplot[domain=0.8:13.5] {\ps*(\pAuno/x)^(1-\palfa)-\pdel};
+  \draw[flecha] (axis cs:0.8,-0.03) -- (axis cs:\ka,-0.03);
+  \draw[flecha] (axis cs:13,-0.03) -- (axis cs:\kb,-0.03);
+  \node[font=\small] at (axis cs:12.5,0.034) {$g_L$};
+  \node[font=\small, anchor=west] at (axis cs:3.4,0.125) {$g_K=s\left(\dfrac{A}{k}\right)^{1-\alpha}-\delta$};
+\end{axis}
+\end{tikzpicture}
+\caption{El modelo de Solow sin progreso técnico. La curva $g_K$ cae con $k$ y cruza una sola vez a $g_L$.}
+\label{fig:solow}
+\end{figure}
+
+El estado estacionario es único y estable (Figura~\ref{fig:solow}). La razón son los rendimientos decrecientes del capital: mientras más capital por trabajador hay, menos produce cada unidad adicional, y $g_K$ cae con $k$. Una curva que siempre cae cruza una sola vez a una recta horizontal. A la izquierda del cruce $g_K>g_L$ y $k$ aumenta; a la derecha $g_K<g_L$ y $k$ disminuye. Aquí la historia no importa: cualquiera sea el capital inicial, la economía llega al mismo $y^*$. Por eso Alemania, después de perder buena parte de su capital en la guerra, volvió a su senda anterior.
+
+Para que la historia importe la curva $g_K$ tiene que cruzar a $g_L$ más de una vez. La ecuación \eqref{eq:gK} muestra tres maneras de lograrlo: que $s$ aumente con el ingreso, que $g_L$ caiga con el ingreso, o que $A$ aumente con el capital. Las vemos en ese orden.
+
+\subsection{Retroalimentación: la tasa de ahorro}
+
+En Solow la tasa de ahorro es un parámetro. Pero es razonable pensar que depende del ingreso. Un hogar cerca del nivel de subsistencia gasta casi todo en sobrevivir y ahorra poco; con más ingreso puede ahorrar una fracción mayor. La versión más simple es un umbral $\bar y$:
+\[
+  s(y)=\begin{cases}s_1 & \text{si } y<\bar y\\ s_2 & \text{si } y\geq\bar y\end{cases}
+  \qquad\text{con } s_2>s_1 .
+\]
+Aplicando \eqref{eq:ee} con cada tasa de ahorro,
+\[
+  y_1^*=A\left(\frac{s_1}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}}
+  \qquad\text{y}\qquad
+  y_2^*=A\left(\frac{s_2}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}} .
+\]
+Los dos son estados estacionarios si $y_1^*<\bar y\leq y_2^*$. La condición dice que cada uno se justifica a sí mismo. En $y_1^*$ el ingreso está bajo el umbral, por lo que la tasa de ahorro es $s_1$, y con $s_1$ el ingreso de largo plazo es $y_1^*$. En $y_2^*$ el ingreso está sobre el umbral, la tasa de ahorro es $s_2$, y con $s_2$ el ingreso es $y_2^*$. Un país es pobre porque ahorra poco y ahorra poco porque es pobre.
+
+La brecha entre ambos es
+\[
+  \frac{y_2^*}{y_1^*}=\left(\frac{s_2}{s_1}\right)^{\frac{\alpha}{1-\alpha}} .
+\]
+
+\begin{intuicion}[Ejemplo numérico]
+Sea $\alpha=1/3$, $\delta=0.05$, $g_L=0.02$ y $A=1$, con $s_1=0.1$, $s_2=0.3$ y $\bar y=1.6$. Entonces $y_1^*=(0.1/0.07)^{1/2}=1.20$ e $y_2^*=(0.3/0.07)^{1/2}=2.07$, y se cumple $1.20<1.6\leq2.07$. Triplicar la tasa de ahorro multiplica el ingreso por $3^{1/2}=1.73$.
+\end{intuicion}
+
+En términos del capital, el umbral de ingreso corresponde a un capital $\bar k$ tal que $\bar k^{\alpha}A^{1-\alpha}=\bar y$. En el panel (a) de la Figura~\ref{fig:retro} la curva $g_K$ salta hacia arriba en $\bar k$, porque ahí la tasa de ahorro pasa de $s_1$ a $s_2$, y cruza dos veces a $g_L$. Una economía que parte con $k_0<\bar k$ converge a $k_1^*$, y una que parte con $k_0\geq\bar k$ converge a $k_2^*$.
+
+\subsection{Retroalimentación: el crecimiento de la población}
+
+El mismo argumento funciona con la población. En los países pobres la mortalidad y la natalidad son altas, y cuando el ingreso sube la mortalidad cae primero y la natalidad después. Al completarse esa transición demográfica la población crece más lento. En su versión más simple,
+\[
+  g_L(y)=\begin{cases}g_1 & \text{si } y<\bar y\\ g_2 & \text{si } y\geq\bar y\end{cases}
+  \qquad\text{con } g_1>g_2 ,
+\]
+y los estados estacionarios son
+\[
+  y_1^*=A\left(\frac{s}{g_1+\delta}\right)^{\frac{\alpha}{1-\alpha}}
+  \qquad\text{y}\qquad
+  y_2^*=A\left(\frac{s}{g_2+\delta}\right)^{\frac{\alpha}{1-\alpha}},
+  \qquad\text{con}\qquad
+  \frac{y_2^*}{y_1^*}=\left(\frac{g_1+\delta}{g_2+\delta}\right)^{\frac{\alpha}{1-\alpha}} .
+\]
+De nuevo ambos existen si $y_1^*<\bar y\leq y_2^*$. Con una población que crece rápido el capital se reparte entre más trabajadores, el ingreso por persona es bajo, y con ingreso bajo la población sigue creciendo rápido. En el panel (b) de la Figura~\ref{fig:retro} lo que salta es la recta $g_L$, que baja de $g_1$ a $g_2$ en $\bar k$.
+
+\begin{intuicion}[Ejemplo numérico]
+Con $s=0.2$, $g_1=0.035$, $g_2=0.005$ y $\bar y=1.7$ (y el resto como antes), $y_1^*=(0.2/0.085)^{1/2}=1.53$ e $y_2^*=(0.2/0.055)^{1/2}=1.91$. Pasar de un crecimiento poblacional de 3.5\% a uno de 0.5\% multiplica el ingreso por $1.24$.
+\end{intuicion}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[baseline]
+\pgfmathsetmacro{\fla}{\ksuno-0.4}\pgfmathsetmacro{\flb}{\ksuno+0.4}\pgfmathsetmacro{\flc}{\kbs-0.25}
+\pgfmathsetmacro{\fld}{\kbs+0.25}\pgfmathsetmacro{\fle}{\ksdos-0.4}\pgfmathsetmacro{\flf}{\ksdos+0.4}
+\begin{axis}[solow, width=7.9cm, height=5.6cm, xmin=0, xmax=13.5, ymin=-0.03, ymax=0.13,
+  extra x ticks={\ksuno,\kbs,\ksdos}, extra x tick labels={$k_1^*$,$\bar k$,$k_2^*$},
+  title={(a) Tasa de ahorro endógena}]
+  \draw[line width=0.4pt] (axis cs:0,0) -- (axis cs:13.5,0);
+  \addplot[dashed, gray, line width=0.9pt, domain=0:13.5, samples=2] {\pgL};
+  \draw[punteada] (axis cs:\ksuno,-0.03) -- (axis cs:\ksuno,\pgL);
+  \draw[punteada] (axis cs:\ksdos,-0.03) -- (axis cs:\ksdos,\pgL);
+  \draw[punteada] (axis cs:\kbs,-0.03) -- (axis cs:\kbs,\gksalto);
+  \addplot[domain=0.45:\kbs] {\psuno*(1/x)^(1-\palfa)-\pdel};
+  \addplot[domain=\kbs:13.5] {\psdos*(1/x)^(1-\palfa)-\pdel};
+  \draw[flecha] (axis cs:0.3,-0.03) -- (axis cs:\fla,-0.03);
+  \draw[flecha] (axis cs:\flc,-0.03) -- (axis cs:\flb,-0.03);
+  \draw[flecha] (axis cs:\fld,-0.03) -- (axis cs:\fle,-0.03);
+  \draw[flecha] (axis cs:13.2,-0.03) -- (axis cs:\flf,-0.03);
+  \node[font=\footnotesize] at (axis cs:12.7,0.03) {$g_L$};
+  \node[font=\footnotesize] at (axis cs:2.4,0.08) {$s=s_1$};
+  \node[font=\footnotesize] at (axis cs:7.3,0.075) {$s=s_2$};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}[baseline]
+\pgfmathsetmacro{\fla}{\kguno-0.3}\pgfmathsetmacro{\flb}{\kguno+0.3}\pgfmathsetmacro{\flc}{\kbg-0.2}
+\pgfmathsetmacro{\fld}{\kbg+0.2}\pgfmathsetmacro{\fle}{\kgdos-0.3}\pgfmathsetmacro{\flf}{\kgdos+0.3}
+\begin{axis}[solow, width=7.9cm, height=5.6cm, xmin=0, xmax=10, ymin=-0.03, ymax=0.13,
+  ylabel={}, extra x ticks={\kguno,\kbg,\kgdos}, extra x tick labels={$k_1^*$,$\bar k$,$k_2^*$},
+  title={(b) Crecimiento poblacional endógeno}]
+  \draw[line width=0.4pt] (axis cs:0,0) -- (axis cs:10,0);
+  \addplot[dashed, gray, line width=0.9pt] coordinates {(0,\pguno) (\kbg,\pguno)};
+  \addplot[dashed, gray, line width=0.9pt] coordinates {(\kbg,\pgdos) (10,\pgdos)};
+  \draw[punteada] (axis cs:\kguno,-0.03) -- (axis cs:\kguno,\pguno);
+  \draw[punteada] (axis cs:\kgdos,-0.03) -- (axis cs:\kgdos,\pgdos);
+  \draw[punteada] (axis cs:\kbg,-0.03) -- (axis cs:\kbg,\pguno);
+  \addplot[domain=1.15:10] {\ps*(1/x)^(1-\palfa)-\pdel};
+  \draw[flecha] (axis cs:0.3,-0.03) -- (axis cs:\fla,-0.03);
+  \draw[flecha] (axis cs:\flc,-0.03) -- (axis cs:\flb,-0.03);
+  \draw[flecha] (axis cs:\fld,-0.03) -- (axis cs:\fle,-0.03);
+  \draw[flecha] (axis cs:9.8,-0.03) -- (axis cs:\flf,-0.03);
+  \node[font=\footnotesize] at (axis cs:1.1,0.045) {$g_L=g_1$};
+  \node[font=\footnotesize] at (axis cs:8.9,0.015) {$g_L=g_2$};
+  \node[font=\footnotesize] at (axis cs:2.9,0.08) {$g_K$};
+\end{axis}
+\end{tikzpicture}
+\caption{Dos formas de obtener dos cruces. En (a) salta la curva $g_K$ y en (b) salta la recta $g_L$. En ambos casos $\bar k$ es el capital en que el ingreso alcanza $\bar y$.}
+\label{fig:retro}
+\end{figure}
+
+En las slides estas dos ideas aparecen también con curvas suaves, donde el umbral es un tercer estado estacionario, inestable, entre los otros dos. Nuestra versión con salto es más simple de resolver y cuenta la misma historia: el umbral $\bar k$ cumple el papel de ese punto inestable.
+
+\subsection{Balance: las brechas son modestas}
+
+Los dos mecanismos generan dependencia histórica. Pero las brechas de ingreso que producen son pequeñas. La razón es el exponente $\frac{\alpha}{1-\alpha}$, que vale $1/2$ cuando $\alpha=1/3$: el ingreso depende de la \emph{raíz cuadrada} de la tasa de ahorro. Triplicar el ahorro no alcanza a duplicar el ingreso. Para explicar con este mecanismo una diferencia de ingreso de 30 veces, como las que se observan entre países ricos y pobres, se necesitaría una diferencia de tasas de ahorro de $30^2=900$ veces. Es la misma lección de la parte de crecimiento: las diferencias en $s$ y $g_L$ explican poco de las diferencias de ingreso entre países.
+
+Las fórmulas \eqref{eq:ee} muestran dónde buscar. El ingreso depende de $A$ con exponente uno. Para generar brechas grandes necesitamos diferencias en productividad, y eso nos lleva a los rendimientos crecientes.
+
+\subsection{Rendimientos crecientes: dos tecnologías}
+
+Muchas tecnologías modernas tienen costos fijos: una fábrica, una red eléctrica o un puerto solo se justifican a partir de cierta escala. Una economía con poco capital usa tecnologías simples, y una con mucho capital puede adoptar las modernas, que son más productivas. En las slides esto aparece como dos funciones de producción, donde la moderna exige pagar un costo hundido. Para obtener soluciones cerradas representamos ese costo como una \textbf{escala mínima}: la tecnología moderna solo puede usarse si el capital por trabajador es al menos $\bar k$.
+\[
+  Y=\begin{cases}
+    K^{\alpha}(A_1L)^{1-\alpha} & \text{si } k<\bar k\quad\text{(tradicional)}\\[2pt]
+    K^{\alpha}(A_2L)^{1-\alpha} & \text{si } k\geq\bar k\quad\text{(moderna)}
+  \end{cases}
+  \qquad\text{con } A_2>A_1 .
+\]
+Cada tecnología por separado tiene rendimientos constantes a escala, como en Solow. Pero en conjunto hay \textbf{rendimientos crecientes}: al cruzar $\bar k$ el producto por trabajador salta de $\bar k^{\alpha}A_1^{1-\alpha}$ a $\bar k^{\alpha}A_2^{1-\alpha}$ sin que haya cambiado el capital. El resto del modelo es el de siempre: $s$, $g_L$ y $\delta$ son constantes.
+
+La tasa de crecimiento del capital es \eqref{eq:gK} con la productividad de la tecnología en uso, $A_1$ si $k<\bar k$ y $A_2$ si $k\geq\bar k$. En $\bar k$ la curva salta hacia arriba (Figura~\ref{fig:tec}). Cada tecnología tiene su propio estado estacionario, dado por \eqref{eq:ee}:
+\begin{equation}\label{eq:eej}
+  k_j^*=A_j\left(\frac{s}{g_L+\delta}\right)^{\frac{1}{1-\alpha}}
+  \qquad\text{y}\qquad
+  y_j^*=A_j\left(\frac{s}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}},
+  \qquad j=1,2 .
+\end{equation}
+El estado estacionario bajo existe si $k_1^*<\bar k$: con la tecnología tradicional la economía no acumula suficiente capital para llegar a la escala mínima. El alto existe si $k_2^*\geq\bar k$: una vez adoptada la tecnología moderna, la economía se mantiene sobre la escala mínima.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[baseline]
+\pgfmathsetmacro{\fla}{\ktuno-0.4}\pgfmathsetmacro{\flb}{\ktuno+0.4}\pgfmathsetmacro{\flc}{\pkbar-0.25}
+\pgfmathsetmacro{\fld}{\pkbar+0.25}\pgfmathsetmacro{\fle}{\ktdos-0.4}\pgfmathsetmacro{\flf}{\ktdos+0.4}
+\begin{axis}[solow, width=9.8cm, height=6cm, xmin=0, xmax=14.5, ymin=-0.03, ymax=0.13,
+  extra x ticks={\ktuno,\pkbar,\ktdos}, extra x tick labels={$k_1^*$,$\bar k$,$k_2^*$}]
+  \draw[line width=0.4pt] (axis cs:0,0) -- (axis cs:14.5,0);
+  \addplot[dashed, gray, line width=0.9pt, domain=0:14.5, samples=2] {\pgL};
+  \draw[punteada] (axis cs:\ktuno,-0.03) -- (axis cs:\ktuno,\pgL);
+  \draw[punteada] (axis cs:\ktdos,-0.03) -- (axis cs:\ktdos,\pgL);
+  \draw[punteada] (axis cs:\pkbar,-0.03) -- (axis cs:\pkbar,\gktsalto);
+  \addplot[domain=1.2:\pkbar] {\ps*(\pAuno/x)^(1-\palfa)-\pdel};
+  \addplot[domain=\pkbar:14.5] {\ps*(\pAdos/x)^(1-\palfa)-\pdel};
+  \draw[flecha] (axis cs:0.4,-0.03) -- (axis cs:\fla,-0.03);
+  \draw[flecha] (axis cs:\flc,-0.03) -- (axis cs:\flb,-0.03);
+  \draw[flecha] (axis cs:\fld,-0.03) -- (axis cs:\fle,-0.03);
+  \draw[flecha] (axis cs:14.2,-0.03) -- (axis cs:\flf,-0.03);
+  \node[font=\small] at (axis cs:0.7,0.03) {$g_L$};
+  \node[font=\small, anchor=west] at (axis cs:2.6,0.09) {Tradicional ($A_1$)};
+  \node[font=\small, anchor=west] at (axis cs:8.4,0.058) {Moderna ($A_2$)};
+\end{axis}
+\end{tikzpicture}
+\caption{Solow con dos tecnologías. La curva $g_K$ salta en la escala mínima $\bar k$ y hay dos estados estacionarios estables.}
+\label{fig:tec}
+\end{figure}
+
+\begin{resultado}{Brecha de ingreso}
+Dos economías con los mismos $s$, $g_L$ y $\delta$, y con acceso a las mismas tecnologías, pueden diferir de forma permanente en su PIB per cápita:
+\[
+  \frac{y_2^*}{y_1^*}=\frac{A_2}{A_1}.
+\]
+\end{resultado}
+
+\noindent La brecha de ingreso es igual a la brecha de productividad, sin la raíz cuadrada que atenuaba el efecto del ahorro. Una tecnología moderna diez veces más productiva genera una diferencia de ingreso de diez veces.
+
+\begin{intuicion}[Ejemplo numérico]
+Sea $\alpha=1/3$, $s=0.2$, $g_L=0.02$, $\delta=0.05$, $A_1=1$, $A_2=2$ y $\bar k=7$. De \eqref{eq:eej}, $k_1^*=4.83$ y $k_2^*=9.66$, con $y_1^*=1.69$ e $y_2^*=3.38$. Se cumple $4.83<7\leq9.66$, así que ambos estados estacionarios existen. En la escala mínima el producto por trabajador salta de $1.91$ a $3.04$ y $g_K$ salta de $0.5\%$ a $3.7\%$: justo bajo $\bar k$ el capital crece menos que la población ($2\%$), y justo sobre $\bar k$ crece más.
+\end{intuicion}
+
+\subsection{¿Cuándo hay trampa?}
+
+Los dos estados estacionarios coexisten si $k_1^*<\bar k\leq k_2^*$. Conviene escribir esta condición en términos de la tasa de ahorro. De \eqref{eq:eej},
+\[
+  k_1^*<\bar k\;\Longleftrightarrow\;s<(g_L+\delta)\left(\frac{\bar k}{A_1}\right)^{1-\alpha}\equiv s_{\max},
+  \qquad
+  k_2^*\geq\bar k\;\Longleftrightarrow\;s\geq(g_L+\delta)\left(\frac{\bar k}{A_2}\right)^{1-\alpha}\equiv s_{\min}.
+\]
+Hay entonces tres regímenes, que resume la Tabla~\ref{tab:reg}.
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+Tasa de ahorro & Estados estacionarios & Resultado & En el ejemplo \\
+\midrule
+$s<s_{\min}$ & Solo el bajo & Pobreza por fundamentales & $s<0.16$ \\
+$s_{\min}\leq s<s_{\max}$ & Bajo y alto & Trampa: la historia decide & $0.16\leq s<0.26$ \\
+$s\geq s_{\max}$ & Solo el alto & No hay trampa & $s\geq0.26$ \\
+\bottomrule
+\end{tabular}
+\caption{Regímenes del modelo de Solow con dos tecnologías según la tasa de ahorro.}
+\label{tab:reg}
+\end{table}
+
+Si la economía ahorra muy poco ($s<s_{\min}$), ni siquiera con la tecnología moderna puede mantenerse sobre la escala mínima: aunque alguien le regalara el capital, lo perdería. Esa economía es pobre por sus fundamentales, no por su historia. Si ahorra mucho ($s\geq s_{\max}$), acumula capital suficiente para cruzar $\bar k$ incluso con la tecnología tradicional, y sale sola. La trampa existe solo en el rango intermedio. Un mayor $g_L$ o una mayor escala mínima $\bar k$ suben ambas cotas y hacen más difícil escapar.
+
+\subsection{La historia importa}
+
+En el rango intermedio el capital inicial decide. Con $k_0<\bar k$ la economía converge a $y_1^*$, y con $k_0\geq\bar k$ converge a $y_2^*$. Esto abre la puerta a políticas temporales con efectos permanentes, y también a accidentes temporales con efectos permanentes.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[baseline]
+\begin{axis}[apunte, width=9.4cm, height=5.8cm, xmin=0, xmax=112, ymin=1.2, ymax=3.75,
+  xtick={15}, xticklabels={Transferencia}, ytick={\yuno,\ydos}, yticklabels={$y_1^*$,$y_2^*$},
+  xlabel={Tiempo (años)}, ylabel={PIB per cápita}]
+  \addplot[punteada, domain=0:110, samples=2] {\yuno};
+  \addplot[punteada, domain=0:110, samples=2] {\ydos};
+  \addplot[dashed] coordinates {(15,\yuno) (15,\ych)};
+  \addplot[dashed, domain=15:110] {(\zuno+(\zch-\zuno)*exp(-\lam*(x-15)))^\expy};
+  \addplot[solid] coordinates {(0,\yuno) (15,\yuno) (15,\ygr)};
+  \addplot[domain=15:110] {\pAdos^(1-\palfa)*(\zdos+(\zgr-\zdos)*exp(-\lam*(x-15)))^\expy};
+  \node[font=\small, anchor=west] at (axis cs:45,2.95) {Transferencia grande};
+  \node[font=\small, anchor=west] at (axis cs:45,1.98) {Transferencia chica};
+\end{axis}
+\end{tikzpicture}
+\caption{Una economía en el estado estacionario bajo recibe una transferencia de capital. Si la transferencia no alcanza para cruzar $\bar k$ el efecto se disipa; si alcanza, el efecto es permanente.}
+\label{fig:tray}
+\end{figure}
+
+\textbf{Una transferencia de capital.} Supongamos que una economía en $y_1^*$ recibe capital desde afuera, por ejemplo ayuda externa. En el ejemplo necesita pasar de $k_1^*=4.83$ a $\bar k=7$, es decir, $2.17$ unidades de capital por trabajador. Si recibe menos (digamos que llega a $k=6.35$), el ingreso sube de $1.69$ a $1.85$, pero la economía sigue con la tecnología tradicional, el capital crece menos que la población y todo vuelve gradualmente a $y_1^*$. Si recibe un poco más (llega a $k=7.22$), adopta la tecnología moderna, el ingreso salta a $3.07$ y de ahí converge a $y_2^*=3.38$ sin más ayuda (Figura~\ref{fig:tray}). La diferencia entre las dos transferencias es pequeña y la diferencia en el resultado es enorme. Esta es la versión dinámica del big push.
+
+\textbf{Un aumento temporal del ahorro.} Lo mismo se logra subiendo $s$ por sobre $s_{\max}$ durante el tiempo necesario para cruzar $\bar k$. Después $s$ puede volver a su valor original.
+
+\textbf{Un shock negativo.} El argumento funciona también al revés. Una economía en $k_2^*=9.66$ que pierde más de $2.66$ unidades de capital por trabajador (un 28\%) en una guerra o una crisis cae bajo $\bar k$, vuelve a la tecnología tradicional y converge al estado estacionario \emph{bajo}. En el modelo de Solow estándar eso no puede ocurrir: la economía siempre se recupera.
+
+Las transiciones son lentas. En este modelo la distancia al estado estacionario se cierra a una tasa cercana a $(1-\alpha)(g_L+\delta)$, que en el ejemplo es $4.7\%$ por año: la mitad de la brecha tarda unos 15 años en cerrarse.
+
+% =============================================================================
+\section{Resumen}
+
+La Tabla~\ref{tab:resumen} compara los tres modelos. Tienen la misma estructura: un resultado bajo y uno alto, ambos estables, separados por un umbral.
+
+\begin{table}[htb]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}p{2.3cm}p{4.0cm}p{4.0cm}p{4.2cm}@{}}
+\toprule
+ & Inversión & Big push & Solow con dos tecnologías \\
+\midrule
+Mecanismo & Complementariedad en la probabilidad de éxito & Complementariedad en la demanda & Rendimientos crecientes \\
+Resultado bajo & $n=0$ & $Y=L$ & $y_1^*=A_1\left(\frac{s}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}}$ \\
+Resultado alto & $n=1$ & $Y=A\,(L-F)$ & $y_2^*=A_2\left(\frac{s}{g_L+\delta}\right)^{\frac{\alpha}{1-\alpha}}$ \\
+Umbral & $n^*=\dfrac{\kappa}{1-\kappa}$ & $\bar n=\dfrac{AwF-(A-w)L}{A(w-1)F}$ & $\bar k$ \\
+Qué decide & Expectativas & Expectativas & Historia ($k_0$) \\
+Política & Garantía temporal & Inversión coordinada & Transferencia de capital \\
+\bottomrule
+\end{tabular}
+\caption{Los tres modelos de trampas para el desarrollo.}
+\label{tab:resumen}
+\end{table}
+
+Las conclusiones son tres. Economías con los mismos parámetros fundamentales pueden terminar en lugares muy distintos, de modo que la convergencia no es automática. El subdesarrollo puede ser un equilibrio, y no la consecuencia de una diferencia intrínseca entre países. Y una política temporal puede tener efectos permanentes, siempre que el resultado bueno sea también un equilibrio.
+
+Una advertencia. Estos modelos muestran que las trampas son \emph{posibles}, no que sean frecuentes. En los tres hay un rango de parámetros en que el problema es de fundamentales y no de coordinación ni de historia ($\kappa\geq1/2$, $F>F_{\max}$, $s<s_{\min}$), y en ese rango un empujón temporal no sirve. Si un país concreto está en una trampa o simplemente tiene malos fundamentales es una pregunta empírica, y la evidencia disponible sugiere que las trampas de este tipo son menos frecuentes de lo que la teoría podría hacer pensar (Kraay y McKenzie, 2014).
+
+% =============================================================================
+\section{Para practicar}
+\enlargethispage{1.3\baselineskip}
+
+\begin{enumerate}[leftmargin=*, itemsep=0.5em]
+  \item En el modelo de inversión con $\theta=2$, suponga $b=4$ y $c=1$. (a) Calcule $\kappa$ y la masa crítica $n^*$. (b) Calcule la pendiente del mapa en los tres equilibrios y clasifíquelos. (c) ¿A cuánto tendría que bajar $c$ para que la masa crítica fuera $n^*=0.2$?
+  \item En el modelo de inversión con $\theta=1$, use la ecuación \eqref{eq:pendiente} para mostrar que $x'(0)=1/\kappa$ y $x'(1)=\kappa$. Explique por qué, salvo cuando $\kappa=1$, exactamente uno de los dos equilibrios extremos es estable.
+  \item En el modelo de big push con $L=100$, $A=2$ y $w=1.5$, suponga ahora $F=22$. (a) Verifique que hay dos equilibrios. (b) Calcule $\pi(0)$, $\pi(1)$, la masa crítica $\bar n$ y el PIB en cada equilibrio. (c) ¿Qué subsidio por empresa bastaría para eliminar el equilibrio malo? (d) Repita (a) suponiendo $w=1$ y explique la diferencia.
+  \item En el modelo de Solow con dos tecnologías, use los parámetros del ejemplo ($\alpha=1/3$, $s=0.2$, $\delta=0.05$, $A_1=1$, $A_2=2$, $\bar k=7$) pero suponga que la población crece al $4\%$. (a) Calcule $s_{\min}$ y $s_{\max}$. (b) ¿En qué régimen está la economía? (c) ¿Qué ocurre con una economía que parte con $k_0=8$? Interprete.
+  \item En el modelo con tasa de ahorro endógena, ¿cómo cambia la brecha $y_2^*/y_1^*$ si $\alpha=1/2$ en lugar de $\alpha=1/3$? Explique por qué una mayor participación del capital amplifica el efecto del ahorro.
+  \item Explique con sus palabras la diferencia entre una trampa que depende de las expectativas y una que depende de la historia. Dé un ejemplo de política temporal con efecto permanente en cada caso y diga bajo qué condiciones \emph{no} funcionaría.
+\end{enumerate}
+
+% =============================================================================
+\section*{Lecturas}
+
+{\small
+\begin{itemize}[leftmargin=*, itemsep=0.25em]
+  \item Azariadis, C. y Drazen, A. (1990). Threshold Externalities in Economic Development. \emph{Quarterly Journal of Economics}, 105(2), 501--526.
+  \item David, P. (1985). Clio and the Economics of QWERTY. \emph{American Economic Review}, 75(2), 332--337.
+  \item Hirschman, A. (1958). \emph{The Strategy of Economic Development}. Yale University Press.
+  \item Kraay, A. y McKenzie, D. (2014). Do Poverty Traps Exist? Assessing the Evidence. \emph{Journal of Economic Perspectives}, 28(3), 127--148.
+  \item Krugman, P. (1995). \emph{Development, Geography, and Economic Theory}. MIT Press.
+  \item Murphy, K., Shleifer, A. y Vishny, R. (1989). Industrialization and the Big Push. \emph{Journal of Political Economy}, 97(5), 1003--1026.
+  \item Ray, D. (1998). \emph{Development Economics}. Princeton University Press. Capítulo 5.
+  \item Rosenstein-Rodan, P. (1943). Problems of Industrialisation of Eastern and South-Eastern Europe. \emph{Economic Journal}, 53(210/211), 202--211.
+\end{itemize}
+}
+
+\end{document}
